@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Toolnova (web)
 
-## Getting Started
+**English** | [简体中文](./README.zh-CN.md)
 
-First, run the development server:
+Next.js App Router frontend: tools, i18n (`en`, `zh-CN`), SEO (metadata, sitemap, JSON-LD), PDF merge API route.
+
+## Local development
 
 ```bash
+npm install
+cp .env.example .env.local
+# edit NEXT_PUBLIC_SITE_URL (e.g. http://localhost:3000)
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+See [`.env.example`](./.env.example). **`NEXT_PUBLIC_SITE_URL`** should be your real origin in production (no trailing slash).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Purpose |
+| -------- | ------- |
+| `NEXT_PUBLIC_SITE_URL` | Canonical URL for metadata, sitemap, structured data |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | GA4; **only loads after “Accept all”** on the cookie banner |
+| `NEXT_PUBLIC_ADSENSE_CLIENT_ID` | AdSense client id (`ca-pub-…`) |
+| `NEXT_PUBLIC_ADSENSE_SLOT_FOOTER` | Display ad unit slot id for the reserved footer placement |
 
-## Learn More
+## Launch checklist
 
-To learn more about Next.js, take a look at the following resources:
+1. Set **`NEXT_PUBLIC_SITE_URL`** on the host (Vercel project env, Docker `-e`, etc.).
+2. Deploy production build: `npm run build` then start the standalone output or use the platform’s Next preset.
+3. **Search Console**: verify property, submit `https://<domain>/sitemap.xml`.
+4. **Cookie banner**: first-time visitors must choose analytics or essential-only; GA/AdSense scripts run only after **Accept all**.
+5. **AdSense**: apply in Google; after approval set client + slot env vars; until then the footer shows a reserved placeholder (fixed min-height to limit CLS).
+6. **GA4**: optional; set measurement ID if you want stats after consent.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Docker
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The app is configured with `output: "standalone"` in `next.config.ts`. Build the image from the `web/` directory using the included `Dockerfile` (if present) or your own multi-stage build copying `.next/standalone`.
 
-## Deploy on Vercel
+## Stack notes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Internationalization: `next-intl`, locale prefix `as-needed` (English unprefixed).
+- Middleware handles locale detection; PDF merge lives at `/api/merge-pdf` (not localized).

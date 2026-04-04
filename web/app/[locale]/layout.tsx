@@ -1,3 +1,7 @@
+import { AdSlot } from "@/components/ad-slot";
+import { ConditionalAnalytics } from "@/components/conditional-analytics";
+import { ConsentProvider } from "@/components/consent-context";
+import { CookieBanner } from "@/components/cookie-banner";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { routing } from "@/i18n/routing";
@@ -7,7 +11,6 @@ import { Noto_Sans_SC } from "next/font/google";
 import type { Metadata } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
-import Script from "next/script";
 import { notFound } from "next/navigation";
 
 const geistSans = Geist({
@@ -27,7 +30,6 @@ const notoSansSc = Noto_Sans_SC({
 });
 
 const siteUrl = getSiteUrl();
-const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -93,26 +95,15 @@ export default async function LocaleLayout({
       <body
         className={`min-h-full flex flex-col ${locale === "zh-CN" ? "locale-zh-cn" : "locale-en"}`}
       >
-        {gaId ? (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-              strategy="afterInteractive"
-            />
-            <Script id="ga4-init" strategy="afterInteractive">
-              {`
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${gaId}', { anonymize_ip: true });
-              `}
-            </Script>
-          </>
-        ) : null}
         <NextIntlClientProvider messages={messages}>
-          <Header />
-          <div className="flex-1">{children}</div>
-          <Footer />
+          <ConsentProvider>
+            <Header />
+            <div className="flex-1">{children}</div>
+            <AdSlot />
+            <Footer />
+            <CookieBanner />
+            <ConditionalAnalytics />
+          </ConsentProvider>
         </NextIntlClientProvider>
       </body>
     </html>

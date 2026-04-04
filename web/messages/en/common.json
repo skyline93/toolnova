@@ -118,6 +118,17 @@
     "generate": "Generate",
     "downloadResult": "Download result"
   },
+  "consentBanner": {
+    "title": "Cookies and optional analytics",
+    "body": "We may use Google Analytics and, later, advertising cookies to keep the site free. Essential-only mode skips those scripts.",
+    "acceptAll": "Accept all",
+    "essentialOnly": "Essential only",
+    "privacyLink": "Privacy policy"
+  },
+  "adSlot": {
+    "ariaLabel": "Advertising",
+    "placeholder": "Ad space reserved — configure AdSense after approval."
+  },
   "privacyPage": {
     "title": "Privacy Policy",
     "metaDescription": "How {siteName} handles analytics, uploads, and local processing.",
@@ -129,7 +140,11 @@
     "hPdf": "PDF merge",
     "pPdf": "When you merge PDFs, files are sent to our server only for the duration of the request. We do not use your documents for training or marketing. Temporary data should be discarded immediately after the response is sent—avoid uploading sensitive documents if your threat model requires zero server transit.",
     "hAnalytics": "Analytics",
-    "pAnalytics": "We may use Google Analytics 4 to understand aggregate traffic. You can control cookies through your browser and any consent banner we enable when advertising partners are added.",
+    "pAnalytics": "Google Analytics 4 loads only if you choose “Accept all” on the cookie banner. You can switch to essential-only mode at any time by clearing site data for this domain in your browser.",
+    "hConsent": "Cookies and your choices",
+    "pConsent": "The first time you visit, you can accept optional analytics and advertising cookies, or choose essential-only mode. Essential-only mode does not load Google Analytics or third-party ad scripts until you clear the choice and accept again.",
+    "hAdvertising": "Advertising",
+    "pAdvertising": "Programs such as Google AdSense may be enabled later. Ad tags load only after you accept all cookies. Ad partners have their own privacy policies; you can use industry opt-out tools where available.",
     "hContact": "Contact",
     "pContact": "For privacy questions, contact the site operator using the address published on this domain once available."
   },

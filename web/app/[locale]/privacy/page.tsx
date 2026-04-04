@@ -30,6 +30,10 @@ export default async function PrivacyPage() {
         <p>{t("pPdf")}</p>
         <h2 className="text-lg font-semibold text-[var(--foreground)]">{t("hAnalytics")}</h2>
         <p>{t("pAnalytics")}</p>
+        <h2 className="text-lg font-semibold text-[var(--foreground)]">{t("hConsent")}</h2>
+        <p>{t("pConsent")}</p>
+        <h2 className="text-lg font-semibold text-[var(--foreground)]">{t("hAdvertising")}</h2>
+        <p>{t("pAdvertising")}</p>
         <h2 className="text-lg font-semibold text-[var(--foreground)]">{t("hContact")}</h2>
         <p>{t("pContact")}</p>
         <p>

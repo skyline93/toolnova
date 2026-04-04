@@ -118,6 +118,17 @@
     "generate": "生成",
     "downloadResult": "下载结果"
   },
+  "consentBanner": {
+    "title": "Cookie 与可选统计",
+    "body": "我们可能使用 Google Analytics，并在后续接入广告相关 Cookie，以维持免费服务。选择「仅必要」将不加载上述脚本。",
+    "acceptAll": "全部接受",
+    "essentialOnly": "仅必要",
+    "privacyLink": "隐私政策"
+  },
+  "adSlot": {
+    "ariaLabel": "广告位",
+    "placeholder": "广告位已预留 — 通过审核并配置 AdSense 后生效。"
+  },
   "privacyPage": {
     "title": "隐私政策",
     "metaDescription": "{siteName} 如何处理分析统计、上传文件与本地处理。",
@@ -129,7 +140,11 @@
     "hPdf": "PDF 合并",
     "pPdf": "合并 PDF 时，文件仅在请求处理期间传至服务器。我们不会将您的文档用于模型训练或营销。响应返回后应尽快丢弃临时数据——若您的安全模型要求「零经过服务器」，请勿上传敏感文档。",
     "hAnalytics": "统计分析",
-    "pAnalytics": "我们可能使用 Google Analytics 4 了解整体流量。您可通过浏览器及我们在接入广告合作方后启用的同意横幅管理 Cookie。",
+    "pAnalytics": "仅在您于 Cookie 横幅中选择「全部接受」后，才会加载 Google Analytics 4。您可随时在浏览器中清除本站数据，回到未同意状态。",
+    "hConsent": "Cookie 与您的选择",
+    "pConsent": "首次访问时，您可选择接受可选的分析与广告类 Cookie，或选择「仅必要」。选择「仅必要」时，不会加载 Google 统计与第三方广告脚本，直至您清除该选择并再次同意。",
+    "hAdvertising": "广告",
+    "pAdvertising": "后续可能接入 Google AdSense 等计划；仅在您接受全部 Cookie 后才会加载广告相关脚本。广告合作方有其各自的隐私说明，您也可使用行业通用的退出工具（若适用）。",
     "hContact": "联系方式",
     "pContact": "如有隐私相关问题，请在域名公布后使用站点上公布的联系方式联系运营方。"
   },
