@@ -1,6 +1,7 @@
 "use client";
 
 import { CopyTextButton } from "@/components/copy-text-button";
+import { JsonCodeEditor } from "@/components/json-code-editor";
 import { useTranslations } from "next-intl";
 import { useCallback, useState } from "react";
 
@@ -44,17 +45,16 @@ export default function JsonFormatterPage() {
         </button>
       </div>
       <div className="grid gap-4 lg:grid-cols-2">
-        <label className="block space-y-2">
+        <div className="block space-y-2">
           <span className="text-sm font-medium text-[var(--muted)]">{t("input")}</span>
-          <textarea
-            className="tool-input min-h-[280px] font-mono text-sm"
+          <JsonCodeEditor
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={setInput}
             placeholder={t("inputPlaceholder")}
-            spellCheck={false}
+            aria-label={t("input")}
           />
-        </label>
-        <label className="block space-y-2">
+        </div>
+        <div className="block space-y-2">
           <span className="flex items-center justify-between gap-2">
             <span className="text-sm font-medium text-[var(--muted)]">{t("output")}</span>
             <CopyTextButton
@@ -66,14 +66,13 @@ export default function JsonFormatterPage() {
               className="!min-w-0"
             />
           </span>
-          <textarea
-            className="tool-input min-h-[280px] font-mono text-sm"
+          <JsonCodeEditor
             value={output}
             readOnly
             placeholder={t("outputPlaceholder")}
-            spellCheck={false}
+            aria-label={t("output")}
           />
-        </label>
+        </div>
       </div>
       {error ? (
         <p className="text-sm text-[var(--danger)]" role="alert">

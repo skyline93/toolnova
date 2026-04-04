@@ -9,7 +9,13 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@codemirror/lang-json": "^6.0.2",
+    "@codemirror/language": "^6.12.3",
+    "@codemirror/view": "^6.41.0",
+    "@lezer/highlight": "^1.2.3",
+    "@uiw/react-codemirror": "^4.25.9",
     "browser-image-compression": "^2.0.2",
+    "codemirror": "^6.0.2",
     "next": "16.2.2",
     "next-intl": "^4.9.0",
     "pdf-lib": "^1.17.1",

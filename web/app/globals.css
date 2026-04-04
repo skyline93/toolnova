@@ -10,6 +10,23 @@
   --border: #e3ddd0;
   --danger: #a32020;
   --radius: 12px;
+  /* JSON editor: syntax + chrome (independent of site accent) */
+  --cm-json-key: #4338ca;
+  --cm-json-string: #a16207;
+  --cm-json-number: #a21caf;
+  --cm-json-bool: #1d4ed8;
+  --cm-json-null: #64748b;
+  --cm-json-punct: #57534e;
+  --cm-json-bracket: #44403c;
+  --cm-json-placeholder: #78716c;
+  --cm-json-caret: #1d4ed8;
+  --cm-json-focus-ring: rgba(29, 78, 216, 0.45);
+  --cm-json-selection: rgba(29, 78, 216, 0.2);
+  --cm-json-active-line-gutter: rgba(29, 78, 216, 0.1);
+  --cm-json-active-line: rgba(71, 85, 105, 0.09);
+  --json-editor-default-height: 420px;
+  --json-editor-min-height: 240px;
+  --json-editor-max-height: min(75vh, 720px);
 }
 
 @theme inline {
@@ -29,6 +46,19 @@
     --accent-hover: #5ecece;
     --border: #2a2620;
     --danger: #ff6b6b;
+    --cm-json-key: #a5b4fc;
+    --cm-json-string: #fbbf24;
+    --cm-json-number: #e879f9;
+    --cm-json-bool: #7dd3fc;
+    --cm-json-null: #94a3b8;
+    --cm-json-punct: #a8a29e;
+    --cm-json-bracket: #d6d3d1;
+    --cm-json-placeholder: #9ca3af;
+    --cm-json-caret: #93c5fd;
+    --cm-json-focus-ring: rgba(147, 197, 253, 0.55);
+    --cm-json-selection: rgba(147, 197, 253, 0.22);
+    --cm-json-active-line-gutter: rgba(147, 197, 253, 0.12);
+    --cm-json-active-line: rgba(148, 163, 184, 0.12);
   }
 }
 
@@ -145,4 +175,37 @@ body {
 .lang-select:disabled {
   opacity: 0.55;
   cursor: wait;
+}
+
+/* JSON CodeMirror: fixed viewport, scroll inside, user can drag bottom edge taller */
+.json-code-editor-shell {
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--json-editor-default-height);
+  min-height: var(--json-editor-min-height);
+  max-height: var(--json-editor-max-height);
+  resize: vertical;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.json-code-editor-shell > div {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.json-code-editor-shell .cm-editor {
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
+}
+
+.json-code-editor-shell .cm-scroller {
+  flex: 1;
+  min-height: 0 !important;
+  overflow: auto !important;
 }
