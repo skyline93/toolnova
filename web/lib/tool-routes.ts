@@ -18,6 +18,7 @@ export const toolRoutes: ToolRoute[] = [
   { path: "/diff-checker", messageKey: "diffChecker", category: "developer" },
   { path: "/json-to-csv", messageKey: "jsonToCsv", category: "developer" },
   { path: "/cron-expression-generator", messageKey: "cronGenerator", category: "developer" },
+  { path: "/markdown-preview", messageKey: "markdownPreview", category: "developer" },
   { path: "/time-zone-converter", messageKey: "timeZone", category: "time" },
   { path: "/date-calculator", messageKey: "dateCalculator", category: "calculators" },
   { path: "/age-calculator", messageKey: "ageCalculator", category: "calculators" },

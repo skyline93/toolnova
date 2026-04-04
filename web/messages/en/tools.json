@@ -206,6 +206,25 @@
     "howTitle": "How to use",
     "howBody": "Cron syntax varies slightly by system; this helper follows a common five-field pattern. Use presets as a starting point, then tweak fields. Preview lists the next few upcoming times in your local timezone."
   },
+  "markdownPreview": {
+    "metaTitle": "Markdown Preview Online Free",
+    "metaDescription": "Write Markdown with GitHub-style tables and task lists, see a live preview in your browser. Export to PDF is planned for a later update.",
+    "title": "Markdown Preview",
+    "intro": "Draft notes, readme snippets, or documentation with instant feedback. Rendering uses GitHub Flavored Markdown features such as tables and strikethrough. Nothing is uploaded.",
+    "source": "Markdown source",
+    "preview": "Preview",
+    "viewSource": "Source",
+    "viewPreview": "Preview",
+    "viewSplit": "Split",
+    "viewModeLabel": "Layout",
+    "fullscreen": "Fullscreen split",
+    "exitFullscreen": "Exit fullscreen",
+    "pdfExport": "Export PDF",
+    "pdfSoon": "Coming later",
+    "pdfHint": "PDF export will be added in a future release. For now you can print the preview from your browser.",
+    "howTitle": "How to use",
+    "howBody": "Use Source, Preview, or Split to focus on editing, reading the render, or seeing both. Split uses two columns on large screens and stacks on small ones. Fullscreen split opens a wide side-by-side workspace (press Esc or Exit to close). Until PDF export ships, you can print from the browser."
+  },
   "loanCalculator": {
     "metaTitle": "Loan Payment Calculator Online Free",
     "metaDescription": "Estimate fixed-rate loan monthly payment, total repayment, and total interest. For planning only—not financial advice.",

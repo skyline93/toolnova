@@ -209,3 +209,129 @@ body {
   min-height: 0 !important;
   overflow: auto !important;
 }
+
+/* Markdown preview (react-markdown + GFM) */
+.markdown-preview-wide {
+  width: 100%;
+  max-width: none;
+}
+
+.markdown-preview-root {
+  color: var(--foreground);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+.markdown-preview-root h1 {
+  margin: 0 0 0.65em;
+  font-size: 1.65rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.markdown-preview-root h2 {
+  margin: 1.25em 0 0.5em;
+  font-size: 1.3rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.markdown-preview-root h3 {
+  margin: 1.1em 0 0.45em;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.markdown-preview-root p {
+  margin: 0 0 0.85em;
+}
+
+.markdown-preview-root ul,
+.markdown-preview-root ol {
+  margin: 0 0 0.85em;
+  padding-left: 1.35rem;
+}
+
+.markdown-preview-root li {
+  margin: 0.25em 0;
+}
+
+.markdown-preview-root blockquote {
+  margin: 0 0 0.85em;
+  padding: 0.5em 0 0.5em 1em;
+  border-left: 3px solid color-mix(in srgb, var(--accent) 55%, var(--border));
+  color: var(--muted);
+}
+
+.markdown-preview-root hr {
+  margin: 1.25em 0;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+.markdown-preview-root a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.markdown-preview-root a:hover {
+  opacity: 0.88;
+}
+
+.markdown-preview-root :not(pre) > code {
+  padding: 0.12em 0.35em;
+  border-radius: calc(var(--radius) - 6px);
+  background: color-mix(in srgb, var(--foreground) 7%, var(--surface));
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.88em;
+}
+
+.markdown-preview-root pre {
+  margin: 0 0 0.85em;
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+  border-radius: calc(var(--radius) - 4px);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.markdown-preview-root pre code {
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  font-size: inherit;
+}
+
+.markdown-preview-root table {
+  width: 100%;
+  margin: 0 0 0.85em;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.markdown-preview-root th,
+.markdown-preview-root td {
+  border: 1px solid var(--border);
+  padding: 0.4em 0.55em;
+  text-align: left;
+}
+
+.markdown-preview-root th {
+  background: color-mix(in srgb, var(--foreground) 4%, var(--surface));
+  font-weight: 600;
+}
+
+.markdown-preview-root input[type="checkbox"] {
+  margin-right: 0.35em;
+  accent-color: var(--accent);
+}
+
+.markdown-preview-root img {
+  max-width: 100%;
+  height: auto;
+  border-radius: calc(var(--radius) - 4px);
+}

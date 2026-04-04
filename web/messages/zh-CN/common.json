@@ -71,6 +71,10 @@
       "title": "Cron 表达式助手",
       "description": "组合常见定时任务表达式并预览未来执行时间。"
     },
+    "markdownPreview": {
+      "title": "Markdown 预览",
+      "description": "左侧编写 Markdown，右侧即时预览渲染效果，内容仅在浏览器本地处理。"
+    },
     "timeZone": {
       "title": "时区转换",
       "description": "对比不同地区的同一时刻，并考虑夏令时。"

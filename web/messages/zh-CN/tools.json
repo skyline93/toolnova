@@ -206,6 +206,25 @@
     "howTitle": "使用说明",
     "howBody": "不同系统 Cron 语法略有差异；本工具按常见的五段式。可从预设起步再微调。预览按您本机时区列出随后数次时间。"
   },
+  "markdownPreview": {
+    "metaTitle": "免费在线 Markdown 预览",
+    "metaDescription": "支持 GitHub 风格表格与任务列表的 Markdown 实时预览，在浏览器本地处理。导出 PDF 将在后续版本提供。",
+    "title": "Markdown 预览",
+    "intro": "撰写笔记、README 片段或文档并即时查看渲染效果。支持 GFM 常用扩展（如表格、删除线）。内容不会上传服务器。",
+    "source": "Markdown 源码",
+    "preview": "预览",
+    "viewSource": "源码",
+    "viewPreview": "预览",
+    "viewSplit": "分栏",
+    "viewModeLabel": "布局",
+    "fullscreen": "全屏分栏",
+    "exitFullscreen": "退出全屏",
+    "pdfExport": "导出 PDF",
+    "pdfSoon": "即将推出",
+    "pdfHint": "内置导出 PDF 将在后续版本加入。目前可使用浏览器的打印功能保存为 PDF。",
+    "howTitle": "使用说明",
+    "howBody": "可用「源码」专注编辑、「预览」专注渲染，或「分栏」同时查看；宽屏为左右排列，窄屏自动上下堆叠。「全屏分栏」进入浏览器全屏下的左右对照（Esc 或退出全屏关闭）。正式 PDF 导出上线前，仍可用浏览器打印保存为 PDF。"
+  },
   "loanCalculator": {
     "metaTitle": "免费贷款月供估算",
     "metaDescription": "按固定利率估算月供、还款总额与利息（等额本息）。仅供参考，非投资建议。",

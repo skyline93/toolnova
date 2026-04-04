@@ -71,6 +71,10 @@
       "title": "Cron Expression Helper",
       "description": "Build common cron schedules and preview upcoming run times."
     },
+    "markdownPreview": {
+      "title": "Markdown Preview",
+      "description": "Write Markdown on the left and see the rendered preview on the right in your browser."
+    },
     "timeZone": {
       "title": "Time Zone Converter",
       "description": "Compare the same moment across regions, with daylight saving handled."
