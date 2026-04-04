@@ -38,6 +38,29 @@ body {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
+/* CJK: Noto Sans SC + system CJK fallbacks + looser line-height */
+.locale-zh-cn {
+  font-family:
+    var(--font-noto-sc),
+    "PingFang SC",
+    "Hiragino Sans GB",
+    "Microsoft YaHei",
+    var(--font-geist-sans),
+    system-ui,
+    sans-serif;
+  line-height: 1.65;
+  letter-spacing: 0.015em;
+}
+
+.locale-zh-cn .font-mono,
+.locale-zh-cn textarea,
+.locale-zh-cn pre,
+.locale-zh-cn code,
+.locale-zh-cn input.font-mono {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  letter-spacing: 0;
+}
+
 .tool-card {
   border-radius: var(--radius);
   border: 1px solid var(--border);
@@ -89,4 +112,37 @@ body {
 
 .tool-btn-secondary:hover {
   background: color-mix(in srgb, var(--foreground) 6%, transparent);
+}
+
+/* Header language switcher — matches .tool-input tokens */
+.lang-select {
+  appearance: none;
+  -webkit-appearance: none;
+  min-width: 9rem;
+  border-radius: calc(var(--radius) - 4px);
+  border: 1px solid var(--border);
+  background-color: var(--background);
+  color: var(--foreground);
+  padding: 0.45rem 2.25rem 0.45rem 0.65rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.lang-select:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+}
+
+.lang-select:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  outline-offset: 1px;
+}
+
+.lang-select:disabled {
+  opacity: 0.55;
+  cursor: wait;
 }

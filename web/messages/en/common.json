@@ -1,0 +1,121 @@
+{
+  "rootMeta": {
+    "titleDefault": "{siteName} — Free online developer & file tools",
+    "description": "Free JSON, Base64, UUID, timestamp, JWT, PDF, and image utilities. Fast, private-by-default tools for developers and everyday work."
+  },
+  "nav": {
+    "tools": "Tools",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "language": "Language",
+    "english": "English",
+    "chineseSimplified": "简体中文"
+  },
+  "footer": {
+    "tagline": "Free online utilities.",
+    "allTools": "All tools"
+  },
+  "home": {
+    "eyebrow": "Free utilities",
+    "headline": "Practical tools for developers, files, and everyday dates",
+    "lead": "{siteName} runs lightweight utilities in your browser whenever possible. No accounts are required for the core toolkit—start with JSON formatting, timestamps, time zones, PDF merge, and image compression.",
+    "browseTools": "Browse all tools",
+    "openJsonFormatter": "Open JSON formatter",
+    "featured": "Featured"
+  },
+  "toolsIndex": {
+    "title": "All tools",
+    "description": "Browse free online utilities: JSON, Base64, UUID, JWT, timestamps, time zones, calculators, PDF merge, and image compression.",
+    "lead": "Browse by category or open the tool you need. Each tool has its own page so it stays fast and easy to focus on one task."
+  },
+  "categories": {
+    "developer": "Developer tools",
+    "file": "File tools",
+    "time": "Time & date",
+    "calculators": "Calculators"
+  },
+  "toolDefs": {
+    "jsonFormatter": {
+      "title": "JSON Formatter",
+      "description": "Format, validate, and minify JSON in your browser."
+    },
+    "uuidGenerator": {
+      "title": "UUID Generator",
+      "description": "Generate random UUID v4 identifiers instantly."
+    },
+    "base64": {
+      "title": "Base64 Encode / Decode",
+      "description": "Encode or decode Base64 with proper UTF-8 handling."
+    },
+    "timestamp": {
+      "title": "Timestamp Converter",
+      "description": "Convert Unix time, milliseconds, and ISO-8601 strings."
+    },
+    "jwt": {
+      "title": "JWT Decoder",
+      "description": "Inspect JWT header and payload (decode only, no verification)."
+    },
+    "timeZone": {
+      "title": "Time Zone Converter",
+      "description": "Compare the same moment across regions, with daylight saving handled."
+    },
+    "dateCalculator": {
+      "title": "Date Calculator",
+      "description": "Add or subtract days and compute the difference between dates."
+    },
+    "ageCalculator": {
+      "title": "Age Calculator",
+      "description": "Calculate exact age from a birth date."
+    },
+    "imageCompressor": {
+      "title": "Image Compressor",
+      "description": "Shrink JPG, PNG, and WebP images locally in your browser."
+    },
+    "pdfMerge": {
+      "title": "PDF Merge",
+      "description": "Combine multiple PDF files into one download."
+    }
+  },
+  "common": {
+    "loading": "Loading…",
+    "allToolsLink": "← All tools",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "copyAll": "Copy all",
+    "allCopied": "All copied!",
+    "copyFailed": "Copy failed",
+    "copyOutput": "Copy output",
+    "copyText": "Copy text",
+    "copyBase64": "Copy Base64",
+    "generate": "Generate",
+    "downloadResult": "Download result"
+  },
+  "privacyPage": {
+    "title": "Privacy Policy",
+    "metaDescription": "How {siteName} handles analytics, uploads, and local processing.",
+    "updated": "Last updated: April 4, 2026",
+    "backHome": "Back to home",
+    "intro": "{siteName} (\"we\") provides free online tools. This page explains what data may be collected and how uploads are handled.",
+    "hLocal": "Local processing",
+    "pLocal": "Many utilities (JSON, Base64, UUID, timestamps, JWT decode, time zones, date math, image compression) run entirely in your browser. That processing does not leave your device unless you explicitly download a file.",
+    "hPdf": "PDF merge",
+    "pPdf": "When you merge PDFs, files are sent to our server only for the duration of the request. We do not use your documents for training or marketing. Temporary data should be discarded immediately after the response is sent—avoid uploading sensitive documents if your threat model requires zero server transit.",
+    "hAnalytics": "Analytics",
+    "pAnalytics": "We may use Google Analytics 4 to understand aggregate traffic. You can control cookies through your browser and any consent banner we enable when advertising partners are added.",
+    "hContact": "Contact",
+    "pContact": "For privacy questions, contact the site operator using the address published on this domain once available."
+  },
+  "termsPage": {
+    "title": "Terms of Service",
+    "metaDescription": "Terms for using {siteName} free online tools.",
+    "updated": "Last updated: April 4, 2026",
+    "backHome": "Back to home",
+    "intro": "By using {siteName}, you agree to these terms. If you disagree, do not use the site.",
+    "hWarranty": "No warranties",
+    "pWarranty": "Tools are provided \"as is\" without warranties of any kind. We are not liable for damages arising from use of the services, including data loss or incorrect calculations.",
+    "hAcceptable": "Acceptable use",
+    "pAcceptable": "Do not use the services to violate laws, infringe copyrights, upload malware, or overload our systems. We may slow down or block traffic that looks automated or abusive.",
+    "hChanges": "Changes",
+    "pChanges": "We may update these terms or discontinue features. Continued use after changes means you accept the revised terms."
+  }
+}

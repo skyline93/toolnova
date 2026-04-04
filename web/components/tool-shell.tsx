@@ -1,23 +1,28 @@
-import Link from "next/link";
 import { JsonLd, webApplicationJsonLd } from "@/components/json-ld";
+import { getPathname, Link } from "@/i18n/navigation";
 import { getSiteUrl } from "@/lib/site";
+import { getLocale, getTranslations } from "next-intl/server";
 
-export function ToolShell({
-  path,
+export async function ToolShell({
+  href,
   title,
   description,
   intro,
   category,
   children,
 }: {
-  path: string;
+  href: string;
   title: string;
   description: string;
   intro: string;
   category?: string;
   children: React.ReactNode;
 }) {
-  const url = `${getSiteUrl()}${path}`;
+  const locale = await getLocale();
+  const pathname = await getPathname({ locale, href });
+  const url = `${getSiteUrl()}${pathname}`;
+  const t = await getTranslations({ locale, namespace: "common" });
+
   return (
     <>
       <JsonLd
@@ -34,7 +39,7 @@ export function ToolShell({
             href="/tools"
             className="text-sm font-medium text-[var(--accent)] hover:underline"
           >
-            ← All tools
+            {t("allToolsLink")}
           </Link>
         </p>
         <h1 className="mt-4 text-3xl font-semibold tracking-tight">{title}</h1>

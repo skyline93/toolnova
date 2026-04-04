@@ -1,0 +1,121 @@
+{
+  "rootMeta": {
+    "titleDefault": "{siteName} — 免费在线开发者与文件工具",
+    "description": "免费的 JSON、Base64、UUID、时间戳、JWT、PDF 与图片工具。默认在本地处理，轻快、注重隐私。"
+  },
+  "nav": {
+    "tools": "工具",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "language": "语言",
+    "english": "English",
+    "chineseSimplified": "简体中文"
+  },
+  "footer": {
+    "tagline": "免费在线实用工具。",
+    "allTools": "全部工具"
+  },
+  "home": {
+    "eyebrow": "免费工具",
+    "headline": "面向开发者、文件与日常日期的实用工具",
+    "lead": "{siteName} 尽可能在浏览器中完成轻量计算，核心工具无需注册即可使用——可从 JSON 格式化、时间戳、时区、PDF 合并与图片压缩开始。",
+    "browseTools": "浏览全部工具",
+    "openJsonFormatter": "打开 JSON 格式化",
+    "featured": "推荐"
+  },
+  "toolsIndex": {
+    "title": "全部工具",
+    "description": "浏览免费在线工具：JSON、Base64、UUID、JWT、时间戳、时区、计算器、PDF 合并与图片压缩等。",
+    "lead": "可按分类浏览，或直接打开需要的工具。每个工具单独成页，加载快、界面更专注。"
+  },
+  "categories": {
+    "developer": "开发者工具",
+    "file": "文件工具",
+    "time": "时间与日期",
+    "calculators": "计算器"
+  },
+  "toolDefs": {
+    "jsonFormatter": {
+      "title": "JSON 格式化",
+      "description": "在浏览器中格式化、校验与压缩 JSON。"
+    },
+    "uuidGenerator": {
+      "title": "UUID 生成器",
+      "description": "即时生成 UUID v4 标识符。"
+    },
+    "base64": {
+      "title": "Base64 编码 / 解码",
+      "description": "正确支持 UTF-8 的 Base64 编码与解码。"
+    },
+    "timestamp": {
+      "title": "时间戳转换",
+      "description": "在 Unix 秒、毫秒与 ISO-8601 之间转换，并查看本地与 UTC 表示。"
+    },
+    "jwt": {
+      "title": "JWT 解码",
+      "description": "查看 JWT 头部与载荷（仅解码，不验证签名）。"
+    },
+    "timeZone": {
+      "title": "时区转换",
+      "description": "对比不同地区的同一时刻，并考虑夏令时。"
+    },
+    "dateCalculator": {
+      "title": "日期计算器",
+      "description": "日期加减天数，或计算两个日期间隔。"
+    },
+    "ageCalculator": {
+      "title": "年龄计算器",
+      "description": "根据出生日期计算周岁（年月日）。"
+    },
+    "imageCompressor": {
+      "title": "图片压缩",
+      "description": "在浏览器本地压缩 JPG、PNG、WebP，减轻上传体积。"
+    },
+    "pdfMerge": {
+      "title": "PDF 合并",
+      "description": "将多个 PDF 合并为一个文件并下载。"
+    }
+  },
+  "common": {
+    "loading": "加载中…",
+    "allToolsLink": "← 全部工具",
+    "copy": "复制",
+    "copied": "已复制",
+    "copyAll": "全部复制",
+    "allCopied": "已全部复制",
+    "copyFailed": "复制失败",
+    "copyOutput": "复制输出",
+    "copyText": "复制文本",
+    "copyBase64": "复制 Base64",
+    "generate": "生成",
+    "downloadResult": "下载结果"
+  },
+  "privacyPage": {
+    "title": "隐私政策",
+    "metaDescription": "{siteName} 如何处理分析统计、上传文件与本地处理。",
+    "updated": "最近更新：2026 年 4 月 4 日",
+    "backHome": "返回首页",
+    "intro": "{siteName}（「我们」）提供免费在线工具。本页说明可能收集的数据以及上传文件的处理方式。",
+    "hLocal": "本地处理",
+    "pLocal": "许多工具（JSON、Base64、UUID、时间戳、JWT 解码、时区、日期计算、图片压缩）完全在您的浏览器中运行。除非您主动下载文件，否则处理过程不会离开本机。",
+    "hPdf": "PDF 合并",
+    "pPdf": "合并 PDF 时，文件仅在请求处理期间传至服务器。我们不会将您的文档用于模型训练或营销。响应返回后应尽快丢弃临时数据——若您的安全模型要求「零经过服务器」，请勿上传敏感文档。",
+    "hAnalytics": "统计分析",
+    "pAnalytics": "我们可能使用 Google Analytics 4 了解整体流量。您可通过浏览器及我们在接入广告合作方后启用的同意横幅管理 Cookie。",
+    "hContact": "联系方式",
+    "pContact": "如有隐私相关问题，请在域名公布后使用站点上公布的联系方式联系运营方。"
+  },
+  "termsPage": {
+    "title": "服务条款",
+    "metaDescription": "使用 {siteName} 免费在线工具的条款说明。",
+    "updated": "最近更新：2026 年 4 月 4 日",
+    "backHome": "返回首页",
+    "intro": "使用 {siteName} 即表示您同意下列条款。若不同意，请勿使用本站。",
+    "hWarranty": "免责声明",
+    "pWarranty": "工具按「现状」提供，不作任何明示或暗示担保。因使用本服务导致的数据丢失、计算错误或其他损害，我们不承担责任。",
+    "hAcceptable": "可接受使用",
+    "pAcceptable": "请勿利用本服务从事违法活动、侵犯版权、上传恶意程序或恶意占用服务器资源。对疑似自动化或有害流量，我们可能会限流或封禁。",
+    "hChanges": "条款变更",
+    "pChanges": "我们可能更新本条款或下线部分功能。变更后继续使用即视为接受更新后的条款。"
+  }
+}
