@@ -55,6 +55,22 @@
       "title": "JWT Decoder",
       "description": "Inspect JWT header and payload (decode only, no verification)."
     },
+    "regexTester": {
+      "title": "Regex Tester",
+      "description": "Test JavaScript regular expressions against sample text in your browser."
+    },
+    "diffChecker": {
+      "title": "Text Diff",
+      "description": "Compare two texts line by line and highlight additions and removals."
+    },
+    "jsonToCsv": {
+      "title": "JSON to CSV",
+      "description": "Turn a JSON array of objects into a comma-separated table you can paste into a spreadsheet."
+    },
+    "cronGenerator": {
+      "title": "Cron Expression Helper",
+      "description": "Build common cron schedules and preview upcoming run times."
+    },
     "timeZone": {
       "title": "Time Zone Converter",
       "description": "Compare the same moment across regions, with daylight saving handled."
@@ -66,6 +82,14 @@
     "ageCalculator": {
       "title": "Age Calculator",
       "description": "Calculate exact age from a birth date."
+    },
+    "loanCalculator": {
+      "title": "Loan Payment Calculator",
+      "description": "Estimate monthly payment, total paid, and interest for a fixed-rate loan."
+    },
+    "roiCalculator": {
+      "title": "ROI Calculator",
+      "description": "Compute return on investment as a percentage from starting and ending amounts."
     },
     "imageCompressor": {
       "title": "Image Compressor",

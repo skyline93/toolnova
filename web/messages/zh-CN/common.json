@@ -55,6 +55,22 @@
       "title": "JWT 解码",
       "description": "查看 JWT 头部与载荷（仅解码，不验证签名）。"
     },
+    "regexTester": {
+      "title": "正则测试",
+      "description": "在浏览器中用 JavaScript 正则表达式测试样本文本。"
+    },
+    "diffChecker": {
+      "title": "文本对比",
+      "description": "逐行对比两段文本，高亮新增与删除。"
+    },
+    "jsonToCsv": {
+      "title": "JSON 转 CSV",
+      "description": "将对象数组 JSON 转为逗号分隔表，便于粘贴到表格软件。"
+    },
+    "cronGenerator": {
+      "title": "Cron 表达式助手",
+      "description": "组合常见定时任务表达式并预览未来执行时间。"
+    },
     "timeZone": {
       "title": "时区转换",
       "description": "对比不同地区的同一时刻，并考虑夏令时。"
@@ -66,6 +82,14 @@
     "ageCalculator": {
       "title": "年龄计算器",
       "description": "根据出生日期计算周岁（年月日）。"
+    },
+    "loanCalculator": {
+      "title": "贷款月供估算",
+      "description": "按固定利率估算月供、还款总额与利息（等额本息）。"
+    },
+    "roiCalculator": {
+      "title": "投资回报率（ROI）",
+      "description": "根据期初与期末金额计算收益率百分比。"
     },
     "imageCompressor": {
       "title": "图片压缩",
