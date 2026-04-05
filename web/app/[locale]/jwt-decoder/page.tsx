@@ -1,6 +1,7 @@
 "use client";
 
 import { CopyTextButton } from "@/components/copy-text-button";
+import { Card, Flex, Grid, Heading, Text, TextArea } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 
@@ -40,27 +41,33 @@ export default function JwtDecoderPage() {
   }, [token, t]);
 
   return (
-    <div className="space-y-6">
-      <label className="block space-y-2">
-        <span className="text-sm font-medium text-[var(--muted)]">{t("label")}</span>
-        <textarea
-          className="tool-input min-h-[120px] font-mono text-sm"
+    <Flex direction="column" gap="6">
+      <Flex direction="column" gap="2">
+        <Text size="2" weight="medium">
+          {t("label")}
+        </Text>
+        <TextArea
+          size="2"
+          variant="surface"
           value={token}
           onChange={(e) => setToken(e.target.value)}
           placeholder={t("placeholder")}
           spellCheck={false}
+          style={{ minHeight: "120px", fontFamily: "var(--font-geist-mono), monospace", fontSize: "var(--font-size-2)" }}
         />
-      </label>
+      </Flex>
       {result.kind === "error" ? (
-        <p className="text-sm text-[var(--danger)]" role="alert">
+        <Text size="2" color="red" role="alert">
           {result.message}
-        </p>
+        </Text>
       ) : null}
       {result.kind === "ok" ? (
-        <div className="grid gap-4 lg:grid-cols-2">
-          <div className="space-y-2">
-            <div className="flex items-center justify-between gap-2">
-              <h2 className="text-sm font-medium text-[var(--muted)]">{t("header")}</h2>
+        <Grid columns={{ initial: "1", lg: "2" }} gap="4">
+          <Flex direction="column" gap="2">
+            <Flex align="center" justify="between" gap="2" wrap="wrap">
+              <Heading as="h2" size="3" color="gray">
+                {t("header")}
+              </Heading>
               <CopyTextButton
                 key={`h:${result.header}`}
                 text={result.header}
@@ -69,14 +76,20 @@ export default function JwtDecoderPage() {
                 variant="link"
                 className="!min-w-0"
               />
-            </div>
-            <pre className="tool-card overflow-x-auto p-4 font-mono text-xs leading-relaxed">
-              {result.header}
-            </pre>
-          </div>
-          <div className="space-y-2">
-            <div className="flex items-center justify-between gap-2">
-              <h2 className="text-sm font-medium text-[var(--muted)]">{t("payload")}</h2>
+            </Flex>
+            <Card size="2" variant="surface">
+              <Text asChild size="1" style={{ fontFamily: "var(--font-geist-mono), monospace", lineHeight: 1.5 }}>
+                <pre style={{ margin: 0, overflow: "auto", whiteSpace: "pre-wrap", wordBreak: "break-word" }}>
+                  {result.header}
+                </pre>
+              </Text>
+            </Card>
+          </Flex>
+          <Flex direction="column" gap="2">
+            <Flex align="center" justify="between" gap="2" wrap="wrap">
+              <Heading as="h2" size="3" color="gray">
+                {t("payload")}
+              </Heading>
               <CopyTextButton
                 key={`p:${result.payload}`}
                 text={result.payload}
@@ -85,17 +98,25 @@ export default function JwtDecoderPage() {
                 variant="link"
                 className="!min-w-0"
               />
-            </div>
-            <pre className="tool-card overflow-x-auto p-4 font-mono text-xs leading-relaxed">
-              {result.payload}
-            </pre>
-          </div>
-        </div>
+            </Flex>
+            <Card size="2" variant="surface">
+              <Text asChild size="1" style={{ fontFamily: "var(--font-geist-mono), monospace", lineHeight: 1.5 }}>
+                <pre style={{ margin: 0, overflow: "auto", whiteSpace: "pre-wrap", wordBreak: "break-word" }}>
+                  {result.payload}
+                </pre>
+              </Text>
+            </Card>
+          </Flex>
+        </Grid>
       ) : null}
-      <section className="tool-card space-y-3 p-5 text-sm leading-relaxed text-[var(--muted)]">
-        <h2 className="font-semibold text-[var(--foreground)]">{t("safetyTitle")}</h2>
-        <p>{t("safetyBody")}</p>
-      </section>
-    </div>
+      <Card size="3" variant="surface">
+        <Heading as="h2" size="4" highContrast>
+          {t("safetyTitle")}
+        </Heading>
+        <Text as="p" size="2" color="gray" mt="3" wrap="pretty">
+          {t("safetyBody")}
+        </Text>
+      </Card>
+    </Flex>
   );
 }

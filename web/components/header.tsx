@@ -1,35 +1,51 @@
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { Link } from "@/i18n/navigation";
 import { siteName } from "@/lib/site";
+import { Box, Flex, Separator, Text } from "@radix-ui/themes";
 import { getTranslations } from "next-intl/server";
 
 export async function Header() {
   const t = await getTranslations("nav");
 
   return (
-    <header className="border-b border-[var(--border)] bg-[var(--surface)]/80 backdrop-blur-md">
-      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link
-          href="/"
-          className="shrink-0 font-semibold tracking-tight text-[var(--foreground)] hover:opacity-90"
-        >
-          {siteName}
-        </Link>
-        <div className="flex items-center gap-3 sm:gap-4">
-          <nav className="flex items-center gap-4 text-sm font-medium text-[var(--muted)]">
-            <Link href="/tools" className="hover:text-[var(--foreground)]">
-              {t("tools")}
+    <Box
+      asChild
+      style={{
+        borderBottom: "1px solid var(--gray-a6)",
+        backgroundColor: "var(--color-panel-translucent)",
+        backdropFilter: "blur(12px)",
+      }}
+    >
+      <header>
+        <Flex align="center" justify="between" gap="4" wrap="wrap" px={{ initial: "4", sm: "6" }} py="3" mx="auto" style={{ maxWidth: "64rem" }}>
+          <Text asChild weight="bold" size="4" highContrast>
+            <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>
+              {siteName}
             </Link>
-            <Link href="/privacy" className="hover:text-[var(--foreground)]">
-              {t("privacy")}
-            </Link>
-            <Link href="/terms" className="hover:text-[var(--foreground)]">
-              {t("terms")}
-            </Link>
-          </nav>
-          <LanguageSwitcher />
-        </div>
-      </div>
-    </header>
+          </Text>
+          <Flex align="center" gap={{ initial: "3", sm: "4" }} wrap="wrap">
+            <Flex align="center" gap="4" wrap="wrap">
+              <Text asChild size="2" color="gray">
+                <Link href="/tools" style={{ textDecoration: "none" }}>
+                  {t("tools")}
+                </Link>
+              </Text>
+              <Text asChild size="2" color="gray">
+                <Link href="/privacy" style={{ textDecoration: "none" }}>
+                  {t("privacy")}
+                </Link>
+              </Text>
+              <Text asChild size="2" color="gray">
+                <Link href="/terms" style={{ textDecoration: "none" }}>
+                  {t("terms")}
+                </Link>
+              </Text>
+            </Flex>
+            <Separator orientation="vertical" size="2" />
+            <LanguageSwitcher />
+          </Flex>
+        </Flex>
+      </header>
+    </Box>
   );
 }

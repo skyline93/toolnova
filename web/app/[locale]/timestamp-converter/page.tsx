@@ -1,6 +1,7 @@
 "use client";
 
 import { CopyTextButton } from "@/components/copy-text-button";
+import { Card, Flex, Heading, Text, TextField } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useLayoutEffect, useMemo, useState } from "react";
 
@@ -48,47 +49,77 @@ export default function TimestampConverterPage() {
   }, [rows]);
 
   return (
-    <div className="space-y-6">
-      <label className="block max-w-xl space-y-2">
-        <span className="text-sm font-medium text-[var(--muted)]">{t("label")}</span>
-        <input
-          className="tool-input font-mono"
+    <Flex direction="column" gap="6">
+      <Flex direction="column" gap="2" style={{ maxWidth: "36rem" }}>
+        <Text size="2" weight="medium">
+          {t("label")}
+        </Text>
+        <TextField.Root
+          size="2"
           value={raw}
           onChange={(e) => setRaw(e.target.value)}
           spellCheck={false}
+          style={{ fontFamily: "var(--font-geist-mono), monospace" }}
         />
-      </label>
+      </Flex>
       {raw === "" ? (
-        <p className="text-sm text-[var(--muted)]">{tc("loading")}</p>
+        <Text size="2" color="gray">
+          {tc("loading")}
+        </Text>
       ) : !date ? (
-        <p className="text-sm text-[var(--danger)]">{t("parseError")}</p>
+        <Text size="2" color="red">
+          {t("parseError")}
+        </Text>
       ) : (
-        <dl className="tool-card divide-y divide-[var(--border)] text-sm">
-          {rowDefs.map(([key, v]) => (
-            <div
+        <Card size="2" variant="surface" style={{ padding: 0, overflow: "hidden" }}>
+          {rowDefs.map(([key, v], idx) => (
+            <Flex
               key={key}
-              className="flex flex-col gap-2 px-4 py-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4"
+              direction={{ initial: "column", sm: "row" }}
+              align={{ sm: "start" }}
+              justify={{ sm: "between" }}
+              gap="2"
+              p="4"
+              style={{
+                borderTop: idx === 0 ? undefined : "1px solid var(--gray-a6)",
+              }}
             >
-              <dt className="shrink-0 font-medium text-[var(--muted)]">{t(key)}</dt>
-              <dd className="flex min-w-0 flex-1 items-start justify-end gap-2 sm:max-w-[70%]">
-                <span className="break-all text-right font-mono text-[var(--foreground)]">{v}</span>
+              <Text size="2" weight="medium" color="gray" className="shrink-0">
+                {t(key)}
+              </Text>
+              <Flex align="start" justify="end" gap="2" className="min-w-0 flex-1" style={{ maxWidth: "100%" }}>
+                <Text
+                  size="2"
+                  align="right"
+                  style={{
+                    wordBreak: "break-all",
+                    fontFamily: "var(--font-geist-mono), monospace",
+                  }}
+                  highContrast
+                >
+                  {v}
+                </Text>
                 <CopyTextButton
                   key={`${key}:${v}`}
                   text={v}
                   idleLabel={tc("copy")}
                   copiedLabel={tc("copied")}
                   variant="link"
-                  className="!min-w-0 shrink-0 pt-0.5"
+                  className="!min-w-0 shrink-0"
                 />
-              </dd>
-            </div>
+              </Flex>
+            </Flex>
           ))}
-        </dl>
+        </Card>
       )}
-      <section className="tool-card space-y-3 p-5 text-sm leading-relaxed text-[var(--muted)]">
-        <h2 className="font-semibold text-[var(--foreground)]">{t("howTitle")}</h2>
-        <p>{t("howBody")}</p>
-      </section>
-    </div>
+      <Card size="3" variant="surface">
+        <Heading as="h2" size="4" highContrast>
+          {t("howTitle")}
+        </Heading>
+        <Text as="p" size="2" color="gray" mt="3" wrap="pretty">
+          {t("howBody")}
+        </Text>
+      </Card>
+    </Flex>
   );
 }

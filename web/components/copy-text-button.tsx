@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@radix-ui/themes";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type CopyStatus = "idle" | "copied" | "error";
@@ -50,27 +51,49 @@ export function CopyTextButton({
   const visibleLabel =
     status === "copied" ? copiedLabel : status === "error" ? errorLabel : idleLabel;
 
-  const base =
-    variant === "secondary"
-      ? "tool-btn tool-btn-secondary inline-flex min-h-[2.5rem] min-w-[7rem] justify-center"
-      : "inline-flex min-w-[5rem] shrink-0 justify-end text-xs font-semibold text-[var(--accent)] hover:underline";
-
-  const stateClass =
+  const toneStyle =
     status === "copied"
-      ? " text-emerald-700 no-underline dark:text-emerald-400"
+      ? ({ color: "var(--green-11)" } as const)
       : status === "error"
-        ? " text-[var(--danger)] no-underline"
-        : "";
+        ? ({ color: "var(--red-11)" } as const)
+        : undefined;
+
+  if (variant === "secondary") {
+    return (
+      <Button
+        type="button"
+        size="2"
+        variant="outline"
+        color="gray"
+        disabled={cannotCopy}
+        aria-live="polite"
+        className={className}
+        style={{ minHeight: "2.5rem", minWidth: "7rem", ...toneStyle }}
+        onClick={handleClick}
+      >
+        {visibleLabel}
+      </Button>
+    );
+  }
 
   return (
-    <button
+    <Button
       type="button"
-      className={`${base}${stateClass} disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:no-underline ${className}`.trim()}
-      onClick={handleClick}
+      size="1"
+      variant="ghost"
+      color="gray"
       disabled={cannotCopy}
       aria-live="polite"
+      className={className}
+      style={{
+        minWidth: "5rem",
+        color: toneStyle?.color ?? "var(--accent-11)",
+        textDecoration: status === "idle" ? "underline" : "none",
+        textUnderlineOffset: "2px",
+      }}
+      onClick={handleClick}
     >
       {visibleLabel}
-    </button>
+    </Button>
   );
 }

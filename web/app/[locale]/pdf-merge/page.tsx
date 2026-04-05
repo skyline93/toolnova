@@ -1,5 +1,6 @@
 "use client";
 
+import { Card, Flex, Heading, Text } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useCallback, useState } from "react";
 
@@ -45,29 +46,41 @@ export default function PdfMergePage() {
   );
 
   return (
-    <div className="space-y-6">
-      <label className="block space-y-2">
-        <span className="text-sm font-medium text-[var(--muted)]">{t("files")}</span>
+    <Flex direction="column" gap="6">
+      <Flex direction="column" gap="2">
+        <Text size="2" weight="medium">
+          {t("files")}
+        </Text>
         <input
           type="file"
           accept="application/pdf,.pdf"
           multiple
-          className="tool-input"
+          className="radix-file-input"
           disabled={busy}
           onChange={(e) => void merge(e.target.files)}
         />
-      </label>
-      <p className="text-sm text-[var(--muted)]">{t("limits")}</p>
+      </Flex>
+      <Text size="2" color="gray">
+        {t("limits")}
+      </Text>
       {error ? (
-        <p className="text-sm text-[var(--danger)]" role="alert">
+        <Text size="2" color="red" role="alert">
           {error}
-        </p>
+        </Text>
       ) : null}
-      {busy ? <p className="text-sm text-[var(--muted)]">{t("merging")}</p> : null}
-      <section className="tool-card space-y-3 p-5 text-sm leading-relaxed text-[var(--muted)]">
-        <h2 className="font-semibold text-[var(--foreground)]">{t("howTitle")}</h2>
-        <p>{t("howBody")}</p>
-      </section>
-    </div>
+      {busy ? (
+        <Text size="2" color="gray">
+          {t("merging")}
+        </Text>
+      ) : null}
+      <Card size="3" variant="surface">
+        <Heading as="h2" size="4" highContrast>
+          {t("howTitle")}
+        </Heading>
+        <Text as="p" size="2" color="gray" mt="3" wrap="pretty">
+          {t("howBody")}
+        </Text>
+      </Card>
+    </Flex>
   );
 }

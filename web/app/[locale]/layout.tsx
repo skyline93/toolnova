@@ -9,6 +9,7 @@ import { getSiteUrl, siteName } from "@/lib/site";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Noto_Sans_SC } from "next/font/google";
 import type { Metadata } from "next";
+import { Theme } from "@radix-ui/themes";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -92,17 +93,24 @@ export default async function LocaleLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${notoSansSc.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body
-        className={`min-h-full flex flex-col ${locale === "zh-CN" ? "locale-zh-cn" : "locale-en"}`}
-      >
+      <body className="min-h-full">
         <NextIntlClientProvider messages={messages}>
           <ConsentProvider>
-            <Header />
-            <div className="flex-1">{children}</div>
-            <AdSlot />
-            <Footer />
-            <CookieBanner />
-            <ConditionalAnalytics />
+            <Theme
+              accentColor="indigo"
+              grayColor="auto"
+              panelBackground="translucent"
+              radius="medium"
+              scaling="100%"
+              className={`flex min-h-full flex-1 flex-col ${locale === "zh-CN" ? "locale-zh-cn" : "locale-en"}`}
+            >
+              <Header />
+              <div className="min-h-0 flex-1">{children}</div>
+              <AdSlot />
+              <Footer />
+              <CookieBanner />
+              <ConditionalAnalytics />
+            </Theme>
           </ConsentProvider>
         </NextIntlClientProvider>
       </body>

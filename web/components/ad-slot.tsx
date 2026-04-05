@@ -1,6 +1,7 @@
 "use client";
 
 import { useConsent } from "@/components/consent-context";
+import { Box, Flex, Text } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 
@@ -42,27 +43,40 @@ export function AdSlot() {
   }, [showAd]);
 
   return (
-    <aside
-      className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6"
-      aria-label={t("ariaLabel")}
-    >
-      <div
-        className="flex min-h-[120px] w-full items-center justify-center overflow-hidden rounded-[calc(var(--radius)-4px)] border border-dashed border-[var(--border)] bg-[color-mix(in_srgb,var(--foreground)_3%,var(--background))]"
-        data-ad-slot-root
-      >
-        {showAd ? (
-          <ins
-            className="adsbygoogle block w-full min-h-[100px] max-w-[728px]"
-            style={{ display: "block" }}
-            data-ad-client={adsenseClient}
-            data-ad-slot={adsenseSlot}
-            data-ad-format="horizontal"
-            data-full-width-responsive="true"
-          />
-        ) : (
-          <p className="px-4 py-8 text-center text-xs text-[var(--muted)]">{t("placeholder")}</p>
-        )}
-      </div>
-    </aside>
+    <Box asChild aria-label={t("ariaLabel")} mx="auto" px={{ initial: "4", sm: "6" }} py="6" style={{ maxWidth: "64rem" }}>
+      <aside>
+        <Box
+          data-ad-slot-root
+          style={{
+            display: "flex",
+            minHeight: "120px",
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+            overflow: "hidden",
+            borderRadius: "var(--radius-3)",
+            border: "1px dashed var(--gray-a7)",
+            backgroundColor: "var(--gray-a2)",
+          }}
+        >
+          {showAd ? (
+            <ins
+              className="adsbygoogle block w-full min-h-[100px] max-w-[728px]"
+              style={{ display: "block" }}
+              data-ad-client={adsenseClient}
+              data-ad-slot={adsenseSlot}
+              data-ad-format="horizontal"
+              data-full-width-responsive="true"
+            />
+          ) : (
+            <Flex align="center" justify="center" px="4" py="8">
+              <Text size="1" color="gray" align="center">
+                {t("placeholder")}
+              </Text>
+            </Flex>
+          )}
+        </Box>
+      </aside>
+    </Box>
   );
 }

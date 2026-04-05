@@ -2,30 +2,9 @@
 
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { Select } from "@radix-ui/themes";
 import { useLocale, useTranslations } from "next-intl";
 import { useTransition } from "react";
-
-function ChevronDown(props: { className?: string }) {
-  return (
-    <svg
-      className={props.className}
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-    >
-      <path
-        d="M4 6l4 4 4-4"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 export function LanguageSwitcher() {
   const pathname = usePathname();
@@ -35,32 +14,24 @@ export function LanguageSwitcher() {
   const [pending, startTransition] = useTransition();
 
   return (
-    <div className="relative border-l border-[var(--border)] pl-3">
-      <select
-        aria-label={t("language")}
-        value={locale}
-        disabled={pending}
-        onChange={(e) => {
-          const next = e.target.value;
-          if (next === locale) return;
-          startTransition(() => {
-            router.replace(pathname, { locale: next });
-          });
-        }}
-        className="lang-select"
-      >
+    <Select.Root
+      value={locale}
+      disabled={pending}
+      onValueChange={(next) => {
+        if (next === locale) return;
+        startTransition(() => {
+          router.replace(pathname, { locale: next });
+        });
+      }}
+    >
+      <Select.Trigger aria-label={t("language")} variant="soft" color="gray" style={{ minWidth: "9rem" }} />
+      <Select.Content position="popper">
         {routing.locales.map((l) => (
-          <option key={l} value={l}>
+          <Select.Item key={l} value={l}>
             {l === "en" ? t("english") : t("chineseSimplified")}
-          </option>
+          </Select.Item>
         ))}
-      </select>
-      <span
-        className="pointer-events-none absolute right-1 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center text-[var(--muted)]"
-        aria-hidden
-      >
-        <ChevronDown />
-      </span>
-    </div>
+      </Select.Content>
+    </Select.Root>
   );
 }

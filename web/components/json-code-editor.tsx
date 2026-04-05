@@ -20,7 +20,7 @@ const jsonHighlight = HighlightStyle.define([
 const jsonEditorTheme = EditorView.theme({
   "&": { fontSize: "13px" },
   ".cm-editor": {
-    borderRadius: "calc(var(--radius) - 4px)",
+    borderRadius: "var(--radius-3)",
     outline: "none",
   },
   ".cm-editor.cm-focused": {
@@ -29,9 +29,9 @@ const jsonEditorTheme = EditorView.theme({
   },
   ".cm-scroller": {
     fontFamily: "var(--font-geist-mono), ui-monospace, monospace",
-    border: "1px solid var(--border)",
-    borderRadius: "calc(var(--radius) - 4px)",
-    backgroundColor: "var(--background)",
+    border: "1px solid var(--gray-a6)",
+    borderRadius: "var(--radius-3)",
+    backgroundColor: "var(--color-background)",
   },
   ".cm-content": {
     caretColor: "var(--cm-json-caret)",
@@ -42,11 +42,11 @@ const jsonEditorTheme = EditorView.theme({
     opacity: 0.9,
   },
   ".cm-gutters": {
-    backgroundColor: "var(--surface)",
+    backgroundColor: "var(--gray-2)",
     color: "var(--cm-json-placeholder)",
     border: "none",
-    borderRight: "1px solid var(--border)",
-    borderRadius: "calc(var(--radius) - 4px) 0 0 calc(var(--radius) - 4px)",
+    borderRight: "1px solid var(--gray-a6)",
+    borderRadius: "var(--radius-3) 0 0 var(--radius-3)",
   },
   ".cm-lineNumbers .cm-gutterElement": {
     padding: "0 0.35rem 0 0.5rem",
@@ -65,8 +65,8 @@ const jsonEditorTheme = EditorView.theme({
     backgroundColor: "var(--cm-json-selection) !important",
   },
   ".cm-foldPlaceholder": {
-    backgroundColor: "color-mix(in srgb, var(--cm-json-placeholder) 12%, var(--background))",
-    border: "1px solid var(--border)",
+    backgroundColor: "var(--gray-a3)",
+    border: "1px solid var(--gray-a6)",
     color: "var(--cm-json-placeholder)",
   },
 });

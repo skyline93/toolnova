@@ -1,6 +1,7 @@
 "use client";
 
 import { CopyTextButton } from "@/components/copy-text-button";
+import { Box, Button, Card, Flex, Heading, Text, TextField } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
 
@@ -35,22 +36,25 @@ export default function UuidGeneratorPage() {
   const allText = useMemo(() => uuids.join("\n"), [uuids]);
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap items-end gap-4">
-        <label className="space-y-2">
-          <span className="text-sm font-medium text-[var(--muted)]">{t("quantity")}</span>
-          <input
+    <Flex direction="column" gap="6">
+      <Flex gap="4" align="end" wrap="wrap">
+        <Flex direction="column" gap="2">
+          <Text size="2" weight="medium">
+            {t("quantity")}
+          </Text>
+          <TextField.Root
             type="number"
+            size="2"
             min={1}
             max={100}
-            className="tool-input w-28"
-            value={count}
+            style={{ width: "7rem" }}
+            value={String(count)}
             onChange={(e) => setCount(Number(e.target.value))}
           />
-        </label>
-        <button type="button" className="tool-btn" onClick={regenerate}>
+        </Flex>
+        <Button type="button" size="2" variant="solid" highContrast onClick={regenerate}>
           {tc("generate")}
-        </button>
+        </Button>
         <CopyTextButton
           key={allText}
           text={allText}
@@ -58,29 +62,37 @@ export default function UuidGeneratorPage() {
           copiedLabel={tc("allCopied")}
           variant="secondary"
         />
-      </div>
-      <ul className="tool-card divide-y divide-[var(--border)] font-mono text-sm">
+      </Flex>
+      <Card size="2" variant="surface" style={{ padding: 0, overflow: "hidden" }}>
         {uuids.length === 0 ? (
-          <li className="px-4 py-6 text-sm text-[var(--muted)]">{tc("loading")}</li>
+          <Box p="6">
+            <Text size="2" color="gray">
+              {tc("loading")}
+            </Text>
+          </Box>
         ) : (
-          uuids.map((u) => (
-            <li key={u} className="flex items-center justify-between gap-3 px-4 py-3">
-              <span className="break-all">{u}</span>
-              <CopyTextButton
-                key={u}
-                text={u}
-                idleLabel={tc("copy")}
-                copiedLabel={tc("copied")}
-                variant="link"
-              />
-            </li>
-          ))
+          <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
+            {uuids.map((u, idx) => (
+              <li key={u} style={{ borderTop: idx === 0 ? undefined : "1px solid var(--gray-a6)" }}>
+                <Flex align="center" justify="between" gap="3" p="4">
+                  <Text size="2" style={{ wordBreak: "break-all", fontFamily: "var(--font-geist-mono), monospace" }} highContrast>
+                    {u}
+                  </Text>
+                  <CopyTextButton key={u} text={u} idleLabel={tc("copy")} copiedLabel={tc("copied")} variant="link" />
+                </Flex>
+              </li>
+            ))}
+          </ul>
         )}
-      </ul>
-      <section className="tool-card space-y-3 p-5 text-sm leading-relaxed text-[var(--muted)]">
-        <h2 className="font-semibold text-[var(--foreground)]">{t("howTitle")}</h2>
-        <p>{t("howBody")}</p>
-      </section>
-    </div>
+      </Card>
+      <Card size="3" variant="surface">
+        <Heading as="h2" size="4" highContrast>
+          {t("howTitle")}
+        </Heading>
+        <Text as="p" size="2" color="gray" mt="3" wrap="pretty">
+          {t("howBody")}
+        </Text>
+      </Card>
+    </Flex>
   );
 }

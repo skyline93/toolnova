@@ -1,6 +1,7 @@
 "use client";
 
 import imageCompression from "browser-image-compression";
+import { Button, Card, Flex, Grid, Heading, Text, TextField } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useCallback, useState } from "react";
 
@@ -51,52 +52,58 @@ export default function ImageCompressorPage() {
   );
 
   return (
-    <div className="space-y-6">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <label className="space-y-2">
-          <span className="text-sm font-medium text-[var(--muted)]">{t("maxSize")}</span>
-          <input
+    <Flex direction="column" gap="6">
+      <Grid columns={{ initial: "1", sm: "2" }} gap="4">
+        <Flex direction="column" gap="2">
+          <Text size="2" weight="medium">
+            {t("maxSize")}
+          </Text>
+          <TextField.Root
             type="number"
+            size="2"
             min={320}
             max={8192}
-            className="tool-input"
-            value={maxWidth}
+            value={String(maxWidth)}
             onChange={(e) => setMaxWidth(Number(e.target.value))}
           />
-        </label>
-        <label className="space-y-2">
-          <span className="text-sm font-medium text-[var(--muted)]">{t("quality")}</span>
-          <input
+        </Flex>
+        <Flex direction="column" gap="2">
+          <Text size="2" weight="medium">
+            {t("quality")}
+          </Text>
+          <TextField.Root
             type="number"
+            size="2"
             min={0.1}
             max={1}
             step={0.05}
-            className="tool-input"
-            value={quality}
+            value={String(quality)}
             onChange={(e) => setQuality(Number(e.target.value))}
           />
-        </label>
-      </div>
-      <label className="block space-y-2">
-        <span className="text-sm font-medium text-[var(--muted)]">{t("file")}</span>
+        </Flex>
+      </Grid>
+      <Flex direction="column" gap="2">
+        <Text size="2" weight="medium">
+          {t("file")}
+        </Text>
         <input
           type="file"
           accept="image/*"
-          className="tool-input"
+          className="radix-file-input"
           disabled={busy}
           onChange={(e) => {
             const f = e.target.files?.[0];
             if (f) void onFile(f);
           }}
         />
-      </label>
+      </Flex>
       {error ? (
-        <p className="text-sm text-[var(--danger)]" role="alert">
+        <Text size="2" color="red" role="alert">
           {error}
-        </p>
+        </Text>
       ) : null}
       {beforeSize !== null ? (
-        <p className="text-sm text-[var(--muted)]">
+        <Text size="2" color="gray">
           {t("sizeOriginal")} {(beforeSize / 1024).toFixed(1)} KB
           {afterSize !== null ? (
             <>
@@ -104,21 +111,29 @@ export default function ImageCompressorPage() {
               → {t("sizeCompressed")} {(afterSize / 1024).toFixed(1)} KB
             </>
           ) : null}
-        </p>
+        </Text>
       ) : null}
       {url ? (
-        <div className="space-y-3">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={url} alt={t("previewAlt")} className="tool-card max-h-96 w-auto object-contain p-2" />
-          <a href={url} download="compressed.jpg" className="tool-btn inline-flex">
-            {tc("downloadResult")}
-          </a>
-        </div>
+        <Flex direction="column" gap="3">
+          <Card size="2" variant="surface" style={{ display: "inline-block", maxWidth: "fit-content" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element -- blob preview URL from compression */}
+            <img src={url} alt={t("previewAlt")} style={{ maxHeight: "24rem", width: "auto", objectFit: "contain", display: "block" }} />
+          </Card>
+          <Button asChild size="2" variant="solid" highContrast>
+            <a href={url} download="compressed.jpg">
+              {tc("downloadResult")}
+            </a>
+          </Button>
+        </Flex>
       ) : null}
-      <section className="tool-card space-y-3 p-5 text-sm leading-relaxed text-[var(--muted)]">
-        <h2 className="font-semibold text-[var(--foreground)]">{t("howTitle")}</h2>
-        <p>{t("howBody")}</p>
-      </section>
-    </div>
+      <Card size="3" variant="surface">
+        <Heading as="h2" size="4" highContrast>
+          {t("howTitle")}
+        </Heading>
+        <Text as="p" size="2" color="gray" mt="3" wrap="pretty">
+          {t("howBody")}
+        </Text>
+      </Card>
+    </Flex>
   );
 }

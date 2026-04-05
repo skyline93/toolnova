@@ -1,5 +1,6 @@
 "use client";
 
+import { Card, Flex, Grid, Heading, Text, TextField } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useLayoutEffect, useMemo, useState } from "react";
 
@@ -39,46 +40,48 @@ export default function AgeCalculatorPage() {
   const result = useMemo(() => (ref ? ageCalendar(birth, ref) : null), [birth, ref]);
 
   return (
-    <div className="space-y-6">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <label className="space-y-2">
-          <span className="text-sm font-medium text-[var(--muted)]">{t("birth")}</span>
-          <input
-            type="date"
-            className="tool-input"
-            value={birth}
-            onChange={(e) => setBirth(e.target.value)}
-          />
-        </label>
-        <label className="space-y-2">
-          <span className="text-sm font-medium text-[var(--muted)]">{t("ref")}</span>
-          <input
-            type="date"
-            className="tool-input"
-            value={ref}
-            onChange={(e) => setRef(e.target.value)}
-          />
-        </label>
-      </div>
+    <Flex direction="column" gap="6">
+      <Grid columns={{ initial: "1", sm: "2" }} gap="4">
+        <Flex direction="column" gap="2">
+          <Text size="2" weight="medium">
+            {t("birth")}
+          </Text>
+          <TextField.Root type="date" size="2" value={birth} onChange={(e) => setBirth(e.target.value)} />
+        </Flex>
+        <Flex direction="column" gap="2">
+          <Text size="2" weight="medium">
+            {t("ref")}
+          </Text>
+          <TextField.Root type="date" size="2" value={ref} onChange={(e) => setRef(e.target.value)} />
+        </Flex>
+      </Grid>
       {ref === "" ? (
-        <p className="text-sm text-[var(--muted)]">{tc("loading")}</p>
+        <Text size="2" color="gray">
+          {tc("loading")}
+        </Text>
       ) : !result ? (
-        <p className="text-sm text-[var(--danger)]">{t("error")}</p>
+        <Text size="2" color="red">
+          {t("error")}
+        </Text>
       ) : (
-        <div className="tool-card px-4 py-5 text-sm leading-relaxed text-[var(--muted)]">
-          <p className="text-[var(--foreground)]">
+        <Card size="3" variant="surface">
+          <Text size="3" color="gray" highContrast>
             {t("result", {
               years: result.years,
               months: result.months,
               days: result.days,
             })}
-          </p>
-        </div>
+          </Text>
+        </Card>
       )}
-      <section className="tool-card space-y-3 p-5 text-sm leading-relaxed text-[var(--muted)]">
-        <h2 className="font-semibold text-[var(--foreground)]">{t("howTitle")}</h2>
-        <p>{t("howBody")}</p>
-      </section>
-    </div>
+      <Card size="3" variant="surface">
+        <Heading as="h2" size="4" highContrast>
+          {t("howTitle")}
+        </Heading>
+        <Text as="p" size="2" color="gray" mt="3" wrap="pretty">
+          {t("howBody")}
+        </Text>
+      </Card>
+    </Flex>
   );
 }

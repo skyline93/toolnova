@@ -2,6 +2,7 @@
 
 import { CopyTextButton } from "@/components/copy-text-button";
 import { JsonCodeEditor } from "@/components/json-code-editor";
+import { Button, Card, Flex, Grid, Heading, Text } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useCallback, useState } from "react";
 
@@ -35,28 +36,32 @@ export default function JsonFormatterPage() {
   }, [input]);
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap gap-2">
-        <button type="button" className="tool-btn" onClick={formatJson}>
+    <Flex direction="column" gap="6">
+      <Flex gap="2" wrap="wrap">
+        <Button type="button" size="2" variant="solid" highContrast onClick={formatJson}>
           {t("format")}
-        </button>
-        <button type="button" className="tool-btn tool-btn-secondary" onClick={minifyJson}>
+        </Button>
+        <Button type="button" size="2" variant="outline" color="gray" onClick={minifyJson}>
           {t("minify")}
-        </button>
-      </div>
-      <div className="grid gap-4 lg:grid-cols-2">
-        <div className="block space-y-2">
-          <span className="text-sm font-medium text-[var(--muted)]">{t("input")}</span>
+        </Button>
+      </Flex>
+      <Grid columns={{ initial: "1", lg: "2" }} gap="4">
+        <Flex direction="column" gap="2">
+          <Text size="2" weight="medium">
+            {t("input")}
+          </Text>
           <JsonCodeEditor
             value={input}
             onChange={setInput}
             placeholder={t("inputPlaceholder")}
             aria-label={t("input")}
           />
-        </div>
-        <div className="block space-y-2">
-          <span className="flex items-center justify-between gap-2">
-            <span className="text-sm font-medium text-[var(--muted)]">{t("output")}</span>
+        </Flex>
+        <Flex direction="column" gap="2">
+          <Flex align="center" justify="between" gap="2" wrap="wrap">
+            <Text size="2" weight="medium">
+              {t("output")}
+            </Text>
             <CopyTextButton
               key={output}
               text={output}
@@ -65,24 +70,23 @@ export default function JsonFormatterPage() {
               variant="link"
               className="!min-w-0"
             />
-          </span>
-          <JsonCodeEditor
-            value={output}
-            readOnly
-            placeholder={t("outputPlaceholder")}
-            aria-label={t("output")}
-          />
-        </div>
-      </div>
+          </Flex>
+          <JsonCodeEditor value={output} readOnly placeholder={t("outputPlaceholder")} aria-label={t("output")} />
+        </Flex>
+      </Grid>
       {error ? (
-        <p className="text-sm text-[var(--danger)]" role="alert">
+        <Text size="2" color="red" role="alert">
           {error}
-        </p>
+        </Text>
       ) : null}
-      <section className="tool-card space-y-3 p-5 text-sm leading-relaxed text-[var(--muted)]">
-        <h2 className="font-semibold text-[var(--foreground)]">{t("howTitle")}</h2>
-        <p>{t("howBody")}</p>
-      </section>
-    </div>
+      <Card size="3" variant="surface">
+        <Heading as="h2" size="4" highContrast>
+          {t("howTitle")}
+        </Heading>
+        <Text as="p" size="2" color="gray" mt="3" wrap="pretty">
+          {t("howBody")}
+        </Text>
+      </Card>
+    </Flex>
   );
 }

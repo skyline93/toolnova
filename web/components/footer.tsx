@@ -1,5 +1,6 @@
 import { Link } from "@/i18n/navigation";
 import { siteName } from "@/lib/site";
+import { Box, Flex, Text } from "@radix-ui/themes";
 import { getTranslations } from "next-intl/server";
 
 export async function Footer() {
@@ -7,23 +8,47 @@ export async function Footer() {
   const tn = await getTranslations("nav");
 
   return (
-    <footer className="mt-auto border-t border-[var(--border)] bg-[var(--surface)]">
-      <div className="mx-auto flex max-w-5xl flex-col gap-2 px-4 py-8 text-sm text-[var(--muted)] sm:flex-row sm:items-center sm:justify-between sm:px-6">
-        <p>
-          © {new Date().getFullYear()} {siteName}. {t("tagline")}
-        </p>
-        <div className="flex flex-wrap gap-4">
-          <Link href="/tools" className="hover:text-[var(--foreground)]">
-            {t("allTools")}
-          </Link>
-          <Link href="/privacy" className="hover:text-[var(--foreground)]">
-            {tn("privacy")}
-          </Link>
-          <Link href="/terms" className="hover:text-[var(--foreground)]">
-            {tn("terms")}
-          </Link>
-        </div>
-      </div>
-    </footer>
+    <Box
+      asChild
+      mt="auto"
+      style={{
+        borderTop: "1px solid var(--gray-a6)",
+        backgroundColor: "var(--color-panel-solid)",
+      }}
+    >
+      <footer>
+        <Flex
+          direction={{ initial: "column", sm: "row" }}
+          align={{ sm: "center" }}
+          justify={{ sm: "between" }}
+          gap="2"
+          px={{ initial: "4", sm: "6" }}
+          py="8"
+          mx="auto"
+          style={{ maxWidth: "64rem" }}
+        >
+          <Text size="2" color="gray">
+            © {new Date().getFullYear()} {siteName}. {t("tagline")}
+          </Text>
+          <Flex gap="4" wrap="wrap">
+            <Text asChild size="2" color="gray">
+              <Link href="/tools" style={{ textDecoration: "none" }}>
+                {t("allTools")}
+              </Link>
+            </Text>
+            <Text asChild size="2" color="gray">
+              <Link href="/privacy" style={{ textDecoration: "none" }}>
+                {tn("privacy")}
+              </Link>
+            </Text>
+            <Text asChild size="2" color="gray">
+              <Link href="/terms" style={{ textDecoration: "none" }}>
+                {tn("terms")}
+              </Link>
+            </Text>
+          </Flex>
+        </Flex>
+      </footer>
+    </Box>
   );
 }

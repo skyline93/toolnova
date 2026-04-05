@@ -1,5 +1,6 @@
 "use client";
 
+import { Box, Card, Checkbox, Flex, Grid, Heading, Text, TextArea, TextField } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 
@@ -47,87 +48,124 @@ export default function RegexTesterPage() {
   const result = useMemo(() => runRegex(pattern, flags, text), [pattern, flags, text]);
 
   return (
-    <div className="space-y-6">
-      <div className="grid gap-4 lg:grid-cols-2">
-        <label className="block space-y-2">
-          <span className="text-sm font-medium text-[var(--muted)]">{t("pattern")}</span>
-          <input
-            className="tool-input font-mono text-sm"
+    <Flex direction="column" gap="6">
+      <Grid columns={{ initial: "1", lg: "2" }} gap="4">
+        <Flex direction="column" gap="2">
+          <Text size="2" weight="medium">
+            {t("pattern")}
+          </Text>
+          <TextField.Root
+            size="2"
             value={pattern}
             onChange={(e) => setPattern(e.target.value)}
             spellCheck={false}
             autoComplete="off"
+            style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: "var(--font-size-2)" }}
           />
-        </label>
-        <fieldset className="tool-card space-y-2 p-4">
-          <legend className="text-sm font-medium text-[var(--muted)]">Flags</legend>
-          <div className="flex flex-wrap gap-4 text-sm">
-            <label className="flex cursor-pointer items-center gap-2">
-              <input type="checkbox" checked={i} onChange={(e) => setI(e.target.checked)} />
-              {t("flagI")}
-            </label>
-            <label className="flex cursor-pointer items-center gap-2">
-              <input type="checkbox" checked={g} onChange={(e) => setG(e.target.checked)} />
-              {t("flagG")}
-            </label>
-            <label className="flex cursor-pointer items-center gap-2">
-              <input type="checkbox" checked={m} onChange={(e) => setM(e.target.checked)} />
-              {t("flagM")}
-            </label>
-            <label className="flex cursor-pointer items-center gap-2">
-              <input type="checkbox" checked={s} onChange={(e) => setS(e.target.checked)} />
-              {t("flagS")}
-            </label>
-          </div>
-        </fieldset>
-      </div>
-      <label className="block space-y-2">
-        <span className="text-sm font-medium text-[var(--muted)]">{t("testText")}</span>
-        <textarea
-          className="tool-input min-h-[160px] font-mono text-sm"
+        </Flex>
+        <Card size="2" variant="surface">
+          <Text as="div" size="2" weight="medium" mb="3" color="gray">
+            Flags
+          </Text>
+          <Flex direction="column" gap="3">
+            <Flex align="center" gap="2">
+              <Checkbox checked={i} onCheckedChange={(c) => setI(c === true)} />
+              <Text size="2" as="label" style={{ cursor: "pointer" }} onClick={() => setI((v) => !v)}>
+                {t("flagI")}
+              </Text>
+            </Flex>
+            <Flex align="center" gap="2">
+              <Checkbox checked={g} onCheckedChange={(c) => setG(c === true)} />
+              <Text size="2" as="label" style={{ cursor: "pointer" }} onClick={() => setG((v) => !v)}>
+                {t("flagG")}
+              </Text>
+            </Flex>
+            <Flex align="center" gap="2">
+              <Checkbox checked={m} onCheckedChange={(c) => setM(c === true)} />
+              <Text size="2" as="label" style={{ cursor: "pointer" }} onClick={() => setM((v) => !v)}>
+                {t("flagM")}
+              </Text>
+            </Flex>
+            <Flex align="center" gap="2">
+              <Checkbox checked={s} onCheckedChange={(c) => setS(c === true)} />
+              <Text size="2" as="label" style={{ cursor: "pointer" }} onClick={() => setS((v) => !v)}>
+                {t("flagS")}
+              </Text>
+            </Flex>
+          </Flex>
+        </Card>
+      </Grid>
+      <Flex direction="column" gap="2">
+        <Text size="2" weight="medium">
+          {t("testText")}
+        </Text>
+        <TextArea
+          size="2"
+          variant="surface"
           value={text}
           onChange={(e) => setText(e.target.value)}
           spellCheck={false}
+          style={{ minHeight: "160px", fontFamily: "var(--font-geist-mono), monospace", fontSize: "var(--font-size-2)" }}
         />
-      </label>
+      </Flex>
 
       {!result.ok ? (
-        <p className="text-sm text-[var(--danger)]" role="alert">
+        <Text size="2" color="red" role="alert">
           {t("errorInvalid")}
-        </p>
+        </Text>
       ) : (
-        <div className="tool-card overflow-hidden">
-          <p className="border-b border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--muted)]">
-            {t("matches")}
-          </p>
+        <Card size="2" variant="surface" style={{ overflow: "hidden", padding: 0 }}>
+          <Box px="4" py="2" style={{ borderBottom: "1px solid var(--gray-a6)" }}>
+            <Text size="2" weight="medium" color="gray">
+              {t("matches")}
+            </Text>
+          </Box>
           {result.rows.length === 0 ? (
-            <p className="px-4 py-6 text-sm text-[var(--muted)]">{t("noMatches")}</p>
+            <Box px="4" py="6">
+              <Text size="2" color="gray">
+                {t("noMatches")}
+              </Text>
+            </Box>
           ) : (
-            <ul className="divide-y divide-[var(--border)] font-mono text-sm">
+            <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
               {result.rows.map((row, idx) => (
-                <li key={`${row.index}-${idx}`} className="space-y-1 px-4 py-3">
-                  <p className="text-xs text-[var(--muted)]">@{row.index}</p>
-                  <p>
-                    <span className="text-[var(--muted)]">{t("fullMatch")}: </span>
-                    <span className="break-all text-[var(--foreground)]">{row.full}</span>
-                  </p>
-                  {row.groups.length > 0 ? (
-                    <p className="text-[var(--muted)]">
-                      {t("groups")}:{" "}
-                      <span className="text-[var(--foreground)]">{row.groups.join(" | ")}</span>
-                    </p>
-                  ) : null}
+                <li key={`${row.index}-${idx}`} style={{ borderTop: idx === 0 ? undefined : "1px solid var(--gray-a6)" }}>
+                  <Flex direction="column" gap="1" p="4">
+                    <Text size="1" color="gray">
+                      @{row.index}
+                    </Text>
+                    <Text size="2">
+                      <Text as="span" color="gray">
+                        {t("fullMatch")}:{" "}
+                      </Text>
+                      <Text as="span" style={{ wordBreak: "break-all", fontFamily: "var(--font-geist-mono), monospace" }} highContrast>
+                        {row.full}
+                      </Text>
+                    </Text>
+                    {row.groups.length > 0 ? (
+                      <Text size="2" color="gray">
+                        {t("groups")}:{" "}
+                        <Text as="span" highContrast style={{ fontFamily: "var(--font-geist-mono), monospace" }}>
+                          {row.groups.join(" | ")}
+                        </Text>
+                      </Text>
+                    ) : null}
+                  </Flex>
                 </li>
               ))}
             </ul>
           )}
-        </div>
+        </Card>
       )}
 
-      <section className="tool-card space-y-3 p-5 text-sm leading-relaxed text-[var(--muted)]">
-        <h2 className="font-semibold text-[var(--foreground)]">{t("howTitle")}</h2>
-        <p>{t("howBody")}</p>
-      </section>
-    </div>
+      <Card size="3" variant="surface">
+        <Heading as="h2" size="4" highContrast>
+          {t("howTitle")}
+        </Heading>
+        <Text as="p" size="2" color="gray" mt="3" wrap="pretty">
+          {t("howBody")}
+        </Text>
+      </Card>
+    </Flex>
   );
 }

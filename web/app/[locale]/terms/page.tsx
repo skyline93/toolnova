@@ -1,8 +1,9 @@
 import { Link } from "@/i18n/navigation";
+import { getPathname } from "@/i18n/navigation";
 import { siteName } from "@/lib/site";
+import { Box, Container, Flex, Heading, Text } from "@radix-ui/themes";
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
-import { getPathname } from "@/i18n/navigation";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -19,23 +20,51 @@ export default async function TermsPage() {
   const t = await getTranslations("termsPage");
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
-      <h1 className="text-3xl font-semibold tracking-tight">{t("title")}</h1>
-      <p className="mt-3 text-sm text-[var(--muted)]">{t("updated")}</p>
-      <div className="prose prose-neutral mt-8 max-w-none space-y-4 text-[var(--muted)] dark:prose-invert">
-        <p className="text-[var(--foreground)]">{t("intro", { siteName })}</p>
-        <h2 className="text-lg font-semibold text-[var(--foreground)]">{t("hWarranty")}</h2>
-        <p>{t("pWarranty")}</p>
-        <h2 className="text-lg font-semibold text-[var(--foreground)]">{t("hAcceptable")}</h2>
-        <p>{t("pAcceptable")}</p>
-        <h2 className="text-lg font-semibold text-[var(--foreground)]">{t("hChanges")}</h2>
-        <p>{t("pChanges")}</p>
-        <p>
-          <Link href="/" className="text-[var(--accent)] hover:underline">
-            {t("backHome")}
-          </Link>
-        </p>
-      </div>
-    </main>
+    <Box asChild>
+      <main>
+        <Container size="2" px={{ initial: "4", sm: "6" }} py={{ initial: "8", sm: "9" }}>
+          <Heading as="h1" size="7" highContrast>
+            {t("title")}
+          </Heading>
+          <Text size="2" color="gray" mt="3">
+            {t("updated")}
+          </Text>
+          <Flex direction="column" gap="4" mt="8">
+            <Text size="3" color="gray" highContrast>
+              {t("intro", { siteName })}
+            </Text>
+            <Box>
+              <Heading as="h2" size="4" mb="2" highContrast>
+                {t("hWarranty")}
+              </Heading>
+              <Text size="3" color="gray">
+                {t("pWarranty")}
+              </Text>
+            </Box>
+            <Box>
+              <Heading as="h2" size="4" mb="2" highContrast>
+                {t("hAcceptable")}
+              </Heading>
+              <Text size="3" color="gray">
+                {t("pAcceptable")}
+              </Text>
+            </Box>
+            <Box>
+              <Heading as="h2" size="4" mb="2" highContrast>
+                {t("hChanges")}
+              </Heading>
+              <Text size="3" color="gray">
+                {t("pChanges")}
+              </Text>
+            </Box>
+            <Text asChild size="3" color="indigo" highContrast>
+              <Link href="/" style={{ textDecoration: "underline", textUnderlineOffset: "2px" }}>
+                {t("backHome")}
+              </Link>
+            </Text>
+          </Flex>
+        </Container>
+      </main>
+    </Box>
   );
 }

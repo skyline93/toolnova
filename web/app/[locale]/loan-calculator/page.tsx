@@ -1,5 +1,6 @@
 "use client";
 
+import { Card, Flex, Grid, Heading, Text, TextField } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 
@@ -43,63 +44,76 @@ export default function LoanCalculatorPage() {
   );
 
   return (
-    <div className="space-y-6">
-      <div className="grid gap-4 sm:grid-cols-3">
-        <label className="space-y-2">
-          <span className="text-sm font-medium text-[var(--muted)]">{t("principal")}</span>
-          <input
-            className="tool-input"
+    <Flex direction="column" gap="6">
+      <Grid columns={{ initial: "1", sm: "3" }} gap="4">
+        <Flex direction="column" gap="2">
+          <Text size="2" weight="medium">
+            {t("principal")}
+          </Text>
+          <TextField.Root
+            size="2"
             inputMode="decimal"
             value={principal}
             onChange={(e) => setPrincipal(e.target.value)}
           />
-        </label>
-        <label className="space-y-2">
-          <span className="text-sm font-medium text-[var(--muted)]">{t("apr")}</span>
-          <input className="tool-input" inputMode="decimal" value={apr} onChange={(e) => setApr(e.target.value)} />
-        </label>
-        <label className="space-y-2">
-          <span className="text-sm font-medium text-[var(--muted)]">{t("years")}</span>
-          <input
-            className="tool-input"
-            inputMode="decimal"
-            value={years}
-            onChange={(e) => setYears(e.target.value)}
-          />
-        </label>
-      </div>
+        </Flex>
+        <Flex direction="column" gap="2">
+          <Text size="2" weight="medium">
+            {t("apr")}
+          </Text>
+          <TextField.Root size="2" inputMode="decimal" value={apr} onChange={(e) => setApr(e.target.value)} />
+        </Flex>
+        <Flex direction="column" gap="2">
+          <Text size="2" weight="medium">
+            {t("years")}
+          </Text>
+          <TextField.Root size="2" inputMode="decimal" value={years} onChange={(e) => setYears(e.target.value)} />
+        </Flex>
+      </Grid>
 
       {result ? (
-        <dl className="tool-card grid gap-4 p-5 sm:grid-cols-3">
-          <div>
-            <dt className="text-sm text-[var(--muted)]">{t("monthly")}</dt>
-            <dd className="mt-1 text-lg font-semibold tabular-nums text-[var(--foreground)]">
-              {fmt.format(result.monthly)}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-sm text-[var(--muted)]">{t("totalPaid")}</dt>
-            <dd className="mt-1 text-lg font-semibold tabular-nums text-[var(--foreground)]">
-              {fmt.format(result.total)}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-sm text-[var(--muted)]">{t("totalInterest")}</dt>
-            <dd className="mt-1 text-lg font-semibold tabular-nums text-[var(--foreground)]">
-              {fmt.format(result.interest)}
-            </dd>
-          </div>
-        </dl>
+        <Card size="3" variant="surface">
+          <Grid columns={{ initial: "1", sm: "3" }} gap="4">
+            <Flex direction="column" gap="1">
+              <Text size="2" color="gray">
+                {t("monthly")}
+              </Text>
+              <Text size="5" weight="bold" style={{ fontVariantNumeric: "tabular-nums" }} highContrast>
+                {fmt.format(result.monthly)}
+              </Text>
+            </Flex>
+            <Flex direction="column" gap="1">
+              <Text size="2" color="gray">
+                {t("totalPaid")}
+              </Text>
+              <Text size="5" weight="bold" style={{ fontVariantNumeric: "tabular-nums" }} highContrast>
+                {fmt.format(result.total)}
+              </Text>
+            </Flex>
+            <Flex direction="column" gap="1">
+              <Text size="2" color="gray">
+                {t("totalInterest")}
+              </Text>
+              <Text size="5" weight="bold" style={{ fontVariantNumeric: "tabular-nums" }} highContrast>
+                {fmt.format(result.interest)}
+              </Text>
+            </Flex>
+          </Grid>
+        </Card>
       ) : (
-        <p className="text-sm text-[var(--danger)]" role="alert">
+        <Text size="2" color="red" role="alert">
           {t("invalid")}
-        </p>
+        </Text>
       )}
 
-      <section className="tool-card space-y-3 p-5 text-sm leading-relaxed text-[var(--muted)]">
-        <h2 className="font-semibold text-[var(--foreground)]">{t("howTitle")}</h2>
-        <p>{t("howBody")}</p>
-      </section>
-    </div>
+      <Card size="3" variant="surface">
+        <Heading as="h2" size="4" highContrast>
+          {t("howTitle")}
+        </Heading>
+        <Text as="p" size="2" color="gray" mt="3" wrap="pretty">
+          {t("howBody")}
+        </Text>
+      </Card>
+    </Flex>
   );
 }

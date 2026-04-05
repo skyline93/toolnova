@@ -1,5 +1,6 @@
 "use client";
 
+import { Card, Flex, Grid, Heading, Text, TextField } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useLayoutEffect, useMemo, useState } from "react";
 
@@ -48,74 +49,87 @@ export default function DateCalculatorPage() {
   );
 
   return (
-    <div className="space-y-10">
-      <section className="space-y-4">
-        <h2 className="text-lg font-semibold text-[var(--foreground)]">{t("diffTitle")}</h2>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <label className="space-y-2">
-            <span className="text-sm font-medium text-[var(--muted)]">{t("start")}</span>
-            <input
-              type="date"
-              className="tool-input"
-              value={start}
-              onChange={(e) => setStart(e.target.value)}
-            />
-          </label>
-          <label className="space-y-2">
-            <span className="text-sm font-medium text-[var(--muted)]">{t("end")}</span>
-            <input
-              type="date"
-              className="tool-input"
-              value={end}
-              onChange={(e) => setEnd(e.target.value)}
-            />
-          </label>
-        </div>
+    <Flex direction="column" gap="10">
+      <Flex direction="column" gap="4">
+        <Heading as="h2" size="5" highContrast>
+          {t("diffTitle")}
+        </Heading>
+        <Grid columns={{ initial: "1", sm: "2" }} gap="4">
+          <Flex direction="column" gap="2">
+            <Text size="2" weight="medium">
+              {t("start")}
+            </Text>
+            <TextField.Root type="date" size="2" value={start} onChange={(e) => setStart(e.target.value)} />
+          </Flex>
+          <Flex direction="column" gap="2">
+            <Text size="2" weight="medium">
+              {t("end")}
+            </Text>
+            <TextField.Root type="date" size="2" value={end} onChange={(e) => setEnd(e.target.value)} />
+          </Flex>
+        </Grid>
         {diff === null ? (
-          <p className="text-sm text-[var(--danger)]">{t("invalidRange")}</p>
+          <Text size="2" color="red">
+            {t("invalidRange")}
+          </Text>
         ) : (
-          <p className="tool-card px-4 py-3 text-sm text-[var(--muted)]">
-            {t("span", { days: diff })}
-          </p>
+          <Card size="2" variant="surface">
+            <Text size="2" color="gray">
+              {t("span", { days: diff })}
+            </Text>
+          </Card>
         )}
-      </section>
-      <section className="space-y-4">
-        <h2 className="text-lg font-semibold text-[var(--foreground)]">{t("addTitle")}</h2>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <label className="space-y-2">
-            <span className="text-sm font-medium text-[var(--muted)]">{t("base")}</span>
-            <input
-              type="date"
-              className="tool-input"
-              value={base}
-              onChange={(e) => setBase(e.target.value)}
-            />
-          </label>
-          <label className="space-y-2">
-            <span className="text-sm font-medium text-[var(--muted)]">{t("delta")}</span>
-            <input
+      </Flex>
+      <Flex direction="column" gap="4">
+        <Heading as="h2" size="5" highContrast>
+          {t("addTitle")}
+        </Heading>
+        <Grid columns={{ initial: "1", sm: "2" }} gap="4">
+          <Flex direction="column" gap="2">
+            <Text size="2" weight="medium">
+              {t("base")}
+            </Text>
+            <TextField.Root type="date" size="2" value={base} onChange={(e) => setBase(e.target.value)} />
+          </Flex>
+          <Flex direction="column" gap="2">
+            <Text size="2" weight="medium">
+              {t("delta")}
+            </Text>
+            <TextField.Root
               type="number"
-              className="tool-input"
-              value={delta}
+              size="2"
+              value={String(delta)}
               onChange={(e) => setDelta(Number(e.target.value))}
             />
-          </label>
-        </div>
+          </Flex>
+        </Grid>
         {base === "" ? (
-          <p className="text-sm text-[var(--muted)]">{tc("loading")}</p>
+          <Text size="2" color="gray">
+            {tc("loading")}
+          </Text>
         ) : shifted ? (
-          <p className="tool-card px-4 py-3 text-sm text-[var(--muted)]">
-            {t("result")}{" "}
-            <strong className="font-mono text-[var(--foreground)]">{shifted}</strong>
-          </p>
+          <Card size="2" variant="surface">
+            <Text size="2" color="gray">
+              {t("result")}{" "}
+              <Text as="span" weight="bold" style={{ fontFamily: "var(--font-geist-mono), monospace" }} highContrast>
+                {shifted}
+              </Text>
+            </Text>
+          </Card>
         ) : (
-          <p className="text-sm text-[var(--danger)]">{t("invalidBase")}</p>
+          <Text size="2" color="red">
+            {t("invalidBase")}
+          </Text>
         )}
-      </section>
-      <section className="tool-card space-y-3 p-5 text-sm leading-relaxed text-[var(--muted)]">
-        <h2 className="font-semibold text-[var(--foreground)]">{t("howTitle")}</h2>
-        <p>{t("howBody")}</p>
-      </section>
-    </div>
+      </Flex>
+      <Card size="3" variant="surface">
+        <Heading as="h2" size="4" highContrast>
+          {t("howTitle")}
+        </Heading>
+        <Text as="p" size="2" color="gray" mt="3" wrap="pretty">
+          {t("howBody")}
+        </Text>
+      </Card>
+    </Flex>
   );
 }

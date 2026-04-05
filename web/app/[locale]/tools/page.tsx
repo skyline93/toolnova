@@ -1,9 +1,10 @@
 import { Link } from "@/i18n/navigation";
+import { getPathname } from "@/i18n/navigation";
 import { categoryOrder } from "@/lib/tools";
 import { toolRoutes } from "@/lib/tool-routes";
+import { Box, Card, Container, Flex, Grid, Heading, Text } from "@radix-ui/themes";
 import type { Metadata } from "next";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
-import { getPathname } from "@/i18n/navigation";
 
 type ToolDefCopy = { title: string; description: string };
 
@@ -34,38 +35,45 @@ export default async function ToolsIndexPage() {
   }));
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-14">
-      <h1 className="text-3xl font-semibold tracking-tight">{t("title")}</h1>
-      <p className="mt-3 max-w-2xl text-pretty leading-relaxed text-[var(--muted)]">
-        {t("lead")}
-      </p>
-      <div className="mt-12 space-y-12">
-        {grouped.map((g) => (
-          <section key={g.category}>
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--muted)]">
-              {g.label}
-            </h2>
-            <ul className="mt-4 grid gap-4 sm:grid-cols-2">
-              {g.items.map((route) => {
-                const def = toolDefs[route.messageKey];
-                return (
-                  <li key={route.path}>
-                    <Link
-                      href={route.path}
-                      className="tool-card block p-5 transition hover:border-[var(--accent)]/35"
-                    >
-                      <span className="font-semibold">{def.title}</span>
-                      <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-                        {def.description}
-                      </p>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
-        ))}
-      </div>
-    </main>
+    <Box asChild>
+      <main>
+        <Container size="4" px={{ initial: "4", sm: "6" }} py={{ initial: "8", sm: "9" }}>
+          <Heading as="h1" size="7" highContrast>
+            {t("title")}
+          </Heading>
+          <Text as="p" size="4" color="gray" mt="3" wrap="pretty" style={{ maxWidth: "42rem" }}>
+            {t("lead")}
+          </Text>
+          <Flex direction="column" gap="9" mt="9">
+            {grouped.map((g) => (
+              <Box key={g.category}>
+                <Heading as="h2" size="3" color="gray" style={{ letterSpacing: "0.06em", textTransform: "uppercase" }}>
+                  {g.label}
+                </Heading>
+                <Grid role="list" columns={{ initial: "1", sm: "2" }} gap="4" mt="4">
+                  {g.items.map((route) => {
+                    const def = toolDefs[route.messageKey];
+                    return (
+                      <Box key={route.path} role="listitem">
+                        <Card asChild size="3" variant="surface">
+                          <Link href={route.path} style={{ textDecoration: "none", color: "inherit", display: "block" }}>
+                            <Text as="p" weight="bold" size="3" highContrast>
+                              {def.title}
+                            </Text>
+                            <Text as="p" size="2" color="gray" mt="2" wrap="pretty">
+                              {def.description}
+                            </Text>
+                          </Link>
+                        </Card>
+                      </Box>
+                    );
+                  })}
+                </Grid>
+              </Box>
+            ))}
+          </Flex>
+        </Container>
+      </main>
+    </Box>
   );
 }

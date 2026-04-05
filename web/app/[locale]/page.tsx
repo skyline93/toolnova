@@ -1,6 +1,7 @@
 import { Link } from "@/i18n/navigation";
 import { toolRoutes } from "@/lib/tool-routes";
 import { siteName } from "@/lib/site";
+import { Box, Button, Card, Container, Flex, Grid, Heading, Text } from "@radix-ui/themes";
 import { getMessages, getTranslations } from "next-intl/server";
 
 type ToolDefCopy = { title: string; description: string };
@@ -13,47 +14,52 @@ export default async function HomePage() {
   const featured = toolRoutes.slice(0, 4);
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24">
-      <p className="text-sm font-medium uppercase tracking-[0.2em] text-[var(--accent)]">
-        {t("eyebrow")}
-      </p>
-      <h1 className="mt-3 max-w-2xl text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
-        {t("headline")}
-      </h1>
-      <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[var(--muted)] text-pretty">
-        {t("lead", { siteName })}
-      </p>
-      <div className="mt-10 flex flex-wrap gap-3">
-        <Link href="/tools" className="tool-btn">
-          {t("browseTools")}
-        </Link>
-        <Link href="/json-formatter" className="tool-btn tool-btn-secondary">
-          {t("openJsonFormatter")}
-        </Link>
-      </div>
-      <section className="mt-20">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--muted)]">
-          {t("featured")}
-        </h2>
-        <ul className="mt-6 grid gap-4 sm:grid-cols-2">
-          {featured.map((route) => {
-            const def = toolDefs[route.messageKey];
-            return (
-              <li key={route.path}>
-                <Link
-                  href={route.path}
-                  className="tool-card block p-5 transition hover:border-[var(--accent)]/35"
-                >
-                  <span className="font-semibold">{def.title}</span>
-                  <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-                    {def.description}
-                  </p>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </section>
-    </main>
+    <Box asChild>
+      <main>
+        <Container size="4" px={{ initial: "4", sm: "6" }} py={{ initial: "9", sm: "12" }}>
+          <Text size="2" weight="medium" color="indigo" highContrast style={{ letterSpacing: "0.2em", textTransform: "uppercase" }}>
+            {t("eyebrow")}
+          </Text>
+          <Heading as="h1" size="8" mt="3" wrap="balance" style={{ maxWidth: "42rem" }} highContrast>
+            {t("headline")}
+          </Heading>
+          <Text as="p" size="5" color="gray" mt="5" wrap="pretty" style={{ maxWidth: "42rem" }}>
+            {t("lead", { siteName })}
+          </Text>
+          <Flex gap="3" mt="8" wrap="wrap">
+            <Button asChild size="3" variant="solid" highContrast>
+              <Link href="/tools">{t("browseTools")}</Link>
+            </Button>
+            <Button asChild size="3" variant="outline" color="gray">
+              <Link href="/json-formatter">{t("openJsonFormatter")}</Link>
+            </Button>
+          </Flex>
+          <Box mt="9">
+            <Heading as="h2" size="3" color="gray" style={{ letterSpacing: "0.06em", textTransform: "uppercase" }}>
+              {t("featured")}
+            </Heading>
+            <Grid role="list" columns={{ initial: "1", sm: "2" }} gap="4" mt="6">
+              {featured.map((route) => {
+                const def = toolDefs[route.messageKey];
+                return (
+                  <Box key={route.path} role="listitem">
+                    <Card asChild size="3" variant="surface">
+                      <Link href={route.path} style={{ textDecoration: "none", color: "inherit", display: "block" }}>
+                        <Text as="p" weight="bold" size="3" highContrast>
+                          {def.title}
+                        </Text>
+                        <Text as="p" size="2" color="gray" mt="2" wrap="pretty">
+                          {def.description}
+                        </Text>
+                      </Link>
+                    </Card>
+                  </Box>
+                );
+              })}
+            </Grid>
+          </Box>
+        </Container>
+      </main>
+    </Box>
   );
 }

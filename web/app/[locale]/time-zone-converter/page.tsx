@@ -1,5 +1,6 @@
 "use client";
 
+import { Card, Flex, Grid, Heading, Text, TextField } from "@radix-ui/themes";
 import { useLocale, useTranslations } from "next-intl";
 import { useLayoutEffect, useMemo, useState } from "react";
 
@@ -54,62 +55,75 @@ export default function TimeZoneConverterPage() {
   }, [iso]);
 
   return (
-    <div className="space-y-6">
-      <label className="block max-w-md space-y-2">
-        <span className="text-sm font-medium text-[var(--muted)]">{t("labelDt")}</span>
-        <input
-          type="datetime-local"
-          className="tool-input"
-          value={iso}
-          onChange={(e) => setIso(e.target.value)}
-        />
-      </label>
-      <div className="grid gap-4 lg:grid-cols-2">
-        <label className="space-y-2">
-          <span className="text-sm font-medium text-[var(--muted)]">{t("zoneA")}</span>
-          <select className="tool-input" value={a} onChange={(e) => setA(e.target.value)}>
+    <Flex direction="column" gap="6">
+      <Flex direction="column" gap="2" style={{ maxWidth: "28rem" }}>
+        <Text size="2" weight="medium">
+          {t("labelDt")}
+        </Text>
+        <TextField.Root type="datetime-local" size="2" value={iso} onChange={(e) => setIso(e.target.value)} />
+      </Flex>
+      <Grid columns={{ initial: "1", lg: "2" }} gap="4">
+        <Flex direction="column" gap="2">
+          <Text size="2" weight="medium">
+            {t("zoneA")}
+          </Text>
+          <select className="radix-native-select" value={a} onChange={(e) => setA(e.target.value)}>
             {zones.map((z) => (
               <option key={z} value={z}>
                 {z}
               </option>
             ))}
           </select>
-        </label>
-        <label className="space-y-2">
-          <span className="text-sm font-medium text-[var(--muted)]">{t("zoneB")}</span>
-          <select className="tool-input" value={b} onChange={(e) => setB(e.target.value)}>
+        </Flex>
+        <Flex direction="column" gap="2">
+          <Text size="2" weight="medium">
+            {t("zoneB")}
+          </Text>
+          <select className="radix-native-select" value={b} onChange={(e) => setB(e.target.value)}>
             {zones.map((z) => (
               <option key={z} value={z}>
                 {z}
               </option>
             ))}
           </select>
-        </label>
-      </div>
+        </Flex>
+      </Grid>
       {iso === "" ? (
-        <p className="text-sm text-[var(--muted)]">{tc("loading")}</p>
+        <Text size="2" color="gray">
+          {tc("loading")}
+        </Text>
       ) : !instant ? (
-        <p className="text-sm text-[var(--danger)]">{t("invalid")}</p>
+        <Text size="2" color="red">
+          {t("invalid")}
+        </Text>
       ) : (
-        <div className="grid gap-4 lg:grid-cols-2">
-          <div className="tool-card p-4 text-sm leading-relaxed">
-            <p className="font-semibold text-[var(--foreground)]">{a}</p>
-            <p className="mt-2 text-[var(--muted)]">
+        <Grid columns={{ initial: "1", lg: "2" }} gap="4">
+          <Card size="3" variant="surface">
+            <Text size="2" weight="bold" highContrast>
+              {a}
+            </Text>
+            <Text size="2" color="gray" mt="2">
               {formatInZone(instant.toISOString(), a, locale)}
-            </p>
-          </div>
-          <div className="tool-card p-4 text-sm leading-relaxed">
-            <p className="font-semibold text-[var(--foreground)]">{b}</p>
-            <p className="mt-2 text-[var(--muted)]">
+            </Text>
+          </Card>
+          <Card size="3" variant="surface">
+            <Text size="2" weight="bold" highContrast>
+              {b}
+            </Text>
+            <Text size="2" color="gray" mt="2">
               {formatInZone(instant.toISOString(), b, locale)}
-            </p>
-          </div>
-        </div>
+            </Text>
+          </Card>
+        </Grid>
       )}
-      <section className="tool-card space-y-3 p-5 text-sm leading-relaxed text-[var(--muted)]">
-        <h2 className="font-semibold text-[var(--foreground)]">{t("howTitle")}</h2>
-        <p>{t("howBody")}</p>
-      </section>
-    </div>
+      <Card size="3" variant="surface">
+        <Heading as="h2" size="4" highContrast>
+          {t("howTitle")}
+        </Heading>
+        <Text as="p" size="2" color="gray" mt="3" wrap="pretty">
+          {t("howBody")}
+        </Text>
+      </Card>
+    </Flex>
   );
 }

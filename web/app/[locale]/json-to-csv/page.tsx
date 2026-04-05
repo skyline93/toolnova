@@ -1,5 +1,6 @@
 "use client";
 
+import { Button, Card, Flex, Grid, Heading, Text, TextArea } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useCallback, useState } from "react";
 
@@ -83,45 +84,57 @@ export default function JsonToCsvPage() {
   }, [output]);
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap gap-2">
-        <button type="button" className="tool-btn" onClick={convert}>
+    <Flex direction="column" gap="6">
+      <Flex gap="2" wrap="wrap">
+        <Button type="button" size="2" variant="solid" highContrast onClick={convert}>
           {t("convert")}
-        </button>
-        <button type="button" className="tool-btn tool-btn-secondary" onClick={download} disabled={!output}>
+        </Button>
+        <Button type="button" size="2" variant="outline" color="gray" onClick={download} disabled={!output}>
           {t("download")}
-        </button>
-      </div>
-      <div className="grid gap-4 lg:grid-cols-2">
-        <label className="block space-y-2">
-          <span className="text-sm font-medium text-[var(--muted)]">{t("input")}</span>
-          <textarea
-            className="tool-input min-h-[280px] font-mono text-sm"
+        </Button>
+      </Flex>
+      <Grid columns={{ initial: "1", lg: "2" }} gap="4">
+        <Flex direction="column" gap="2">
+          <Text size="2" weight="medium">
+            {t("input")}
+          </Text>
+          <TextArea
+            size="2"
+            variant="surface"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             spellCheck={false}
+            style={{ minHeight: "280px", fontFamily: "var(--font-geist-mono), ui-monospace, monospace", fontSize: "var(--font-size-2)" }}
           />
-        </label>
-        <label className="block space-y-2">
-          <span className="text-sm font-medium text-[var(--muted)]">{t("output")}</span>
-          <textarea
-            className="tool-input min-h-[280px] font-mono text-sm"
+        </Flex>
+        <Flex direction="column" gap="2">
+          <Text size="2" weight="medium">
+            {t("output")}
+          </Text>
+          <TextArea
+            size="2"
+            variant="surface"
             value={output}
             readOnly
             placeholder="CSV…"
             spellCheck={false}
+            style={{ minHeight: "280px", fontFamily: "var(--font-geist-mono), ui-monospace, monospace", fontSize: "var(--font-size-2)" }}
           />
-        </label>
-      </div>
+        </Flex>
+      </Grid>
       {error ? (
-        <p className="text-sm text-[var(--danger)]" role="alert">
+        <Text size="2" color="red" role="alert">
           {error}
-        </p>
+        </Text>
       ) : null}
-      <section className="tool-card space-y-3 p-5 text-sm leading-relaxed text-[var(--muted)]">
-        <h2 className="font-semibold text-[var(--foreground)]">{t("howTitle")}</h2>
-        <p>{t("howBody")}</p>
-      </section>
-    </div>
+      <Card size="3" variant="surface">
+        <Heading as="h2" size="4" highContrast>
+          {t("howTitle")}
+        </Heading>
+        <Text as="p" size="2" color="gray" mt="3" wrap="pretty">
+          {t("howBody")}
+        </Text>
+      </Card>
+    </Flex>
   );
 }

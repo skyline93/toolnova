@@ -1,7 +1,8 @@
 "use client";
 
-import { CronExpressionParser } from "cron-parser";
 import { CopyTextButton } from "@/components/copy-text-button";
+import { CronExpressionParser } from "cron-parser";
+import { Button, Card, Flex, Grid, Heading, Text, TextField } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 
@@ -44,11 +45,13 @@ export default function CronExpressionGeneratorPage() {
   }, [expression, t]);
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap gap-2">
-        <button
+    <Flex direction="column" gap="6">
+      <Flex gap="2" wrap="wrap">
+        <Button
           type="button"
-          className="tool-btn tool-btn-secondary"
+          size="2"
+          variant="outline"
+          color="gray"
           onClick={() => {
             setMinute("0");
             setHour("*");
@@ -58,10 +61,12 @@ export default function CronExpressionGeneratorPage() {
           }}
         >
           {t("presetEveryHour")}
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
-          className="tool-btn tool-btn-secondary"
+          size="2"
+          variant="outline"
+          color="gray"
           onClick={() => {
             setMinute("0");
             setHour("0");
@@ -71,10 +76,12 @@ export default function CronExpressionGeneratorPage() {
           }}
         >
           {t("presetMidnight")}
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
-          className="tool-btn tool-btn-secondary"
+          size="2"
+          variant="outline"
+          color="gray"
           onClick={() => {
             setMinute("0");
             setHour("9");
@@ -84,65 +91,117 @@ export default function CronExpressionGeneratorPage() {
           }}
         >
           {t("presetDailyNine")}
-        </button>
-      </div>
+        </Button>
+      </Flex>
 
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-        <label className="space-y-1">
-          <span className="text-xs font-medium text-[var(--muted)]">{t("minute")}</span>
-          <input className="tool-input font-mono text-sm" value={minute} onChange={(e) => setMinute(e.target.value)} />
-        </label>
-        <label className="space-y-1">
-          <span className="text-xs font-medium text-[var(--muted)]">{t("hour")}</span>
-          <input className="tool-input font-mono text-sm" value={hour} onChange={(e) => setHour(e.target.value)} />
-        </label>
-        <label className="space-y-1">
-          <span className="text-xs font-medium text-[var(--muted)]">{t("dayOfMonth")}</span>
-          <input className="tool-input font-mono text-sm" value={dom} onChange={(e) => setDom(e.target.value)} />
-        </label>
-        <label className="space-y-1">
-          <span className="text-xs font-medium text-[var(--muted)]">{t("month")}</span>
-          <input className="tool-input font-mono text-sm" value={month} onChange={(e) => setMonth(e.target.value)} />
-        </label>
-        <label className="space-y-1">
-          <span className="text-xs font-medium text-[var(--muted)]">{t("dayOfWeek")}</span>
-          <input className="tool-input font-mono text-sm" value={dow} onChange={(e) => setDow(e.target.value)} />
-        </label>
-      </div>
-
-      <div className="tool-card space-y-3 p-4">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <span className="text-sm font-medium text-[var(--muted)]">{t("expression")}</span>
-          <CopyTextButton
-            text={expression}
-            idleLabel={tc("copy")}
-            copiedLabel={tc("copied")}
-            variant="secondary"
+      <Grid columns={{ initial: "2", sm: "3", lg: "5" }} gap="3">
+        <Flex direction="column" gap="1">
+          <Text size="1" weight="medium" color="gray">
+            {t("minute")}
+          </Text>
+          <TextField.Root
+            size="2"
+            value={minute}
+            onChange={(e) => setMinute(e.target.value)}
+            style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: "var(--font-size-2)" }}
           />
-        </div>
-        <p className="font-mono text-sm break-all text-[var(--foreground)]">{expression}</p>
-        <p className="text-xs text-[var(--muted)]">{t("copyHint")}</p>
-      </div>
+        </Flex>
+        <Flex direction="column" gap="1">
+          <Text size="1" weight="medium" color="gray">
+            {t("hour")}
+          </Text>
+          <TextField.Root
+            size="2"
+            value={hour}
+            onChange={(e) => setHour(e.target.value)}
+            style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: "var(--font-size-2)" }}
+          />
+        </Flex>
+        <Flex direction="column" gap="1">
+          <Text size="1" weight="medium" color="gray">
+            {t("dayOfMonth")}
+          </Text>
+          <TextField.Root
+            size="2"
+            value={dom}
+            onChange={(e) => setDom(e.target.value)}
+            style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: "var(--font-size-2)" }}
+          />
+        </Flex>
+        <Flex direction="column" gap="1">
+          <Text size="1" weight="medium" color="gray">
+            {t("month")}
+          </Text>
+          <TextField.Root
+            size="2"
+            value={month}
+            onChange={(e) => setMonth(e.target.value)}
+            style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: "var(--font-size-2)" }}
+          />
+        </Flex>
+        <Flex direction="column" gap="1">
+          <Text size="1" weight="medium" color="gray">
+            {t("dayOfWeek")}
+          </Text>
+          <TextField.Root
+            size="2"
+            value={dow}
+            onChange={(e) => setDow(e.target.value)}
+            style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: "var(--font-size-2)" }}
+          />
+        </Flex>
+      </Grid>
+
+      <Card size="3" variant="surface">
+        <Flex align="center" justify="between" gap="2" wrap="wrap">
+          <Text size="2" weight="medium" color="gray">
+            {t("expression")}
+          </Text>
+          <CopyTextButton text={expression} idleLabel={tc("copy")} copiedLabel={tc("copied")} variant="secondary" />
+        </Flex>
+        <Text
+          as="p"
+          size="2"
+          mt="3"
+          style={{ fontFamily: "var(--font-geist-mono), monospace", wordBreak: "break-all" }}
+          highContrast
+        >
+          {expression}
+        </Text>
+        <Text size="1" color="gray" mt="2">
+          {t("copyHint")}
+        </Text>
+      </Card>
 
       {cronError ? (
-        <p className="text-sm text-[var(--danger)]" role="alert">
+        <Text size="2" color="red" role="alert">
           {cronError}
-        </p>
+        </Text>
       ) : (
-        <div className="tool-card space-y-2 p-4">
-          <p className="text-sm font-medium text-[var(--muted)]">{t("nextRuns")}</p>
-          <ul className="font-mono text-sm text-[var(--foreground)]">
+        <Card size="3" variant="surface">
+          <Text size="2" weight="medium" color="gray">
+            {t("nextRuns")}
+          </Text>
+          <ul style={{ margin: "var(--space-2) 0 0", padding: 0, listStyle: "none" }}>
             {runs.map((r, i) => (
-              <li key={i}>{r}</li>
+              <li key={i}>
+                <Text size="2" style={{ fontFamily: "var(--font-geist-mono), monospace" }} highContrast>
+                  {r}
+                </Text>
+              </li>
             ))}
           </ul>
-        </div>
+        </Card>
       )}
 
-      <section className="tool-card space-y-3 p-5 text-sm leading-relaxed text-[var(--muted)]">
-        <h2 className="font-semibold text-[var(--foreground)]">{t("howTitle")}</h2>
-        <p>{t("howBody")}</p>
-      </section>
-    </div>
+      <Card size="3" variant="surface">
+        <Heading as="h2" size="4" highContrast>
+          {t("howTitle")}
+        </Heading>
+        <Text as="p" size="2" color="gray" mt="3" wrap="pretty">
+          {t("howBody")}
+        </Text>
+      </Card>
+    </Flex>
   );
 }

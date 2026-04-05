@@ -2,6 +2,7 @@
 
 import { Link } from "@/i18n/navigation";
 import { useConsent } from "@/components/consent-context";
+import { Box, Button, Flex, Text } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 
@@ -23,37 +24,53 @@ export function CookieBanner() {
   }
 
   return (
-    <div
-      className="fixed bottom-0 left-0 right-0 z-[200] border-t border-[var(--border)] bg-[var(--surface)]/95 p-4 shadow-[0_-8px_30px_rgba(0,0,0,0.08)] backdrop-blur-md supports-[backdrop-filter]:bg-[var(--surface)]/88"
+    <Box
+      position="fixed"
+      bottom="0"
+      left="0"
+      right="0"
+      p="4"
+      style={{
+        zIndex: 200,
+        borderTop: "1px solid var(--gray-a6)",
+        backgroundColor: "var(--color-panel-translucent)",
+        boxShadow: "var(--shadow-5)",
+        backdropFilter: "blur(12px)",
+      }}
       role="dialog"
       aria-modal="false"
       aria-labelledby="cookie-banner-title"
     >
-      <div className="mx-auto flex max-w-5xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-        <div className="min-w-0 flex-1 space-y-2 text-sm leading-relaxed text-[var(--foreground)]">
-          <p id="cookie-banner-title" className="font-semibold">
+      <Flex
+        direction={{ initial: "column", sm: "row" }}
+        align={{ sm: "center" }}
+        justify={{ sm: "between" }}
+        gap="4"
+        mx="auto"
+        style={{ maxWidth: "64rem" }}
+      >
+        <Flex direction="column" gap="2" className="min-w-0 flex-1">
+          <Text id="cookie-banner-title" size="2" weight="bold" highContrast>
             {t("title")}
-          </p>
-          <p className="text-[var(--muted)]">{t("body")}</p>
-          <p>
-            <Link href="/privacy" className="text-[var(--accent)] underline underline-offset-2 hover:opacity-90">
+          </Text>
+          <Text size="2" color="gray">
+            {t("body")}
+          </Text>
+          <Text asChild size="2" color="indigo" highContrast>
+            <Link href="/privacy" style={{ textDecoration: "underline", textUnderlineOffset: "2px" }}>
               {t("privacyLink")}
             </Link>
-          </p>
-        </div>
-        <div className="flex shrink-0 flex-col gap-2 sm:flex-row sm:items-center">
-          <button type="button" className="tool-btn w-full sm:w-auto" onClick={acceptAnalytics}>
+          </Text>
+        </Flex>
+        <Flex direction={{ initial: "column", sm: "row" }} gap="2" className="shrink-0">
+          <Button size="2" variant="solid" highContrast className="w-full sm:w-auto" onClick={acceptAnalytics}>
             {t("acceptAll")}
-          </button>
-          <button
-            type="button"
-            className="tool-btn tool-btn-secondary w-full sm:w-auto"
-            onClick={acceptEssentialOnly}
-          >
+          </Button>
+          <Button size="2" variant="outline" color="gray" className="w-full sm:w-auto" onClick={acceptEssentialOnly}>
             {t("essentialOnly")}
-          </button>
-        </div>
-      </div>
-    </div>
+          </Button>
+        </Flex>
+      </Flex>
+    </Box>
   );
 }

@@ -2,7 +2,7 @@
 
 **English** | [简体中文](./README.zh-CN.md)
 
-Next.js App Router frontend: tools, i18n (`en`, `zh-CN`), SEO (metadata, sitemap, JSON-LD), PDF merge API route.
+Next.js App Router frontend: tools, i18n (`en`, `zh-CN`), SEO (metadata, sitemap, JSON-LD), PDF merge API route. UI uses **Radix Themes** 3 with Tailwind CSS 4 for light utility styling.
 
 ## Local development
 
@@ -39,5 +39,7 @@ The app is configured with `output: "standalone"` in `next.config.ts`. Build the
 
 ## Stack notes
 
+- UI: [`@radix-ui/themes`](https://www.radix-ui.com/themes) v3 (global `Theme`, layout primitives, form controls). Styles load via `@radix-ui/themes/styles.css`; root `Theme` uses defaults aligned with the official look (`accentColor: indigo`, `grayColor: auto`, `panelBackground: translucent`, `radius: medium`).
+- Styling: Tailwind CSS 4 (`globals.css` + `@theme`) for fonts, CodeMirror/markdown helpers, and a few native controls (e.g. long `<select>` lists).
 - Internationalization: `next-intl`, locale prefix `as-needed` (English unprefixed).
 - Middleware handles locale detection; PDF merge lives at `/api/merge-pdf` (not localized).
