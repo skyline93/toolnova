@@ -31,7 +31,7 @@ export default async function HomePage() {
               <Link href="/tools">{t("browseTools")}</Link>
             </Button>
             <Button asChild size="3" variant="outline" color="gray">
-              <Link href="/json-formatter">{t("openJsonFormatter")}</Link>
+              <Link href="/markdown-preview">{t("openMarkdownPreview")}</Link>
             </Button>
           </Flex>
           <Box mt="9">

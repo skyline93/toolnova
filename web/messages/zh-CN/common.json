@@ -20,7 +20,7 @@
     "headline": "面向开发者、文件与日常日期的实用工具",
     "lead": "{siteName} 尽可能在浏览器中完成轻量计算，核心工具无需注册即可使用——可从 JSON 格式化、时间戳、时区、PDF 合并与图片压缩开始。",
     "browseTools": "浏览全部工具",
-    "openJsonFormatter": "打开 JSON 格式化",
+    "openMarkdownPreview": "打开 Markdown 预览",
     "featured": "推荐"
   },
   "toolsIndex": {
