@@ -12,8 +12,8 @@ export async function Header() {
       asChild
       style={{
         borderBottom: "1px solid var(--gray-a6)",
-        backgroundColor: "var(--color-panel-translucent)",
-        backdropFilter: "blur(12px)",
+        backgroundColor: "var(--color-panel-solid)",
+        boxShadow: "0 1px 3px rgba(15, 23, 42, 0.06)",
       }}
     >
       <header>

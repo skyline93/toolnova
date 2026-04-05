@@ -23,7 +23,7 @@ export async function Footer() {
           justify={{ sm: "between" }}
           gap="2"
           px={{ initial: "4", sm: "6" }}
-          py="8"
+          py="3"
           mx="auto"
           style={{ maxWidth: "64rem" }}
         >

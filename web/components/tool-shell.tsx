@@ -37,7 +37,7 @@ export async function ToolShell({
       <Box asChild>
         <main>
           <Container size="4" px={{ initial: "4", sm: "6" }} py={{ initial: "8", sm: "9" }}>
-            <Text asChild size="2" weight="medium" color="indigo" highContrast>
+            <Text asChild size="2" weight="medium" color="blue" highContrast>
               <Link href="/tools" style={{ textDecoration: "none" }}>
                 {t("allToolsLink")}
               </Link>

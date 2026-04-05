@@ -5,37 +5,99 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* CodeMirror JSON editor — tokens follow light/dark on Radix Theme root */
+/* Clean white page (light); Theme hasBackground paints Radix canvas */
+body {
+  background-color: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #111113;
+  }
+}
+
+/* Light UI: crisp white canvas + Google-style blue (Radix accent blue) */
 .radix-themes.light {
-  --cm-json-key: #4338ca;
+  --color-background: #ffffff;
+}
+
+/* Subtle elevation — cards, fields, controls (honor reduced motion: no animated shadows) */
+.radix-themes.light .rt-Card {
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.05),
+    0 4px 14px rgba(15, 23, 42, 0.06);
+}
+
+.radix-themes.light .rt-BaseButton:not([data-disabled]) {
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+.radix-themes.light .rt-BaseButton[data-variant="solid"] {
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.08),
+    0 2px 8px rgba(26, 115, 232, 0.22);
+}
+
+.radix-themes.light .rt-TextFieldRoot,
+.radix-themes.light .rt-TextArea,
+.radix-themes.light .rt-SelectTrigger {
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.07);
+}
+
+.radix-themes.light .rt-BaseCheckboxRoot,
+.radix-themes.light .rt-SwitchRoot {
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+.radix-themes.light .rt-SegmentedControlRoot {
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+.radix-themes.dark .rt-Card {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+}
+
+.radix-themes.dark .rt-BaseButton:not([data-disabled]) {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.radix-themes.dark .rt-TextFieldRoot,
+.radix-themes.dark .rt-TextArea,
+.radix-themes.dark .rt-SelectTrigger {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+/* CodeMirror JSON — Google-blue family for keys/bools/caret (light/dark) */
+.radix-themes.light {
+  --cm-json-key: #1967d2;
   --cm-json-string: #a16207;
   --cm-json-number: #a21caf;
-  --cm-json-bool: #1d4ed8;
+  --cm-json-bool: #1a73e8;
   --cm-json-null: #64748b;
-  --cm-json-punct: #57534e;
+  --cm-json-punct: #5f6368;
   --cm-json-bracket: #44403c;
-  --cm-json-placeholder: #78716c;
-  --cm-json-caret: #1d4ed8;
-  --cm-json-focus-ring: rgba(29, 78, 216, 0.45);
-  --cm-json-selection: rgba(29, 78, 216, 0.2);
-  --cm-json-active-line-gutter: rgba(29, 78, 216, 0.1);
-  --cm-json-active-line: rgba(71, 85, 105, 0.09);
+  --cm-json-placeholder: #80868b;
+  --cm-json-caret: #1a73e8;
+  --cm-json-focus-ring: rgba(26, 115, 232, 0.5);
+  --cm-json-selection: rgba(66, 133, 244, 0.22);
+  --cm-json-active-line-gutter: rgba(26, 115, 232, 0.12);
+  --cm-json-active-line: rgba(66, 133, 244, 0.08);
 }
 
 .radix-themes.dark {
-  --cm-json-key: #a5b4fc;
+  --cm-json-key: #8ab4f8;
   --cm-json-string: #fbbf24;
   --cm-json-number: #e879f9;
-  --cm-json-bool: #7dd3fc;
+  --cm-json-bool: #8ab4f8;
   --cm-json-null: #94a3b8;
   --cm-json-punct: #a8a29e;
   --cm-json-bracket: #d6d3d1;
   --cm-json-placeholder: #9ca3af;
-  --cm-json-caret: #93c5fd;
-  --cm-json-focus-ring: rgba(147, 197, 253, 0.55);
-  --cm-json-selection: rgba(147, 197, 253, 0.22);
-  --cm-json-active-line-gutter: rgba(147, 197, 253, 0.12);
-  --cm-json-active-line: rgba(148, 163, 184, 0.12);
+  --cm-json-caret: #8ab4f8;
+  --cm-json-focus-ring: rgba(138, 180, 248, 0.55);
+  --cm-json-selection: rgba(138, 180, 248, 0.22);
+  --cm-json-active-line-gutter: rgba(138, 180, 248, 0.14);
+  --cm-json-active-line: rgba(138, 180, 248, 0.1);
 }
 
 .radix-themes {
@@ -78,6 +140,7 @@
   font-size: var(--font-size-3);
   line-height: 1.4;
   cursor: pointer;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.07);
 }
 
 .radix-native-select:focus-visible {
@@ -99,6 +162,7 @@
   background-color: var(--color-background);
   color: var(--gray-12);
   font-size: var(--font-size-2);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.07);
 }
 
 .radix-file-input:focus-visible {
@@ -142,6 +206,11 @@
   flex: 1;
   min-height: 0 !important;
   overflow: auto !important;
+}
+
+.radix-themes.light .json-code-editor-shell {
+  border-radius: var(--radius-3);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
 }
 
 /* Markdown preview (react-markdown + GFM) */

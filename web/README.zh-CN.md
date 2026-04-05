@@ -2,7 +2,7 @@
 
 [English](./README.md) | **简体中文**
 
-基于 Next.js App Router 的前端：工具页、国际化（`en`、`zh-CN`）、SEO（metadata、sitemap、JSON-LD），以及 PDF 合并 API 路由。界面采用 **Radix Themes** 3，并用 Tailwind CSS 4 做少量工具类与局部样式。
+基于 Next.js App Router 的前端：工具页、国际化（`en`、`zh-CN`）、SEO（metadata、sitemap、JSON-LD），以及 PDF 合并 API 路由。界面采用 **Radix Themes** 3（主色为 **blue**，与谷歌蓝一致；slate 灰阶、白底、卡片/按钮/输入框轻阴影），并用 Tailwind CSS 4 做少量工具类与局部样式。
 
 ## 本地开发
 
@@ -39,7 +39,7 @@ npm run dev
 
 ## 技术说明
 
-- 界面：[`@radix-ui/themes`](https://www.radix-ui.com/themes) v3（根级 `Theme`、布局与表单等预置组件）。全局样式通过 `@radix-ui/themes/styles.css` 引入；`Theme` 配置与官方推荐观感一致（`accentColor: indigo`、`grayColor: auto`、`panelBackground: translucent`、`radius: medium`）。
+- 界面：[`@radix-ui/themes`](https://www.radix-ui.com/themes) v3（根级 `Theme`、布局与表单等预置组件）。全局样式通过 `@radix-ui/themes/styles.css` 引入；`Theme` 主色为 `accentColor: blue`（与谷歌蓝系一致），辅以 `grayColor: slate`、`panelBackground: solid`、`radius: large`、开启 `hasBackground`。`globals.css` 在浅色模式下将页面设为纯白底，为卡片、按钮、文本域、选择器、分段控件及原生上传/下拉等增加轻微阴影；CodeMirror JSON 高亮中的键名、布尔值、光标与选区亦使用同一蓝色系。
 - 样式：Tailwind CSS 4（`globals.css` 与 `@theme`）用于字体变量、CodeMirror / Markdown 辅助样式，以及部分原生控件（例如时区等超长 `<select>`）。
 - 国际化：`next-intl`，语言前缀策略为 `as-needed`（英文默认无前缀）。
 - 中间件负责语言检测；PDF 合并接口为 `/api/merge-pdf`（不参与语言前缀路由）。

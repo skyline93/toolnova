@@ -17,7 +17,7 @@ export default async function HomePage() {
     <Box asChild>
       <main>
         <Container size="4" px={{ initial: "4", sm: "6" }} py={{ initial: "9", sm: "12" }}>
-          <Text size="2" weight="medium" color="indigo" highContrast style={{ letterSpacing: "0.2em", textTransform: "uppercase" }}>
+          <Text size="2" weight="medium" color="blue" highContrast style={{ letterSpacing: "0.2em", textTransform: "uppercase" }}>
             {t("eyebrow")}
           </Text>
           <Heading as="h1" size="8" mt="3" wrap="balance" style={{ maxWidth: "42rem" }} highContrast>

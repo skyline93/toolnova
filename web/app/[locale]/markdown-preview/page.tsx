@@ -134,7 +134,10 @@ export default function MarkdownPreviewPage() {
           gap: "var(--space-4)",
           borderRadius: isFullscreen ? 0 : "var(--radius-4)",
           border: isFullscreen ? "none" : "1px solid var(--gray-a6)",
-          backgroundColor: isFullscreen ? "var(--color-background)" : "var(--gray-a2)",
+          backgroundColor: "var(--color-background)",
+          boxShadow: isFullscreen
+            ? undefined
+            : "0 1px 3px rgba(15, 23, 42, 0.06), 0 6px 20px rgba(15, 23, 42, 0.05)",
           minHeight: isFullscreen ? "100dvh" : undefined,
         }}
       >

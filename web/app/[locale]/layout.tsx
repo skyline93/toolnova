@@ -97,12 +97,13 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <ConsentProvider>
             <Theme
-              accentColor="indigo"
-              grayColor="auto"
-              panelBackground="translucent"
-              radius="medium"
+              accentColor="blue"
+              grayColor="slate"
+              panelBackground="solid"
+              radius="large"
               scaling="100%"
-              className={`flex min-h-full flex-1 flex-col ${locale === "zh-CN" ? "locale-zh-cn" : "locale-en"}`}
+              hasBackground
+              className={`flex min-h-dvh flex-1 flex-col ${locale === "zh-CN" ? "locale-zh-cn" : "locale-en"}`}
             >
               <Header />
               <div className="min-h-0 flex-1">{children}</div>

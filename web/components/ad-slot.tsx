@@ -43,7 +43,7 @@ export function AdSlot() {
   }, [showAd]);
 
   return (
-    <Box asChild aria-label={t("ariaLabel")} mx="auto" px={{ initial: "4", sm: "6" }} py="6" style={{ maxWidth: "64rem" }}>
+    <Box asChild aria-label={t("ariaLabel")} mx="auto" px={{ initial: "4", sm: "6" }} py="4" style={{ maxWidth: "64rem" }}>
       <aside>
         <Box
           data-ad-slot-root
@@ -56,7 +56,8 @@ export function AdSlot() {
             overflow: "hidden",
             borderRadius: "var(--radius-3)",
             border: "1px dashed var(--gray-a7)",
-            backgroundColor: "var(--gray-a2)",
+            backgroundColor: "var(--color-background)",
+            boxShadow: "0 1px 3px rgba(15, 23, 42, 0.06)",
           }}
         >
           {showAd ? (

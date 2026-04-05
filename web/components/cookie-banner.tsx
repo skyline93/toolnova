@@ -13,7 +13,7 @@ export function CookieBanner() {
   useEffect(() => {
     if (!hydrated || tier !== "unknown") return;
     const prev = document.body.style.paddingBottom;
-    document.body.style.paddingBottom = "calc(9rem + env(safe-area-inset-bottom, 0px))";
+    document.body.style.paddingBottom = "calc(7.5rem + env(safe-area-inset-bottom, 0px))";
     return () => {
       document.body.style.paddingBottom = prev;
     };
@@ -29,13 +29,12 @@ export function CookieBanner() {
       bottom="0"
       left="0"
       right="0"
-      p="4"
+      p="3"
       style={{
         zIndex: 200,
         borderTop: "1px solid var(--gray-a6)",
-        backgroundColor: "var(--color-panel-translucent)",
-        boxShadow: "var(--shadow-5)",
-        backdropFilter: "blur(12px)",
+        backgroundColor: "var(--color-panel-solid)",
+        boxShadow: "0 -4px 24px rgba(15, 23, 42, 0.08)",
       }}
       role="dialog"
       aria-modal="false"
@@ -56,7 +55,7 @@ export function CookieBanner() {
           <Text size="2" color="gray">
             {t("body")}
           </Text>
-          <Text asChild size="2" color="indigo" highContrast>
+          <Text asChild size="2" color="blue" highContrast>
             <Link href="/privacy" style={{ textDecoration: "underline", textUnderlineOffset: "2px" }}>
               {t("privacyLink")}
             </Link>

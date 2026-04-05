@@ -81,7 +81,7 @@ export default async function PrivacyPage() {
                 {t("pContact")}
               </Text>
             </Box>
-            <Text asChild size="3" color="indigo" highContrast>
+            <Text asChild size="3" color="blue" highContrast>
               <Link href="/" style={{ textDecoration: "underline", textUnderlineOffset: "2px" }}>
                 {t("backHome")}
               </Link>
