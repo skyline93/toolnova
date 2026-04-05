@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "fonts:download": "bash scripts/download-geist-fonts.sh",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -15,6 +16,7 @@
     "@lezer/highlight": "^1.2.3",
     "@radix-ui/themes": "^3.3.0",
     "@uiw/react-codemirror": "^4.25.9",
+    "@uiw/react-md-editor": "^4.1.0",
     "browser-image-compression": "^2.0.2",
     "codemirror": "^6.0.2",
     "cron-parser": "^5.5.0",

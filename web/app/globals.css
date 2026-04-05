@@ -5,6 +5,12 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Noto Sans SC via <link> — avoids Turbopack breaking on next/font/google for this family (Next 16 + --turbo). */
+:root {
+  --font-noto-sc: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", ui-sans-serif, system-ui,
+    sans-serif;
+}
+
 /* Clean white page (light); Theme hasBackground paints Radix canvas */
 body {
   background-color: #ffffff;
@@ -337,4 +343,38 @@ body {
   max-width: 100%;
   height: auto;
   border-radius: var(--radius-3);
+}
+
+/* @uiw/react-md-editor — fill flex parent, align with Radix surface */
+.markdown-preview-md-editor-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: min(240px, 40vh);
+  border-radius: var(--radius-3);
+  overflow: hidden;
+  border: 1px solid var(--gray-a6);
+  background-color: var(--color-background);
+}
+
+.markdown-preview-md-editor-shell .w-md-editor {
+  flex: 1 !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background-color: var(--color-background) !important;
+  --md-editor-background-color: var(--color-background);
+  --md-editor-font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.markdown-preview-md-editor-shell .w-md-editor-content {
+  flex: 1 !important;
+  min-height: 0 !important;
+}
+
+.markdown-preview-md-editor-shell .w-md-editor-text,
+.markdown-preview-md-editor-shell .w-md-editor-text-pre,
+.markdown-preview-md-editor-shell .w-md-editor-text-pre > code {
+  font-family: var(--font-geist-mono), ui-monospace, monospace !important;
 }

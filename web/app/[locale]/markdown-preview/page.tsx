@@ -1,8 +1,6 @@
 "use client";
 
-import type { Components } from "react-markdown";
-import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import { MarkdownPreviewEditor } from "@/components/markdown-preview-editor";
 import {
   Badge,
   Box,
@@ -12,10 +10,9 @@ import {
   Heading,
   SegmentedControl,
   Text,
-  TextArea,
 } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const DEFAULT_MARKDOWN = `# Markdown preview
 
@@ -51,25 +48,6 @@ console.log(greeting);
 \`\`\`
 `;
 
-const markdownComponents: Components = {
-  a: ({ href, children, ...rest }) => {
-    if (!href || href.toLowerCase().startsWith("javascript:") || href.toLowerCase().startsWith("data:")) {
-      return <span>{children}</span>;
-    }
-    const external = href.startsWith("http://") || href.startsWith("https://");
-    return (
-      <a
-        href={href}
-        {...rest}
-        target={external ? "_blank" : undefined}
-        rel={external ? "noopener noreferrer" : undefined}
-      >
-        {children}
-      </a>
-    );
-  },
-};
-
 type ViewMode = "source" | "preview" | "split";
 
 export default function MarkdownPreviewPage() {
@@ -78,8 +56,6 @@ export default function MarkdownPreviewPage() {
   const [viewMode, setViewMode] = useState<ViewMode>("split");
   const fsRef = useRef<HTMLDivElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
-
-  const remarkPlugins = useMemo(() => [remarkGfm], []);
 
   useEffect(() => {
     const sync = () => {
@@ -108,20 +84,6 @@ export default function MarkdownPreviewPage() {
       }
     }
   }, []);
-
-  const showSource = isFullscreen || viewMode === "source" || viewMode === "split";
-  const showPreview = isFullscreen || viewMode === "preview" || viewMode === "split";
-
-  const panelStyle = {
-    display: "flex" as const,
-    flexDirection: "column" as const,
-    minHeight: 0,
-    flex: 1,
-    overflow: "hidden" as const,
-    borderRadius: "var(--radius-3)",
-    border: "1px solid var(--gray-a6)",
-    backgroundColor: "var(--color-background)",
-  };
 
   return (
     <Flex direction="column" gap="6">
@@ -185,57 +147,15 @@ export default function MarkdownPreviewPage() {
         </Flex>
 
         <Flex
-          direction={
-            isFullscreen
-              ? { initial: "column", sm: "row" }
-              : viewMode === "split"
-                ? { initial: "column", md: "row" }
-                : "column"
-          }
+          direction="column"
           gap="4"
-          align={viewMode === "split" && !isFullscreen ? { md: "stretch" } : undefined}
+          className="min-h-0 min-w-0"
           style={{
             minHeight: isFullscreen ? 0 : "min(68vh, 820px)",
             flex: isFullscreen ? 1 : undefined,
           }}
         >
-          {showSource ? (
-            <Flex direction="column" gap="2" className="min-h-0 min-w-0 flex-1">
-              <Text size="2" weight="medium" color="gray">
-                {t("source")}
-              </Text>
-              <TextArea
-                size="2"
-                variant="surface"
-                resize="none"
-                value={source}
-                onChange={(e) => setSource(e.target.value)}
-                spellCheck={false}
-                className="min-h-0 flex-1"
-                style={{
-                  minHeight: "min(240px, 40vh)",
-                  fontFamily: "var(--font-geist-mono), ui-monospace, monospace",
-                  fontSize: "var(--font-size-2)",
-                  lineHeight: 1.6,
-                }}
-              />
-            </Flex>
-          ) : null}
-
-          {showPreview ? (
-            <Flex direction="column" gap="2" className="min-h-0 min-w-0 flex-1">
-              <Text size="2" weight="medium" color="gray">
-                {t("preview")}
-              </Text>
-              <Box style={{ ...panelStyle, overflowY: "auto", padding: "var(--space-3) var(--space-4)" }} aria-live="polite">
-                <article className="markdown-preview-root markdown-preview-wide max-w-none">
-                  <Markdown remarkPlugins={remarkPlugins} components={markdownComponents}>
-                    {source}
-                  </Markdown>
-                </article>
-              </Box>
-            </Flex>
-          ) : null}
+          <MarkdownPreviewEditor value={source} onChange={setSource} viewMode={viewMode} isFullscreen={isFullscreen} />
         </Flex>
       </Box>
 

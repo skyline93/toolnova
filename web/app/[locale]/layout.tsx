@@ -5,30 +5,13 @@ import { CookieBanner } from "@/components/cookie-banner";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { routing } from "@/i18n/routing";
+import { geistMono, geistSans } from "@/app/fonts";
 import { getSiteUrl, siteName } from "@/lib/site";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Noto_Sans_SC } from "next/font/google";
 import type { Metadata } from "next";
 import { Theme } from "@radix-ui/themes";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const notoSansSc = Noto_Sans_SC({
-  variable: "--font-noto-sc",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
 
 const siteUrl = getSiteUrl();
 
@@ -90,9 +73,17 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale === "zh-CN" ? "zh-CN" : "en"}
-      className={`${geistSans.variable} ${geistMono.variable} ${notoSansSc.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className="min-h-full">
         <NextIntlClientProvider messages={messages}>
           <ConsentProvider>
