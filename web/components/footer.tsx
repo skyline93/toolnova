@@ -1,3 +1,4 @@
+import { SiteChromeFrame } from "@/components/site-chrome-frame";
 import { Link } from "@/i18n/navigation";
 import { siteName } from "@/lib/site";
 import { Box, Flex, Text } from "@radix-ui/themes";
@@ -17,37 +18,36 @@ export async function Footer() {
       }}
     >
       <footer>
-        <Flex
-          direction={{ initial: "column", sm: "row" }}
-          align={{ sm: "center" }}
-          justify={{ sm: "between" }}
-          gap="2"
-          px={{ initial: "4", sm: "6" }}
-          py="3"
-          mx="auto"
-          style={{ maxWidth: "64rem" }}
-        >
-          <Text size="2" color="gray">
-            © {new Date().getFullYear()} {siteName}. {t("tagline")}
-          </Text>
-          <Flex gap="4" wrap="wrap">
-            <Text asChild size="2" color="gray">
-              <Link href="/tools" style={{ textDecoration: "none" }}>
-                {t("allTools")}
-              </Link>
+        <SiteChromeFrame>
+          <Flex
+            direction={{ initial: "column", sm: "row" }}
+            align={{ sm: "center" }}
+            justify={{ sm: "between" }}
+            gap="2"
+            py="3"
+          >
+            <Text size="2" color="gray">
+              © {new Date().getFullYear()} {siteName}. {t("tagline")}
             </Text>
-            <Text asChild size="2" color="gray">
-              <Link href="/privacy" style={{ textDecoration: "none" }}>
-                {tn("privacy")}
-              </Link>
-            </Text>
-            <Text asChild size="2" color="gray">
-              <Link href="/terms" style={{ textDecoration: "none" }}>
-                {tn("terms")}
-              </Link>
-            </Text>
+            <Flex gap="4" wrap="wrap">
+              <Text asChild size="2" color="gray">
+                <Link href="/tools" style={{ textDecoration: "none" }}>
+                  {t("allTools")}
+                </Link>
+              </Text>
+              <Text asChild size="2" color="gray">
+                <Link href="/privacy" style={{ textDecoration: "none" }}>
+                  {tn("privacy")}
+                </Link>
+              </Text>
+              <Text asChild size="2" color="gray">
+                <Link href="/terms" style={{ textDecoration: "none" }}>
+                  {tn("terms")}
+                </Link>
+              </Text>
+            </Flex>
           </Flex>
-        </Flex>
+        </SiteChromeFrame>
       </footer>
     </Box>
   );

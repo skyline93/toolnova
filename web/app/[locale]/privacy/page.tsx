@@ -1,7 +1,8 @@
+import { SitePageContainer } from "@/components/site-page-container";
 import { Link } from "@/i18n/navigation";
 import { getPathname } from "@/i18n/navigation";
 import { siteName } from "@/lib/site";
-import { Box, Container, Flex, Heading, Text } from "@radix-ui/themes";
+import { Box, Flex, Heading, Text } from "@radix-ui/themes";
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 
@@ -22,7 +23,7 @@ export default async function PrivacyPage() {
   return (
     <Box asChild>
       <main>
-        <Container size="2" px={{ initial: "4", sm: "6" }} py={{ initial: "8", sm: "9" }}>
+        <SitePageContainer py={{ initial: "8", sm: "9" }}>
           <Heading as="h1" size="7" highContrast>
             {t("title")}
           </Heading>
@@ -87,7 +88,7 @@ export default async function PrivacyPage() {
               </Link>
             </Text>
           </Flex>
-        </Container>
+        </SitePageContainer>
       </main>
     </Box>
   );

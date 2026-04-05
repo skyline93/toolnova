@@ -1,7 +1,8 @@
+import { SitePageContainer } from "@/components/site-page-container";
 import { Link } from "@/i18n/navigation";
 import { toolRoutes } from "@/lib/tool-routes";
 import { siteName } from "@/lib/site";
-import { Box, Button, Card, Container, Flex, Grid, Heading, Text } from "@radix-ui/themes";
+import { Box, Button, Card, Flex, Grid, Heading, Text } from "@radix-ui/themes";
 import { getMessages, getTranslations } from "next-intl/server";
 
 type ToolDefCopy = { title: string; description: string };
@@ -17,7 +18,7 @@ export default async function HomePage() {
   return (
     <Box asChild>
       <main>
-        <Container size="4" px={{ initial: "4", sm: "6" }} py={{ initial: "9", sm: "12" }}>
+        <SitePageContainer py={{ initial: "9", sm: "12" }}>
           <Text
             size="2"
             weight="medium"
@@ -66,7 +67,7 @@ export default async function HomePage() {
               })}
             </Grid>
           </Box>
-        </Container>
+        </SitePageContainer>
       </main>
     </Box>
   );

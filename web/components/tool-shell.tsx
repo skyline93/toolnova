@@ -1,7 +1,8 @@
 import { JsonLd, webApplicationJsonLd } from "@/components/json-ld";
+import { SitePageContainer } from "@/components/site-page-container";
 import { getPathname, Link } from "@/i18n/navigation";
 import { getSiteUrl } from "@/lib/site";
-import { Box, Container, Heading, Text } from "@radix-ui/themes";
+import { Box, Heading, Text } from "@radix-ui/themes";
 import { getLocale, getTranslations } from "next-intl/server";
 
 export async function ToolShell({
@@ -36,7 +37,7 @@ export async function ToolShell({
       />
       <Box asChild>
         <main>
-          <Container size="4" px={{ initial: "4", sm: "6" }} py={{ initial: "8", sm: "9" }}>
+          <SitePageContainer py={{ initial: "8", sm: "9" }}>
             <Text asChild size="2" weight="medium" color="blue" highContrast>
               <Link href="/tools" style={{ textDecoration: "none" }}>
                 {t("allToolsLink")}
@@ -49,7 +50,7 @@ export async function ToolShell({
               {intro}
             </Text>
             <Box mt="8">{children}</Box>
-          </Container>
+          </SitePageContainer>
         </main>
       </Box>
     </>

@@ -1,5 +1,6 @@
 "use client";
 
+import { SiteChromeFrame } from "@/components/site-chrome-frame";
 import { useConsent } from "@/components/consent-context";
 import { Box, Flex, Text } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
@@ -43,40 +44,44 @@ export function AdSlot() {
   }, [showAd]);
 
   return (
-    <Box asChild aria-label={t("ariaLabel")} mx="auto" px={{ initial: "4", sm: "6" }} py="4" style={{ maxWidth: "64rem" }}>
+    <Box asChild aria-label={t("ariaLabel")}>
       <aside>
-        <Box
-          data-ad-slot-root
-          style={{
-            display: "flex",
-            minHeight: "120px",
-            width: "100%",
-            alignItems: "center",
-            justifyContent: "center",
-            overflow: "hidden",
-            borderRadius: "var(--radius-3)",
-            border: "1px dashed var(--gray-a7)",
-            backgroundColor: "var(--color-background)",
-            boxShadow: "0 1px 3px rgba(15, 23, 42, 0.06)",
-          }}
-        >
-          {showAd ? (
-            <ins
-              className="adsbygoogle block w-full min-h-[100px] max-w-[728px]"
-              style={{ display: "block" }}
-              data-ad-client={adsenseClient}
-              data-ad-slot={adsenseSlot}
-              data-ad-format="horizontal"
-              data-full-width-responsive="true"
-            />
-          ) : (
-            <Flex align="center" justify="center" px="4" py="8">
-              <Text size="1" color="gray" align="center">
-                {t("placeholder")}
-              </Text>
-            </Flex>
-          )}
-        </Box>
+        <SiteChromeFrame>
+          <Box py="4">
+            <Box
+              data-ad-slot-root
+              style={{
+                display: "flex",
+                minHeight: "120px",
+                width: "100%",
+                alignItems: "center",
+                justifyContent: "center",
+                overflow: "hidden",
+                borderRadius: "var(--radius-3)",
+                border: "1px dashed var(--gray-a7)",
+                backgroundColor: "var(--color-background)",
+                boxShadow: "0 1px 3px rgba(15, 23, 42, 0.06)",
+              }}
+            >
+              {showAd ? (
+                <ins
+                  className="adsbygoogle block w-full min-h-[100px] max-w-[728px]"
+                  style={{ display: "block" }}
+                  data-ad-client={adsenseClient}
+                  data-ad-slot={adsenseSlot}
+                  data-ad-format="horizontal"
+                  data-full-width-responsive="true"
+                />
+              ) : (
+                <Flex align="center" justify="center" px="4" py="8">
+                  <Text size="1" color="gray" align="center">
+                    {t("placeholder")}
+                  </Text>
+                </Flex>
+              )}
+            </Box>
+          </Box>
+        </SiteChromeFrame>
       </aside>
     </Box>
   );
