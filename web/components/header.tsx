@@ -26,23 +26,11 @@ export async function Header() {
               </Link>
             </Text>
             <Flex align="center" gap={{ initial: "3", sm: "4" }} wrap="wrap">
-              <Flex align="center" gap="4" wrap="wrap">
-                <Text asChild size="2" color="gray">
-                  <Link href="/tools" style={{ textDecoration: "none" }}>
-                    {t("tools")}
-                  </Link>
-                </Text>
-                <Text asChild size="2" color="gray">
-                  <Link href="/privacy" style={{ textDecoration: "none" }}>
-                    {t("privacy")}
-                  </Link>
-                </Text>
-                <Text asChild size="2" color="gray">
-                  <Link href="/terms" style={{ textDecoration: "none" }}>
-                    {t("terms")}
-                  </Link>
-                </Text>
-              </Flex>
+              <Text asChild size="2" color="gray">
+                <Link href="/tools" style={{ textDecoration: "none" }}>
+                  {t("tools")}
+                </Link>
+              </Text>
               <Separator orientation="vertical" size="2" />
               <LanguageSwitcher />
             </Flex>
