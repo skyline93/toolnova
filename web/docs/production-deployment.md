@@ -1,72 +1,103 @@
 # Production deployment (Docker)
 
-This document describes how to build and run the Toolnova web app in production using Docker. The runtime image is self-contained (Next.js `output: "standalone"`); you do not mount application source into the container.
+Deploy **Web (Next.js standalone)** and **Markdown PDF (Python + Playwright)** from the **repository root** using `docker-compose.yml` and `Makefile`. Images are self-contained; do not bind-mount application source.
 
 For the Chinese version, see [production-deployment.zh-CN.md](./production-deployment.zh-CN.md).
 
 ## Prerequisites
 
-- Docker Engine and the Docker Compose plugin (`docker compose`), or Docker Desktop.
-- On the build host: the full `web/` project tree (or CI checkout) as build context for `Dockerfile`.
-- On a **pull-only** host: a pushed image in a registry; no source tree required for `docker run`.
+- Docker Engine and the Compose plugin (`docker compose`), or Docker Desktop.
+- **Build host**: full repo checkout (at least `web/` and `services/markdown-pdf/`) for `docker build` / `make build`.
+- **Run-only host**: root **`docker-compose.yml`** + optional **`.env`** + **pulled or loaded images** — **no** source tree required on the server.
 
-## Build-time environment variables
+## Files at repository root
 
-All `NEXT_PUBLIC_*` values are inlined into the client bundle during `next build`. Changing them requires **rebuilding the image**; setting them only at `docker run` with `-e` does **not** update already-built assets.
+| File | Role |
+|------|------|
+| `docker-compose.yml` | `web` + `markdown-pdf` services, **`image:` only** (no `build:`) |
+| `Makefile` | Build images, `compose up/down/logs` |
+| `.env.example` | Copy to `.env`; set image names, ports, PDF secrets |
 
-| Variable | Required | Description |
-| -------- | -------- | ----------- |
-| `NEXT_PUBLIC_SITE_URL` | Yes (production) | Canonical site origin, **no trailing slash** (metadata, sitemap, JSON-LD). |
-| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | No | Google Analytics 4 measurement ID. Loaded only after the user accepts analytics in the cookie banner. |
-| `NEXT_PUBLIC_ADSENSE_CLIENT_ID` | No* | AdSense publisher id (`ca-pub-…`). |
-| `NEXT_PUBLIC_ADSENSE_SLOT_FOOTER` | No* | Display ad slot id for the footer placement. |
-
-\*For the footer ad slot to request ads, **both** AdSense variables must be set at build time. Omit them until your site is approved in AdSense if you prefer the placeholder footer.
-
-Runtime variables `PORT` and `HOSTNAME` are set in the image (`3000` / `0.0.0.0`); override only if you know you need to.
-
-## Option A: Docker Compose + Makefile (recommended)
-
-**Build and run are separate.** `docker compose up` does **not** build images. Build on a dev machine or in CI, push (or transfer) the image, then start on production with an existing image only.
-
-### 1. Build (dev / CI)
-
-From the `web/` directory, with your real origin and optional `NEXT_PUBLIC_*` values:
+From **`toolnova/`** (repo root):
 
 ```bash
-make build NEXT_PUBLIC_SITE_URL=https://example.com
-
-# Optional analytics / AdSense (all build-time)
-make build \
-  NEXT_PUBLIC_SITE_URL=https://example.com \
-  NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX \
-  NEXT_PUBLIC_ADSENSE_CLIENT_ID=ca-pub-XXXXXXXXXXXXXXXX \
-  NEXT_PUBLIC_ADSENSE_SLOT_FOOTER=1234567890
-```
-
-You can put `NEXT_PUBLIC_*` in a local `web/.env` for convenience when running `make build` (do not commit secrets unnecessarily). Those variables are **not** read by Compose for starting the container—only `docker build` uses them.
-
-### 2. Start (production or any host with the image)
-
-After `docker pull your-registry/toolnova-web:1.0.0` (or the image is already local), from `web/`:
-
-```env
-# web/.env on the server (example — no NEXT_PUBLIC_* needed here)
-TOOLNOVA_WEB_IMAGE=your-registry/toolnova-web:1.0.0
-WEB_PORT=3000
-```
-
-```bash
+docker compose up -d
+# or
 make up
 ```
 
-Or without `.env`: `make up IMAGE=your-registry/toolnova-web:1.0.0 WEB_PORT=3000`.
+## Build-time variables (web image)
 
-Useful targets: `make build`, `make up`, `make down`, `make logs`, `make rebuild` (no-cache build + up), `make print-run`, `make print-docker-build`. See `make help`.
+All `NEXT_PUBLIC_*` values are inlined at `next build`. Changing them requires **rebuilding the web image**; restarting the container is not enough.
 
-## Option B: `docker build` + `docker run` (no Makefile)
+| Variable | Required | Description |
+| -------- | -------- | ----------- |
+| `NEXT_PUBLIC_SITE_URL` | Yes (prod) | Canonical origin, **no trailing slash**. |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | No | GA4; loaded only after cookie consent. |
+| `NEXT_PUBLIC_ADSENSE_CLIENT_ID` | No* | AdSense publisher id. |
+| `NEXT_PUBLIC_ADSENSE_SLOT_FOOTER` | No* | Footer display slot id. |
 
-Build from `web/`:
+\*Both AdSense vars must be set at **build** time for the footer slot to request ads.
+
+Build from **repo root**:
+
+```bash
+make build-web NEXT_PUBLIC_SITE_URL=https://example.com
+
+# or web + pdf
+make build NEXT_PUBLIC_SITE_URL=https://example.com
+```
+
+You may put `NEXT_PUBLIC_*` in root `.env` for `make build-web` (do not commit secrets).
+
+## Runtime variables (Compose / `.env`)
+
+See root **`.env.example`**. Highlights:
+
+| Variable | Purpose |
+|----------|---------|
+| `TOOLNOVA_WEB_IMAGE` | Web image ref (default `toolnova-web:latest`) |
+| `TOOLNOVA_MARKDOWN_PDF_IMAGE` | PDF image ref (default `toolnova-markdown-pdf:latest`) |
+| `WEB_PORT` | Host port (default `3000`) |
+| `PDF_SERVICE_URL` | Default `http://markdown-pdf:8000` inside Compose |
+| `PDF_SERVICE_SECRET` / `PDF_INTERNAL_API_TOKEN` | Optional shared secret |
+
+### Start production (images already local)
+
+```bash
+cd /path/to/toolnova   # only compose + .env; source optional
+docker pull your-registry/toolnova-web:1.0.0
+docker pull your-registry/toolnova-markdown-pdf:1.0.0
+# set TOOLNOVA_*_IMAGE in .env
+docker compose up -d
+```
+
+### Running Make from `web/`
+
+`web/Makefile` **forwards** to the repo root:
+
+```bash
+cd web && make up
+cd web && make build-web NEXT_PUBLIC_SITE_URL=https://example.com
+```
+
+## Useful Make targets
+
+| Target | Description |
+|--------|-------------|
+| `make` / `make up` | `docker compose up -d` (no build) |
+| `make down` | Stop and remove containers |
+| `make logs` | Follow web + markdown-pdf logs |
+| `make ps` | Compose status |
+| `make build` | Build web + pdf images |
+| `make build-web` / `make build-pdf` | Build one image |
+| `make build-amd64` | linux/amd64 via buildx (e.g. Apple Silicon) |
+| `make rebuild` | No-cache build both, then up |
+| `make print-docker-build` | Print raw `docker build` lines |
+
+## Option B: raw `docker build` + `docker compose`
+
+From repo root:
 
 ```bash
 docker build -t toolnova-web:latest \
@@ -74,44 +105,34 @@ docker build -t toolnova-web:latest \
   --build-arg NEXT_PUBLIC_GA_MEASUREMENT_ID= \
   --build-arg NEXT_PUBLIC_ADSENSE_CLIENT_ID= \
   --build-arg NEXT_PUBLIC_ADSENSE_SLOT_FOOTER= \
-  -f Dockerfile .
-```
+  -f web/Dockerfile web
 
-Omit optional `--build-arg` lines entirely if your Docker version allows it; otherwise pass empty strings as above.
+docker build -t toolnova-markdown-pdf:latest \
+  -f services/markdown-pdf/Dockerfile services/markdown-pdf
 
-Run (image must already exist locally or after `docker pull`):
-
-```bash
-docker run -d --name toolnova-web --restart unless-stopped -p 3000:3000 toolnova-web:latest
-```
-
-Adjust the host port (`3000:3000` → `8080:3000`) and image name/tag as needed. Do not bind-mount the app source for production serving.
-
-To print a copy-paste build command with current Makefile variables:
-
-```bash
-make print-docker-build
+docker compose up -d
 ```
 
 ## Option C: Registry workflow
 
-1. Build and tag on CI or a builder machine (with the same `--build-arg` values as production).
-2. `docker push your-registry/toolnova-web:1.0.0`
-3. On the server: `docker pull your-registry/toolnova-web:1.0.0` and `docker run ... your-registry/toolnova-web:1.0.0`
+1. CI builds and `docker push` both images.
+2. On the server: `docker pull`, place root `docker-compose.yml` + `.env`, run `docker compose up -d`.
 
-The bundled `docker-compose.yml` defines **only** `image:` (no `build:`), so production can start as soon as the image is present.
+## Markdown PDF export
 
-## Operational checklist
+See [docs/5-Markdown导出PDF-Python-Playwright方案.md](../../docs/5-Markdown导出PDF-Python-Playwright方案.md). Compose sets `PDF_SERVICE_URL=http://markdown-pdf:8000` by default.
 
-1. Set **`NEXT_PUBLIC_SITE_URL`** to the real HTTPS origin (no trailing slash).
-2. Configure optional GA / AdSense at **build** time if required.
-3. Put TLS termination in front of the container (reverse proxy, load balancer, or platform ingress) for public HTTPS.
-4. Search Console: verify the property and submit `https://<domain>/sitemap.xml`.
-5. Cookie / consent: GA and AdSense scripts load only after **Accept all**; plan messaging and policy accordingly.
+## Launch checklist
+
+1. Set **`NEXT_PUBLIC_SITE_URL`** when building the web image.
+2. Set GA / AdSense at **build** time if needed.
+3. Terminate TLS in front of the stack (reverse proxy / Ingress).
+4. **Google Search Console**: verify and submit `https://<host>/sitemap.xml`.
+5. Respect cookie consent before loading GA / AdSense.
 
 ## Troubleshooting
 
-- **`docker compose up` / `make up` fails with image not found**: Build or pull the image first (`make build` on a dev host, or `docker pull` on the server). Compose does not build images.
-- **Wrong canonical URL or analytics in the browser after deploy**: Rebuild the image with corrected `NEXT_PUBLIC_*` build args; restart is not enough without a rebuild.
-- **Port already in use**: Change the host port in Compose (`WEB_PORT`) or `docker run -p`.
-- **Name already in use**: `docker rm -f toolnova-web` (or your container name) before starting a new one.
+- **`Image ... not found`**: `docker pull` or build locally first; Compose does **not** build.
+- **Stale site URL or analytics**: rebuild the **web** image with correct `NEXT_PUBLIC_*`.
+- **Port in use**: change `WEB_PORT` in `.env`.
+- **Web only (no PDF)**: use a custom override or edit compose to drop `markdown-pdf` and set `PDF_SERVICE_URL` accordingly; the default stack runs both.

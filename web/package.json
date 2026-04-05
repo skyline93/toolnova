@@ -10,6 +10,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@swc/helpers": "^0.5.21",
     "@codemirror/lang-json": "^6.0.2",
     "@codemirror/language": "^6.12.3",
     "@codemirror/view": "^6.41.0",
@@ -27,7 +28,13 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-markdown": "^10.1.0",
-    "remark-gfm": "^4.0.1"
+    "rehype-prism-plus": "^2.0.2",
+    "rehype-stringify": "^10.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.1",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",

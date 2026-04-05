@@ -2,27 +2,15 @@
 
 import type { PreviewType } from "@uiw/react-md-editor";
 import dynamic from "next/dynamic";
-import type { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
+
+import { useMarkdownPreviewColorMode } from "@/lib/markdown-preview-color-mode";
+import { markdownPreviewComponents } from "@/lib/markdown-preview-markup";
 
 import "@uiw/react-md-editor/markdown-editor.css";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
-
-const markdownComponents: Components = {
-  a: ({ href, children, ...rest }) => {
-    if (!href || href.toLowerCase().startsWith("javascript:") || href.toLowerCase().startsWith("data:")) {
-      return <span>{children}</span>;
-    }
-    const external = href.startsWith("http://") || href.startsWith("https://");
-    return (
-      <a href={href} {...rest} target={external ? "_blank" : undefined} rel={external ? "noopener noreferrer" : undefined}>
-        {children}
-      </a>
-    );
-  },
-};
 
 export type MarkdownViewMode = "source" | "preview" | "split";
 
@@ -30,18 +18,6 @@ function previewFromViewMode(viewMode: MarkdownViewMode): PreviewType {
   if (viewMode === "source") return "edit";
   if (viewMode === "preview") return "preview";
   return "live";
-}
-
-function useMdColorMode(): "light" | "dark" {
-  const [mode, setMode] = useState<"light" | "dark">("light");
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    const sync = () => setMode(mq.matches ? "dark" : "light");
-    sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
-  }, []);
-  return mode;
 }
 
 export function MarkdownPreviewEditor({
@@ -53,14 +29,14 @@ export function MarkdownPreviewEditor({
   onChange: (value: string) => void;
   viewMode: MarkdownViewMode;
 }) {
-  const colorMode = useMdColorMode();
+  const colorMode = useMarkdownPreviewColorMode();
   const preview = previewFromViewMode(viewMode);
   const enableScroll = preview === "live";
 
   const previewOptions = useMemo(
     () => ({
       remarkPlugins: [remarkGfm],
-      components: markdownComponents,
+      components: markdownPreviewComponents,
       wrapperElement: {
         "data-color-mode": colorMode,
         className: "markdown-preview-root markdown-preview-wide max-w-none",

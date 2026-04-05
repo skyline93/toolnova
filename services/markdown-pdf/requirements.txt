@@ -1,0 +1,10 @@
+# Markdown PDF 服务 — 与 docs/5-Markdown导出PDF-Python-Playwright方案.md 对齐
+# 安装浏览器二进制：playwright install --with-deps chromium
+
+fastapi>=0.115.0,<1
+uvicorn[standard]>=0.32.0,<1
+gunicorn>=23.0.0,<24
+pydantic>=2.10.0,<3
+playwright>=1.49.0,<2
+
+nh3>=0.2.18,<1

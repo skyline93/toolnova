@@ -1,0 +1,358 @@
+/*
+ * PDF / print styles for .markdown-preview-root — keep in sync with web/app/globals.css
+ * (Radix CSS variables replaced with literals; Geist → system / Noto stack for headless Chromium.)
+ */
+html[data-color-mode="light"] {
+  --md-text: #11181c;
+  --md-muted: #687076;
+  --md-border: #d7dbdf;
+  --md-code-bg: #e8ebed;
+  --md-pre-bg: #f4f6f8;
+  --md-th-bg: #e8ebed;
+  --md-link: #1a73e8;
+  --md-blockquote-border: rgba(26, 115, 232, 0.45);
+  --md-accent-checkbox: #1a73e8;
+  --md-page-bg: #ffffff;
+  --md-radius-2: 4px;
+  --md-radius-3: 8px;
+  --md-font-weight-medium: 500;
+  --md-font-weight-bold: 700;
+  --md-font-size-3: 16px;
+  --md-font-size-4: 18px;
+  --md-font-size-5: 20px;
+  --md-font-size-7: 28px;
+}
+
+html[data-color-mode="dark"] {
+  --md-text: #ecedee;
+  --md-muted: #b0b4ba;
+  --md-border: #3a3f44;
+  --md-code-bg: #2a2e32;
+  --md-pre-bg: #1e2124;
+  --md-th-bg: #2a2e32;
+  --md-link: #8ab4f8;
+  --md-blockquote-border: rgba(138, 180, 248, 0.45);
+  --md-accent-checkbox: #8ab4f8;
+  --md-page-bg: #111113;
+  --md-radius-2: 4px;
+  --md-radius-3: 8px;
+  --md-font-weight-medium: 500;
+  --md-font-weight-bold: 700;
+  --md-font-size-3: 16px;
+  --md-font-size-4: 18px;
+  --md-font-size-5: 20px;
+  --md-font-size-7: 28px;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--md-page-bg);
+}
+
+body {
+  font-family:
+    "Noto Sans SC",
+    "PingFang SC",
+    "Hiragino Sans GB",
+    "Microsoft YaHei",
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+  color: var(--md-text);
+  font-size: var(--md-font-size-3);
+  line-height: 1.65;
+}
+
+.markdown-preview-wide {
+  width: 100%;
+  max-width: none;
+}
+
+.markdown-preview-root {
+  color: var(--md-text);
+  font-size: var(--md-font-size-3);
+  line-height: 1.65;
+}
+
+.markdown-preview-root h1 {
+  margin: 0 0 0.65em;
+  font-size: var(--md-font-size-7);
+  font-weight: var(--md-font-weight-bold);
+  letter-spacing: -0.02em;
+}
+
+.markdown-preview-root h2 {
+  margin: 1.25em 0 0.5em;
+  font-size: var(--md-font-size-5);
+  font-weight: var(--md-font-weight-bold);
+  letter-spacing: -0.02em;
+}
+
+.markdown-preview-root h3 {
+  margin: 1.1em 0 0.45em;
+  font-size: var(--md-font-size-4);
+  font-weight: var(--md-font-weight-medium);
+}
+
+.markdown-preview-root p {
+  margin: 0 0 0.85em;
+}
+
+.markdown-preview-root ul,
+.markdown-preview-root ol {
+  margin: 0 0 0.85em;
+  padding-left: 1.35rem;
+}
+
+.markdown-preview-root li {
+  margin: 0.25em 0;
+}
+
+.markdown-preview-root blockquote {
+  margin: 0 0 0.85em;
+  padding: 0.5em 0 0.5em 1em;
+  border-left: 3px solid var(--md-blockquote-border);
+  color: var(--md-muted);
+}
+
+.markdown-preview-root hr {
+  margin: 1.25em 0;
+  border: none;
+  border-top: 1px solid var(--md-border);
+}
+
+.markdown-preview-root a {
+  color: var(--md-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.markdown-preview-root :not(pre) > code {
+  padding: 0.12em 0.35em;
+  border-radius: var(--md-radius-2);
+  background: var(--md-code-bg);
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace;
+  font-size: 0.88em;
+}
+
+.markdown-preview-root pre {
+  margin: 0 0 0.85em;
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+  border-radius: var(--md-radius-3);
+  border: 1px solid var(--md-border);
+  background: var(--md-pre-bg);
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.markdown-preview-root pre code {
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  font-size: inherit;
+}
+
+.markdown-preview-root table {
+  width: 100%;
+  margin: 0 0 0.85em;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.markdown-preview-root th,
+.markdown-preview-root td {
+  border: 1px solid var(--md-border);
+  padding: 0.4em 0.55em;
+  text-align: left;
+}
+
+.markdown-preview-root th {
+  background: var(--md-th-bg);
+  font-weight: var(--md-font-weight-medium);
+}
+
+.markdown-preview-root input[type="checkbox"] {
+  margin-right: 0.35em;
+  accent-color: var(--md-accent-checkbox);
+}
+
+.markdown-preview-root img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--md-radius-3);
+}
+
+/*
+ * Prism + GitHub Pretty Lights — aligned with @uiw/react-markdown-preview/markdown.css
+ * (scoped to .wmde-markdown.markdown-preview-root for PDF only).
+ */
+html[data-color-mode="light"] .wmde-markdown.markdown-preview-root {
+  color-scheme: light;
+  --color-prettylights-syntax-comment: #6e7781;
+  --color-prettylights-syntax-constant: #0550ae;
+  --color-prettylights-syntax-entity: #8250df;
+  --color-prettylights-syntax-storage-modifier-import: #24292f;
+  --color-prettylights-syntax-entity-tag: #116329;
+  --color-prettylights-syntax-keyword: #cf222e;
+  --color-prettylights-syntax-string: #0a3069;
+  --color-prettylights-syntax-variable: #953800;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #82071e;
+  --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+  --color-prettylights-syntax-invalid-illegal-bg: #82071e;
+  --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+  --color-prettylights-syntax-carriage-return-bg: #cf222e;
+  --color-prettylights-syntax-string-regexp: #116329;
+  --color-prettylights-syntax-markup-list: #3b2300;
+  --color-prettylights-syntax-markup-heading: #0550ae;
+  --color-prettylights-syntax-markup-italic: #24292f;
+  --color-prettylights-syntax-markup-bold: #24292f;
+  --color-prettylights-syntax-markup-deleted-text: #82071e;
+  --color-prettylights-syntax-markup-deleted-bg: #ffebe9;
+  --color-prettylights-syntax-markup-inserted-text: #116329;
+  --color-prettylights-syntax-markup-inserted-bg: #dafbe1;
+  --color-prettylights-syntax-markup-changed-text: #953800;
+  --color-prettylights-syntax-markup-changed-bg: #ffd8b5;
+  --color-prettylights-syntax-markup-ignored-text: #eaeef2;
+  --color-prettylights-syntax-markup-ignored-bg: #0550ae;
+  --color-prettylights-syntax-meta-diff-range: #8250df;
+  --color-prettylights-syntax-brackethighlighter-angle: #57606a;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #8c959f;
+  --color-prettylights-syntax-constant-other-reference-link: #0a3069;
+}
+
+html[data-color-mode="dark"] .wmde-markdown.markdown-preview-root {
+  color-scheme: dark;
+  --color-prettylights-syntax-comment: #8b949e;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-storage-modifier-import: #c9d1d9;
+  --color-prettylights-syntax-entity-tag: #7ee787;
+  --color-prettylights-syntax-keyword: #ff7b72;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-variable: #ffa657;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-carriage-return-bg: #b62324;
+  --color-prettylights-syntax-string-regexp: #7ee787;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-italic: #c9d1d9;
+  --color-prettylights-syntax-markup-bold: #c9d1d9;
+  --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
+  --color-prettylights-syntax-markup-deleted-bg: #67060c;
+  --color-prettylights-syntax-markup-inserted-text: #aff5b4;
+  --color-prettylights-syntax-markup-inserted-bg: #033a16;
+  --color-prettylights-syntax-markup-changed-text: #ffdfb6;
+  --color-prettylights-syntax-markup-changed-bg: #5a1e02;
+  --color-prettylights-syntax-markup-ignored-text: #c9d1d9;
+  --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+  --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+  --color-prettylights-syntax-brackethighlighter-angle: #8b949e;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #484f58;
+  --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+}
+
+.wmde-markdown.markdown-preview-root .token.comment,
+.wmde-markdown.markdown-preview-root .token.prolog,
+.wmde-markdown.markdown-preview-root .token.doctype,
+.wmde-markdown.markdown-preview-root .token.cdata {
+  color: var(--color-prettylights-syntax-comment);
+}
+
+.wmde-markdown.markdown-preview-root .token.namespace {
+  opacity: 0.7;
+}
+
+.wmde-markdown.markdown-preview-root .token.property,
+.wmde-markdown.markdown-preview-root .token.tag,
+.wmde-markdown.markdown-preview-root .token.selector,
+.wmde-markdown.markdown-preview-root .token.constant,
+.wmde-markdown.markdown-preview-root .token.symbol,
+.wmde-markdown.markdown-preview-root .token.deleted {
+  color: var(--color-prettylights-syntax-entity-tag);
+}
+
+.wmde-markdown.markdown-preview-root .token.maybe-class-name {
+  color: var(--color-prettylights-syntax-variable);
+}
+
+.wmde-markdown.markdown-preview-root .token.property-access,
+.wmde-markdown.markdown-preview-root .token.operator,
+.wmde-markdown.markdown-preview-root .token.boolean,
+.wmde-markdown.markdown-preview-root .token.number,
+.wmde-markdown.markdown-preview-root .token.selector .token.class,
+.wmde-markdown.markdown-preview-root .token.attr-name,
+.wmde-markdown.markdown-preview-root .token.string,
+.wmde-markdown.markdown-preview-root .token.char,
+.wmde-markdown.markdown-preview-root .token.builtin {
+  color: var(--color-prettylights-syntax-constant);
+}
+
+.wmde-markdown.markdown-preview-root .token.deleted {
+  color: var(--color-prettylights-syntax-markup-deleted-text);
+}
+
+.wmde-markdown.markdown-preview-root .code-line .token.deleted {
+  background-color: var(--color-prettylights-syntax-markup-deleted-bg);
+}
+
+.wmde-markdown.markdown-preview-root .token.inserted {
+  color: var(--color-prettylights-syntax-markup-inserted-text);
+}
+
+.wmde-markdown.markdown-preview-root .code-line .token.inserted {
+  background-color: var(--color-prettylights-syntax-markup-inserted-bg);
+}
+
+.wmde-markdown.markdown-preview-root .token.variable {
+  color: var(--color-prettylights-syntax-constant);
+}
+
+.wmde-markdown.markdown-preview-root .token.entity,
+.wmde-markdown.markdown-preview-root .token.url,
+.wmde-markdown.markdown-preview-root .language-css .token.string,
+.wmde-markdown.markdown-preview-root .style .token.string {
+  color: var(--color-prettylights-syntax-string);
+}
+
+.wmde-markdown.markdown-preview-root .token.color,
+.wmde-markdown.markdown-preview-root .token.atrule,
+.wmde-markdown.markdown-preview-root .token.attr-value,
+.wmde-markdown.markdown-preview-root .token.function,
+.wmde-markdown.markdown-preview-root .token.class-name {
+  color: var(--color-prettylights-syntax-string);
+}
+
+.wmde-markdown.markdown-preview-root .token.rule,
+.wmde-markdown.markdown-preview-root .token.regex,
+.wmde-markdown.markdown-preview-root .token.important,
+.wmde-markdown.markdown-preview-root .token.keyword {
+  color: var(--color-prettylights-syntax-keyword);
+}
+
+.wmde-markdown.markdown-preview-root .token.coord {
+  color: var(--color-prettylights-syntax-meta-diff-range);
+}
+
+.wmde-markdown.markdown-preview-root .token.important,
+.wmde-markdown.markdown-preview-root .token.bold {
+  font-weight: bold;
+}
+
+.wmde-markdown.markdown-preview-root .token.italic {
+  font-style: italic;
+}
+
+.wmde-markdown.markdown-preview-root .token.entity {
+  cursor: help;
+}
+
+.wmde-markdown.markdown-preview-root pre code {
+  color: var(--md-text);
+}

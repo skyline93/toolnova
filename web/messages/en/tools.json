@@ -208,9 +208,9 @@
   },
   "markdownPreview": {
     "metaTitle": "Markdown Preview Online Free",
-    "metaDescription": "Write Markdown with GitHub-style tables and task lists, see a live preview in your browser. Export to PDF is planned for a later update.",
+    "metaDescription": "Write Markdown with GitHub-style tables and task lists, with live preview; export a PDF that matches the preview when the PDF service is configured.",
     "title": "Markdown Preview",
-    "intro": "Draft notes, readme snippets, or documentation with instant feedback. Rendering uses GitHub Flavored Markdown features such as tables and strikethrough. Nothing is uploaded.",
+    "intro": "Draft notes, readme snippets, or documentation with instant feedback. Rendering uses GitHub Flavored Markdown features such as tables and strikethrough. PDF export sends your Markdown through this site’s server to a dedicated converter; content is not kept by the tool after the file is generated.",
     "source": "Markdown source",
     "preview": "Preview",
     "viewSource": "Source",
@@ -220,10 +220,11 @@
     "fullscreen": "Fullscreen",
     "exitFullscreen": "Exit fullscreen",
     "pdfExport": "Export PDF",
-    "pdfSoon": "Coming later",
-    "pdfHint": "PDF export will be added in a future release. For now you can print the preview from your browser.",
+    "pdfExporting": "Generating…",
+    "pdfErrorGeneric": "Export failed. Try again later or check server configuration.",
+    "pdfHint": "Download a PDF that matches the preview (requires the PDF worker and PDF_SERVICE_URL).",
     "howTitle": "How to use",
-    "howBody": "Use Source, Preview, or Split to focus on editing, reading the render, or seeing both. Split uses two columns on large screens and stacks on small ones. Fullscreen keeps the same layout options in a full-screen workspace (press Esc or Exit to close). Until PDF export ships, you can print from the browser."
+    "howBody": "Use Source, Preview, or Split to focus on editing, reading the render, or seeing both. Split uses two columns on large screens and stacks on small ones. Fullscreen keeps the same layout options in a full-screen workspace (press Esc or Exit to close). PDF export uses the same rendering rules as the preview; if the converter is not configured, use your browser’s print-to-PDF instead."
   },
   "loanCalculator": {
     "metaTitle": "Loan Payment Calculator Online Free",

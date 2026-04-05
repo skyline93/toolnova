@@ -1,0 +1,26 @@
+# 仅使用已存在的本地/仓库镜像启动，不包含 build。生产环境只需本文件 + .env（可选）+ 已 docker pull 的镜像。
+# 一键：docker compose up -d
+name: toolnova
+
+services:
+  markdown-pdf:
+    image: ${TOOLNOVA_MARKDOWN_PDF_IMAGE:-toolnova-markdown-pdf:latest}
+    restart: unless-stopped
+    environment:
+      WEB_CONCURRENCY: ${PDF_WEB_CONCURRENCY:-2}
+      INTERNAL_API_TOKEN: ${PDF_INTERNAL_API_TOKEN:-}
+    expose:
+      - "8000"
+
+  web:
+    image: ${TOOLNOVA_WEB_IMAGE:-toolnova-web:latest}
+    depends_on:
+      - markdown-pdf
+    ports:
+      - "${WEB_PORT:-3000}:3000"
+    restart: unless-stopped
+    environment:
+      PORT: "3000"
+      HOSTNAME: "0.0.0.0"
+      PDF_SERVICE_URL: ${PDF_SERVICE_URL:-http://markdown-pdf:8000}
+      PDF_SERVICE_SECRET: ${PDF_SERVICE_SECRET:-}

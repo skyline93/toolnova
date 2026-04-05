@@ -1,8 +1,8 @@
 "use client";
 
 import { MarkdownPreviewEditor } from "@/components/markdown-preview-editor";
+import { useMarkdownPreviewColorMode } from "@/lib/markdown-preview-color-mode";
 import {
-  Badge,
   Box,
   Button,
   Card,
@@ -36,7 +36,7 @@ Write **bold**, *italic*, and ~~strikethrough~~.
 ## Task list
 
 - [x] Live preview
-- [ ] Built-in PDF export (planned)
+- [x] Built-in PDF export
 
 ## Code
 
@@ -56,6 +56,9 @@ export default function MarkdownPreviewPage() {
   const [viewMode, setViewMode] = useState<ViewMode>("split");
   const fsRef = useRef<HTMLDivElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const colorMode = useMarkdownPreviewColorMode();
+  const [pdfBusy, setPdfBusy] = useState(false);
+  const [pdfError, setPdfError] = useState<string | null>(null);
 
   useEffect(() => {
     const sync = () => {
@@ -84,6 +87,48 @@ export default function MarkdownPreviewPage() {
       }
     }
   }, []);
+
+  const exportPdf = useCallback(async () => {
+    setPdfError(null);
+    setPdfBusy(true);
+    const pdfFilename = `${Date.now()}.pdf`;
+    try {
+      const res = await fetch("/api/markdown-pdf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          markdown: source,
+          color_mode: colorMode,
+          filename: pdfFilename,
+        }),
+      });
+      if (!res.ok) {
+        let message = t("pdfErrorGeneric");
+        try {
+          const data = (await res.json()) as { error?: string };
+          if (typeof data.error === "string" && data.error) {
+            message = data.error;
+          }
+        } catch {
+          /* ignore */
+        }
+        setPdfError(message);
+        return;
+      }
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = pdfFilename;
+      a.rel = "noopener";
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch {
+      setPdfError(t("pdfErrorGeneric"));
+    } finally {
+      setPdfBusy(false);
+    }
+  }, [colorMode, source, t]);
 
   return (
     <Flex direction="column" gap="6">
@@ -129,14 +174,24 @@ export default function MarkdownPreviewPage() {
                 {t("fullscreen")}
               </Button>
             )}
-            <Button type="button" size="2" variant="outline" color="gray" disabled style={{ opacity: 0.55 }} title={t("pdfHint")}>
-              {t("pdfExport")}
-              <Badge size="1" color="gray" ml="2" variant="soft">
-                {t("pdfSoon")}
-              </Badge>
+            <Button
+              type="button"
+              size="2"
+              variant="outline"
+              color="gray"
+              disabled={pdfBusy || source.trim().length === 0}
+              title={t("pdfHint")}
+              onClick={exportPdf}
+            >
+              {pdfBusy ? t("pdfExporting") : t("pdfExport")}
             </Button>
           </Flex>
         </Flex>
+        {pdfError ? (
+          <Text size="2" color="red" role="alert">
+            {pdfError}
+          </Text>
+        ) : null}
 
         <Flex
           direction="column"
