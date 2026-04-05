@@ -105,27 +105,19 @@ export default function MarkdownPreviewPage() {
       >
         <Flex align="center" gap="3" wrap="wrap" justify="between">
           <Flex align="center" gap="3" wrap="wrap">
-            {!isFullscreen ? (
-              <>
-                <Text size="1" weight="bold" color="gray" style={{ letterSpacing: "0.06em", textTransform: "uppercase" }}>
-                  {t("viewModeLabel")}
-                </Text>
-                <SegmentedControl.Root
-                  value={viewMode}
-                  onValueChange={(v) => setViewMode(v as ViewMode)}
-                  size="2"
-                  aria-label={t("viewModeLabel")}
-                >
-                  <SegmentedControl.Item value="source">{t("viewSource")}</SegmentedControl.Item>
-                  <SegmentedControl.Item value="preview">{t("viewPreview")}</SegmentedControl.Item>
-                  <SegmentedControl.Item value="split">{t("viewSplit")}</SegmentedControl.Item>
-                </SegmentedControl.Root>
-              </>
-            ) : (
-              <Text size="2" weight="medium" highContrast>
-                {t("viewSplit")}
-              </Text>
-            )}
+            <Text size="1" weight="bold" color="gray" style={{ letterSpacing: "0.06em", textTransform: "uppercase" }}>
+              {t("viewModeLabel")}
+            </Text>
+            <SegmentedControl.Root
+              value={viewMode}
+              onValueChange={(v) => setViewMode(v as ViewMode)}
+              size="2"
+              aria-label={t("viewModeLabel")}
+            >
+              <SegmentedControl.Item value="source">{t("viewSource")}</SegmentedControl.Item>
+              <SegmentedControl.Item value="preview">{t("viewPreview")}</SegmentedControl.Item>
+              <SegmentedControl.Item value="split">{t("viewSplit")}</SegmentedControl.Item>
+            </SegmentedControl.Root>
           </Flex>
           <Flex gap="2" wrap="wrap">
             {isFullscreen ? (
@@ -155,7 +147,7 @@ export default function MarkdownPreviewPage() {
             flex: isFullscreen ? 1 : undefined,
           }}
         >
-          <MarkdownPreviewEditor value={source} onChange={setSource} viewMode={viewMode} isFullscreen={isFullscreen} />
+          <MarkdownPreviewEditor value={source} onChange={setSource} viewMode={viewMode} />
         </Flex>
       </Box>
 

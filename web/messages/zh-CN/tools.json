@@ -217,13 +217,13 @@
     "viewPreview": "预览",
     "viewSplit": "分栏",
     "viewModeLabel": "布局",
-    "fullscreen": "全屏分栏",
+    "fullscreen": "全屏",
     "exitFullscreen": "退出全屏",
     "pdfExport": "导出 PDF",
     "pdfSoon": "即将推出",
     "pdfHint": "内置导出 PDF 将在后续版本加入。目前可使用浏览器的打印功能保存为 PDF。",
     "howTitle": "使用说明",
-    "howBody": "可用「源码」专注编辑、「预览」专注渲染，或「分栏」同时查看；宽屏为左右排列，窄屏自动上下堆叠。「全屏分栏」进入浏览器全屏下的左右对照（Esc 或退出全屏关闭）。正式 PDF 导出上线前，仍可用浏览器打印保存为 PDF。"
+    "howBody": "可用「源码」专注编辑、「预览」专注渲染，或「分栏」同时查看；宽屏为左右排列，窄屏自动上下堆叠。「全屏」进入浏览器全屏后仍可切换上述三种布局（Esc 或退出全屏关闭）。正式 PDF 导出上线前，仍可用浏览器打印保存为 PDF。"
   },
   "loanCalculator": {
     "metaTitle": "免费贷款月供估算",

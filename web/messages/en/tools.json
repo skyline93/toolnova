@@ -217,13 +217,13 @@
     "viewPreview": "Preview",
     "viewSplit": "Split",
     "viewModeLabel": "Layout",
-    "fullscreen": "Fullscreen split",
+    "fullscreen": "Fullscreen",
     "exitFullscreen": "Exit fullscreen",
     "pdfExport": "Export PDF",
     "pdfSoon": "Coming later",
     "pdfHint": "PDF export will be added in a future release. For now you can print the preview from your browser.",
     "howTitle": "How to use",
-    "howBody": "Use Source, Preview, or Split to focus on editing, reading the render, or seeing both. Split uses two columns on large screens and stacks on small ones. Fullscreen split opens a wide side-by-side workspace (press Esc or Exit to close). Until PDF export ships, you can print from the browser."
+    "howBody": "Use Source, Preview, or Split to focus on editing, reading the render, or seeing both. Split uses two columns on large screens and stacks on small ones. Fullscreen keeps the same layout options in a full-screen workspace (press Esc or Exit to close). Until PDF export ships, you can print from the browser."
   },
   "loanCalculator": {
     "metaTitle": "Loan Payment Calculator Online Free",

@@ -16,7 +16,7 @@
     "allTools": "All tools"
   },
   "home": {
-    "eyebrow": "Free utilities",
+    "eyebrow": "",
     "headline": "Practical tools for developers, files, and everyday dates",
     "lead": "{siteName} runs lightweight utilities in your browser whenever possible. No accounts are required for the core toolkit—start with JSON formatting, timestamps, time zones, PDF merge, and image compression.",
     "browseTools": "Browse all tools",

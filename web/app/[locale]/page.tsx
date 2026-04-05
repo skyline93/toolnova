@@ -8,6 +8,7 @@ type ToolDefCopy = { title: string; description: string };
 
 export default async function HomePage() {
   const t = await getTranslations("home");
+  const eyebrow = t("eyebrow");
   const messages = await getMessages();
   const toolDefs = messages.toolDefs as Record<string, ToolDefCopy>;
 
@@ -17,8 +18,15 @@ export default async function HomePage() {
     <Box asChild>
       <main>
         <Container size="4" px={{ initial: "4", sm: "6" }} py={{ initial: "9", sm: "12" }}>
-          <Text size="2" weight="medium" color="blue" highContrast style={{ letterSpacing: "0.2em", textTransform: "uppercase" }}>
-            {t("eyebrow")}
+          <Text
+            size="2"
+            weight="medium"
+            color="blue"
+            highContrast
+            aria-hidden={!eyebrow}
+            style={{ letterSpacing: "0.2em", textTransform: "uppercase" }}
+          >
+            {eyebrow || "\u00a0"}
           </Text>
           <Heading as="h1" size="8" mt="3" wrap="balance" style={{ maxWidth: "42rem" }} highContrast>
             {t("headline")}

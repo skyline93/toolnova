@@ -26,8 +26,7 @@ const markdownComponents: Components = {
 
 export type MarkdownViewMode = "source" | "preview" | "split";
 
-function previewFromViewMode(viewMode: MarkdownViewMode, isFullscreen: boolean): PreviewType {
-  if (isFullscreen) return "live";
+function previewFromViewMode(viewMode: MarkdownViewMode): PreviewType {
   if (viewMode === "source") return "edit";
   if (viewMode === "preview") return "preview";
   return "live";
@@ -49,15 +48,13 @@ export function MarkdownPreviewEditor({
   value,
   onChange,
   viewMode,
-  isFullscreen,
 }: {
   value: string;
   onChange: (value: string) => void;
   viewMode: MarkdownViewMode;
-  isFullscreen: boolean;
 }) {
   const colorMode = useMdColorMode();
-  const preview = previewFromViewMode(viewMode, isFullscreen);
+  const preview = previewFromViewMode(viewMode);
   const enableScroll = preview === "live";
 
   const previewOptions = useMemo(
