@@ -1,0 +1,13 @@
+# 仅启动已有镜像，不包含构建。镜像在开发机/CI 上通过 `make build` 或 `docker build` 制作并分发（推送仓库或离线加载）后再部署。
+# 生产环境只需本文件 + 目标镜像；无需 Dockerfile 与源码树（若使用仓库镜像）。
+name: toolnova-web
+
+services:
+  web:
+    image: ${TOOLNOVA_WEB_IMAGE:-toolnova-web:latest}
+    ports:
+      - "${WEB_PORT:-3000}:3000"
+    restart: unless-stopped
+    environment:
+      PORT: "3000"
+      HOSTNAME: "0.0.0.0"

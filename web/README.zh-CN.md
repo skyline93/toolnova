@@ -4,14 +4,31 @@
 
 基于 Next.js App Router 的前端：工具页、国际化（`en`、`zh-CN`）、SEO（metadata、sitemap、JSON-LD），以及 PDF 合并 API 路由。界面采用 **Radix Themes** 3（主色为 **blue**，与谷歌蓝一致；slate 灰阶、白底、卡片/按钮/输入框轻阴影），并用 Tailwind CSS 4 做少量工具类与局部样式。
 
-## 本地开发
+## 快速开始
+
+**Docker（生产形态镜像）** — 先在开发环境构建，生产仅启动、不构建。在仓库根目录：
 
 ```bash
+cd web
+make build NEXT_PUBLIC_SITE_URL=https://你的域名.com
+make up
+```
+
+生产环境使用已推送或已导入的镜像（例如 `make up IMAGE=registry/toolnova-web:标签`）。可选构建期变量见 [docs/production-deployment.zh-CN.md](./docs/production-deployment.zh-CN.md)。`make help` 列出全部目标。
+
+**本地开发** — 安装依赖、复制环境文件、启动开发服务：
+
+```bash
+cd web
 npm install
 cp .env.example .env.local
-# 编辑 NEXT_PUBLIC_SITE_URL（例如 http://localhost:3000）
+# 设置 NEXT_PUBLIC_SITE_URL（例如 http://localhost:3000）
 npm run dev
 ```
+
+## 本地开发
+
+与上文 [快速开始](#快速开始) 中「本地开发」命令相同。
 
 ## 环境变量
 
@@ -26,8 +43,8 @@ npm run dev
 
 ## 上线清单（初版）
 
-1. 在部署环境配置 **`NEXT_PUBLIC_SITE_URL`**（Vercel 项目环境变量、Docker `-e` 等）。
-2. 部署生产构建：执行 `npm run build`，再启动 standalone 输出，或使用平台自带的 Next 部署方式。
+1. 使用 Docker 时在**构建阶段**设置 **`NEXT_PUBLIC_SITE_URL`**（Makefile / Compose 旁 `.env` / `docker build --build-arg`）；使用 Vercel 时在构建前配置项目环境变量。详见 [docs/production-deployment.zh-CN.md](./docs/production-deployment.zh-CN.md)。
+2. 部署生产构建：执行 `npm run build` 再启动 standalone、按文档使用 Docker，或采用平台自带的 Next 部署方式。
 3. **Google Search Console**：完成域名/资源验证，提交 `https://<你的域名>/sitemap.xml`。
 4. **Cookie 横幅**：首次访问需选择「全部接受」或「仅必要」；**GA / AdSense 脚本仅在「全部接受」后**加载。
 5. **AdSense**：在 Google 申请并通过后，再填写 client 与 slot 环境变量；在此之前页脚为固定高度的占位区，以降低 CLS。
@@ -35,7 +52,7 @@ npm run dev
 
 ## Docker
 
-项目在 `next.config.ts` 中启用了 `output: "standalone"`。请在 `web/` 目录下使用本仓库自带的 `Dockerfile`（或自行多阶段构建并复制 `.next/standalone`）构建镜像。
+项目在 `next.config.ts` 中启用了 `output: "standalone"`。生产向的构建与运行说明（Compose、Makefile、`docker run`、镜像仓库流程）见 [docs/production-deployment.zh-CN.md](./docs/production-deployment.zh-CN.md)。
 
 ## 技术说明
 
