@@ -7,6 +7,7 @@
 #   make build         构建 web + markdown-pdf 镜像
 #   make build-web     仅构建 Next.js 镜像
 #   make build-pdf     仅构建 PDF 服务镜像
+#   make tag-registry  为已构建的本地镜像追加远程仓库前缀（REGISTRY_PREFIX）
 #
 COMPOSE := docker compose
 COMPOSE_FILE := docker-compose.yml
@@ -20,6 +21,9 @@ NEXT_PUBLIC_GA_MEASUREMENT_ID =
 NEXT_PUBLIC_ADSENSE_CLIENT_ID =
 NEXT_PUBLIC_ADSENSE_SLOT_FOOTER =
 
+# 阿里云 ACR 等：末尾须带 /，例如 registry.cn-shenzhen.aliyuncs.com/greene/
+REGISTRY_PREFIX ?=
+
 PLATFORM_LINUX_AMD64 := linux/amd64
 
 -include .env
@@ -29,6 +33,9 @@ endif
 ifneq ($(strip $(TOOLNOVA_MARKDOWN_PDF_IMAGE)),)
 IMAGE_PDF := $(TOOLNOVA_MARKDOWN_PDF_IMAGE)
 endif
+
+IMAGE_WEB_REGISTRY := $(REGISTRY_PREFIX)$(IMAGE_WEB)
+IMAGE_PDF_REGISTRY := $(REGISTRY_PREFIX)$(IMAGE_PDF)
 
 export TOOLNOVA_WEB_IMAGE := $(IMAGE_WEB)
 export TOOLNOVA_MARKDOWN_PDF_IMAGE := $(IMAGE_PDF)
@@ -45,6 +52,7 @@ DOCKER_WEB_ARGS := \
 	--build-arg NEXT_PUBLIC_ADSENSE_SLOT_FOOTER=$(NEXT_PUBLIC_ADSENSE_SLOT_FOOTER)
 
 .PHONY: default help build build-web build-pdf build-amd64 build-web-amd64 build-pdf-amd64 \
+	tag-registry tag-registry-web tag-registry-pdf \
 	up down logs ps rebuild rebuild-amd64 print-run print-docker-build print-docker-build-pdf \
 	print-docker-build-web-amd64 print-docker-build-pdf-amd64
 
@@ -62,8 +70,11 @@ help:
 	@echo "  make build-pdf       仅构建 PDF 镜像"
 	@echo "  make build-amd64     交叉构建两个镜像（linux/amd64，需 buildx）"
 	@echo "  make rebuild         无缓存构建两镜像后 up"
+	@echo "  make tag-registry    docker tag：本地镜像 → \$$REGISTRY_PREFIX + 镜像名"
+	@echo "  make tag-registry-web / tag-registry-pdf  仅打一个"
 	@echo ""
 	@echo "构建期：NEXT_PUBLIC_* ；启动期：见根目录 .env.example"
+	@echo "打 tag：REGISTRY_PREFIX（可写入 .env），例：registry.cn-shenzhen.aliyuncs.com/greene/"
 	@echo "Compose 文件：$(COMPOSE_FILE)"
 
 build-web:
@@ -81,6 +92,16 @@ build-pdf-amd64:
 	docker buildx build --platform $(PLATFORM_LINUX_AMD64) -t $(IMAGE_PDF) -f services/markdown-pdf/Dockerfile services/markdown-pdf --load
 
 build-amd64: build-web-amd64 build-pdf-amd64
+
+tag-registry-web:
+	@test -n "$(strip $(REGISTRY_PREFIX))" || (echo "REGISTRY_PREFIX 未设置。示例: make tag-registry-web REGISTRY_PREFIX=registry.cn-shenzhen.aliyuncs.com/greene/" >&2; exit 1)
+	docker tag $(IMAGE_WEB) $(IMAGE_WEB_REGISTRY)
+
+tag-registry-pdf:
+	@test -n "$(strip $(REGISTRY_PREFIX))" || (echo "REGISTRY_PREFIX 未设置。示例: make tag-registry-pdf REGISTRY_PREFIX=registry.cn-shenzhen.aliyuncs.com/greene/" >&2; exit 1)
+	docker tag $(IMAGE_PDF) $(IMAGE_PDF_REGISTRY)
+
+tag-registry: tag-registry-web tag-registry-pdf
 
 up:
 	$(COMPOSE) -f $(COMPOSE_FILE) up -d
