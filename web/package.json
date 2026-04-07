@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "fonts:download": "bash scripts/download-geist-fonts.sh",
+    "mermaid:sync-assets": "cp node_modules/mermaid/dist/mermaid.min.js assets/mermaid.min.js && cp node_modules/mermaid/dist/mermaid.min.js ../services/markdown-pdf/assets/mermaid.min.js",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -23,6 +24,7 @@
     "codemirror": "^6.0.2",
     "cron-parser": "^5.5.0",
     "diff": "^8.0.4",
+    "mermaid": "^11.14.0",
     "next": "16.2.2",
     "next-intl": "^4.9.0",
     "pdf-lib": "^1.17.1",

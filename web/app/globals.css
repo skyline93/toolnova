@@ -282,6 +282,149 @@ html.dark body {
   font-size: inherit;
 }
 
+.markdown-preview-root .markdown-mermaid-block {
+  margin: 0 0 0.85em;
+  overflow: visible;
+  border-radius: var(--radius-3);
+  border: 1px solid var(--gray-a6);
+  background: var(--gray-2);
+  padding: 0.85rem 1rem;
+}
+
+.markdown-preview-root .markdown-mermaid-chrome {
+  position: relative;
+}
+
+.markdown-preview-root .markdown-mermaid-zoom-controls {
+  position: absolute;
+  top: 0.1rem;
+  right: 0.15rem;
+  left: auto;
+  z-index: 2;
+  flex-wrap: nowrap;
+  padding: 0.15rem 0.3rem;
+  border-radius: var(--radius-3);
+  background: color-mix(in srgb, var(--gray-1) 72%, transparent);
+  border: 1px solid color-mix(in srgb, var(--gray-a6) 35%, transparent);
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--gray-12) 6%, transparent);
+  opacity: 0.82;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+@media (hover: hover) {
+  .markdown-preview-root .markdown-mermaid-block:hover .markdown-mermaid-zoom-controls,
+  .markdown-preview-root .markdown-mermaid-zoom-controls:focus-within {
+    opacity: 0.96;
+    background: color-mix(in srgb, var(--gray-1) 88%, transparent);
+    border-color: color-mix(in srgb, var(--gray-a6) 50%, transparent);
+  }
+}
+
+.markdown-preview-root .markdown-mermaid-zoom-label {
+  min-width: 2.75rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  color: var(--gray-11);
+  line-height: 1;
+  opacity: 0.85;
+}
+
+.markdown-preview-root .markdown-mermaid-zoom-icon.rt-IconButton {
+  color: var(--gray-11);
+  opacity: 0.88;
+}
+
+.markdown-preview-root .markdown-mermaid-zoom-icon.rt-IconButton:hover:not(:disabled) {
+  opacity: 1;
+}
+
+.markdown-preview-root .markdown-mermaid-zoom-viewport {
+  overflow: auto;
+  max-height: min(70vh, 52rem);
+  margin-top: 0.2rem;
+}
+
+.markdown-preview-root .markdown-mermaid-zoom-inner {
+  width: 100%;
+}
+
+.markdown-preview-root .markdown-mermaid-block pre.mermaid {
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  border: none;
+  background: transparent;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.markdown-preview-root .markdown-mermaid-block pre.mermaid.mermaid-error {
+  white-space: pre-wrap;
+  color: var(--red-11);
+}
+
+.markdown-preview-root .markdown-mermaid-block svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.markdown-preview-root .mermaid-render-error {
+  margin-top: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: var(--radius-2);
+  border: 1px solid var(--red-a6);
+  background: var(--red-a2);
+  font-size: 0.8125rem;
+  color: var(--gray-12);
+}
+
+.markdown-preview-root .mermaid-render-error strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.8125rem;
+}
+
+.markdown-preview-root .mermaid-render-error-detail {
+  margin: 0 0 0.5rem;
+  padding: 0.5rem;
+  overflow-x: auto;
+  border-radius: var(--radius-2);
+  background: var(--gray-a3);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.markdown-preview-root .mermaid-render-error-hint {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--gray-11);
+  line-height: 1.5;
+}
+
+.markdown-preview-root .mermaid-render-error-hint code {
+  padding: 0.1em 0.25em;
+  border-radius: var(--radius-1);
+  background: var(--gray-a4);
+  font-size: 0.9em;
+}
+
+/* Standalone export / PDF: `pre.mermaid` before or after Mermaid runs */
+.markdown-preview-root pre.mermaid {
+  margin: 0 0 0.85em;
+}
+
+.markdown-preview-root pre.mermaid svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 .markdown-preview-root table {
   width: 100%;
   margin: 0 0 0.85em;

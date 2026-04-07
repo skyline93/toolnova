@@ -165,6 +165,99 @@ body {
   font-size: inherit;
 }
 
+.markdown-preview-root .markdown-mermaid-block {
+  margin: 0 0 0.85em;
+  overflow-x: auto;
+  border-radius: var(--md-radius-3);
+  border: 1px solid var(--md-border);
+  background: var(--md-pre-bg);
+  padding: 0.85rem 1rem;
+}
+
+.markdown-preview-root .markdown-mermaid-block pre.mermaid {
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  border: none;
+  background: transparent;
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.markdown-preview-root .markdown-mermaid-block pre.mermaid.mermaid-error {
+  white-space: pre-wrap;
+  color: #c62a2a;
+}
+
+html[data-color-mode="dark"] .markdown-preview-root .markdown-mermaid-block pre.mermaid.mermaid-error {
+  color: #ff8a8a;
+}
+
+.markdown-preview-root .markdown-mermaid-block svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.markdown-preview-root .mermaid-render-error {
+  margin-top: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: var(--md-radius-2);
+  border: 1px solid #f5a8a8;
+  background: #fff5f5;
+  font-size: 0.8125rem;
+  color: var(--md-text);
+}
+
+html[data-color-mode="dark"] .markdown-preview-root .mermaid-render-error {
+  border-color: #8b3a3a;
+  background: #2a1515;
+}
+
+.markdown-preview-root .mermaid-render-error strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.8125rem;
+}
+
+.markdown-preview-root .mermaid-render-error-detail {
+  margin: 0 0 0.5rem;
+  padding: 0.5rem;
+  overflow-x: auto;
+  border-radius: var(--md-radius-2);
+  background: var(--md-code-bg);
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.markdown-preview-root .mermaid-render-error-hint {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--md-muted);
+  line-height: 1.5;
+}
+
+.markdown-preview-root .mermaid-render-error-hint code {
+  padding: 0.1em 0.25em;
+  border-radius: var(--md-radius-2);
+  background: var(--md-pre-bg);
+  font-size: 0.9em;
+}
+
+.markdown-preview-root pre.mermaid {
+  margin: 0 0 0.85em;
+}
+
+.markdown-preview-root pre.mermaid svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 .markdown-preview-root table {
   width: 100%;
   margin: 0 0 0.85em;

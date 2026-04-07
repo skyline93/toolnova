@@ -38,6 +38,8 @@ gunicorn app.main:app \
 
 Next 在调用 `/v1/pdf` 时会附带可选字段 **`font_override_css`**（由 Web 服务端读取 **`MARKDOWN_EXPORT_BASE_FONT_PX`** 生成，见 `web/.env.example`），插在基础 `markdown-export.css` 之后，用于与 HTML 导出相同的正文字号。旧客户端不传该字段时默认为空，行为与此前一致。
 
+含 Mermaid 的 HTML 会在页面内 **内联** `assets/mermaid.min.js`（不依赖外网 CDN），并在 **`load` 事件之前**同步执行 `mermaid.initialize({ startOnLoad: false, ... })`，否则库自带的 `load` 监听器会先跑一遍 `run()`，留下 `data-processed`，Playwright 里再次 `run()` 会跳过，PDF 里只剩源码。升级 `web` 的 `mermaid` 依赖后请在 `web/` 执行 **`npm run mermaid:sync-assets`**，并重新构建本服务镜像。
+
 ## 镜像与 Compose
 
 与 **Web** 一键启动：使用仓库根目录的 **`docker-compose.yml`**（仅需已构建/已拉取的镜像，无需挂载源码）。环境变量见根目录 **`.env.example`**（`TOOLNOVA_MARKDOWN_PDF_IMAGE`、`PDF_INTERNAL_API_TOKEN` 等）。

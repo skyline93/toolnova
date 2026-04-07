@@ -5,8 +5,8 @@ import dynamic from "next/dynamic";
 import remarkGfm from "remark-gfm";
 import { useMemo } from "react";
 
+import { createMarkdownPreviewComponents } from "@/lib/markdown-preview-components";
 import { useMarkdownPreviewColorMode } from "@/lib/markdown-preview-color-mode";
-import { markdownPreviewComponents } from "@/lib/markdown-preview-markup";
 
 import "@uiw/react-md-editor/markdown-editor.css";
 
@@ -35,7 +35,7 @@ export function MarkdownPreviewEditor({
   const previewOptions = useMemo(
     () => ({
       remarkPlugins: [remarkGfm],
-      components: markdownPreviewComponents,
+      components: createMarkdownPreviewComponents(colorMode),
       wrapperElement: {
         "data-color-mode": colorMode,
         className: "markdown-preview-root markdown-preview-wide max-w-none",

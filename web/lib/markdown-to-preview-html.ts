@@ -6,6 +6,8 @@ import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 import { visit } from "unist-util-visit";
 
+import { rehypeMermaidPre } from "@/lib/rehype-mermaid-pre";
+
 /**
  * PDF export HTML: same stack as @uiw/react-md-editor live preview — remark-gfm + rehype-prism-plus.
  * Token colors come from `markdown-export.css` (GitHub Pretty Lights, aligned with @uiw/react-markdown-preview).
@@ -44,6 +46,7 @@ export function markdownToPreviewHtmlFragment(markdown: string, _colorMode: "lig
     .use(remarkGfm)
     .use(remarkRehype, { allowDangerousHtml: false })
     .use(rehypePreviewLinks)
+    .use(rehypeMermaidPre)
     .use(rehypePrism, { ignoreMissing: true })
     .use(rehypeStringify)
     .processSync(markdown);

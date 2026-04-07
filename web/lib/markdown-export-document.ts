@@ -1,9 +1,15 @@
+import { markdownExportMermaidBootScript } from "@/lib/markdown-export-mermaid";
+import { htmlIncludesMermaidPre, loadMermaidMinJs } from "@/lib/load-mermaid-min-js";
+
 export function buildMarkdownExportFullHtml(
   bodyInnerHtml: string,
   colorMode: "light" | "dark",
   css: string,
   fontOverrideCss: string,
 ): string {
+  const mermaidScripts = htmlIncludesMermaidPre(bodyInnerHtml)
+    ? `<script>\n${loadMermaidMinJs()}\n</script>\n${markdownExportMermaidBootScript()}\n`
+    : "";
   return `<!DOCTYPE html>
 <html lang="en" data-color-mode="${colorMode}">
 <head>
@@ -18,6 +24,6 @@ ${fontOverrideCss}
 </head>
 <body>
 ${bodyInnerHtml}
-</body>
+${mermaidScripts}</body>
 </html>`;
 }

@@ -48,6 +48,14 @@ Inline \`code\` and a block:
 const greeting = "hello";
 console.log(greeting);
 \`\`\`
+
+## Mermaid
+
+\`\`\`mermaid
+flowchart LR
+  A[Markdown] --> B[Preview]
+  B --> C[HTML / PDF]
+\`\`\`
 `;
 
 type ViewMode = "source" | "preview" | "split";
