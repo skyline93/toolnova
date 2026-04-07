@@ -1,7 +1,7 @@
 import { SitePageContainer } from "@/components/site-page-container";
 import { Link } from "@/i18n/navigation";
 import { getPathname } from "@/i18n/navigation";
-import { siteName } from "@/lib/site";
+import { siteContactEmail, siteName } from "@/lib/site";
 import { Box, Flex, Heading, Text } from "@radix-ui/themes";
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -76,10 +76,26 @@ export default async function PrivacyPage() {
             </Box>
             <Box>
               <Heading as="h2" size="4" mb="2" highContrast>
+                {t("hOperator")}
+              </Heading>
+              <Text size="3" color="gray">
+                {t("pOperator", { siteName })}
+              </Text>
+            </Box>
+            <Box>
+              <Heading as="h2" size="4" mb="2" highContrast>
                 {t("hContact")}
               </Heading>
               <Text size="3" color="gray">
-                {t("pContact")}
+                {t("pContact")}{" "}
+                <Text asChild size="3" color="blue" highContrast>
+                  <a
+                    href={`mailto:${siteContactEmail}`}
+                    style={{ textDecoration: "underline", textUnderlineOffset: "2px" }}
+                  >
+                    {siteContactEmail}
+                  </a>
+                </Text>
               </Text>
             </Box>
             <Text asChild size="3" color="blue" highContrast>

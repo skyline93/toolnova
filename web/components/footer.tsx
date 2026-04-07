@@ -13,6 +13,8 @@ export async function Footer() {
       asChild
       mt="auto"
       style={{
+        position: "relative",
+        zIndex: 1,
         borderTop: "1px solid var(--gray-a6)",
         backgroundColor: "var(--color-panel-solid)",
       }}

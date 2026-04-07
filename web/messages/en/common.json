@@ -145,8 +145,10 @@
     "pConsent": "The first time you visit, you can accept optional analytics and advertising cookies, or choose essential-only mode. Essential-only mode does not load Google Analytics or third-party ad scripts until you clear the choice and accept again.",
     "hAdvertising": "Advertising",
     "pAdvertising": "Programs such as Google AdSense may be enabled later. Ad tags load only after you accept all cookies. Ad partners have their own privacy policies; you can use industry opt-out tools where available.",
+    "hOperator": "Site operator",
+    "pOperator": "{siteName} is operated by an individual. There is no registered company behind this project.",
     "hContact": "Contact",
-    "pContact": "For privacy questions, contact the site operator using the address published on this domain once available."
+    "pContact": "For privacy requests, questions about this policy, or advertising on this site, email:"
   },
   "termsPage": {
     "title": "Terms of Service",
@@ -159,6 +161,8 @@
     "hAcceptable": "Acceptable use",
     "pAcceptable": "Do not use the services to violate laws, infringe copyrights, upload malware, or overload our systems. We may slow down or block traffic that looks automated or abusive.",
     "hChanges": "Changes",
-    "pChanges": "We may update these terms or discontinue features. Continued use after changes means you accept the revised terms."
+    "pChanges": "We may update these terms or discontinue features. Continued use after changes means you accept the revised terms.",
+    "hContact": "Contact",
+    "pContact": "The site is operated by an individual. For questions about these terms, email:"
   }
 }
