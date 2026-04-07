@@ -36,6 +36,8 @@ gunicorn app.main:app \
 | `PDF_MAX_CONCURRENT` | 每进程并发 PDF 上限，默认 `2` |
 | `INTERNAL_API_TOKEN` | 若设置，请求头须带 `X-Internal-Token`（与 Next 的 `PDF_SERVICE_SECRET` 一致） |
 
+Next 在调用 `/v1/pdf` 时会附带可选字段 **`font_override_css`**（由 Web 服务端读取 **`MARKDOWN_EXPORT_BASE_FONT_PX`** 生成，见 `web/.env.example`），插在基础 `markdown-export.css` 之后，用于与 HTML 导出相同的正文字号。旧客户端不传该字段时默认为空，行为与此前一致。
+
 ## 镜像与 Compose
 
 与 **Web** 一键启动：使用仓库根目录的 **`docker-compose.yml`**（仅需已构建/已拉取的镜像，无需挂载源码）。环境变量见根目录 **`.env.example`**（`TOOLNOVA_MARKDOWN_PDF_IMAGE`、`PDF_INTERNAL_API_TOKEN` 等）。

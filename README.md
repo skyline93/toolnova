@@ -30,6 +30,8 @@ npm run dev
 
 The app usually runs at <http://localhost:3000> (see the terminal output for the exact port).
 
+Optional variables are listed in `web/.env.example` (e.g. Markdown export font size `MARKDOWN_EXPORT_BASE_FONT_PX`); copy it to `web/.env` for local use.
+
 ## 🚀 Build and production
 
 ```bash

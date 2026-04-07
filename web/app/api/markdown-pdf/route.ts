@@ -1,3 +1,4 @@
+import { buildMarkdownExportFontOverrideCss, getMarkdownExportBaseFontPx } from "@/lib/markdown-export-font";
 import { markdownToPreviewHtmlFragment } from "@/lib/markdown-to-preview-html";
 import { NextResponse } from "next/server";
 
@@ -52,6 +53,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Could not render Markdown" }, { status: 400 });
   }
 
+  const baseFontPx = getMarkdownExportBaseFontPx();
+  const fontOverrideCss = buildMarkdownExportFontOverrideCss(baseFontPx);
+
   const pdfUrl = `${pdfBase.replace(/\/$/, "")}/v1/pdf`;
   const headers: Record<string, string> = { "Content-Type": "application/json" };
   const secret = process.env.PDF_SERVICE_SECRET?.trim();
@@ -70,6 +74,7 @@ export async function POST(request: Request) {
         filename,
         paper: "A4",
         print_background: true,
+        font_override_css: fontOverrideCss,
       }),
       signal: AbortSignal.timeout(60_000),
     });

@@ -30,6 +30,8 @@ npm run dev
 
 默认在 <http://localhost:3000> 启动（具体端口以终端输出为准）。
 
+可选环境变量见 `web/.env.example`（例如 Markdown 导出字号 `MARKDOWN_EXPORT_BASE_FONT_PX`）；本地开发将文件复制为 `web/.env` 后按需填写。
+
 ## 🚀 构建与生产启动
 
 ```bash

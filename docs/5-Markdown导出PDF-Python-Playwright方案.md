@@ -119,6 +119,7 @@ flowchart LR
 - `filename`：可选，默认 `export.pdf`；正则限制为 `[a-zA-Z0-9._-]+`，防路径穿越。
 - `paper`：可选枚举 `A4`、`Letter`。
 - `print_background`：`bool`，默认 `True`。
+- `font_override_css`：可选字符串，默认空；由 Next 根据服务端环境变量 **`MARKDOWN_EXPORT_BASE_FONT_PX`**（整数 px，12–22，未设置则默认 14）生成，插在基础 `markdown-export.css` 之后，与 HTML 导出字号一致（`max_length` 需限制，如 16KiB）。
 
 ### 5.3 响应与错误
 

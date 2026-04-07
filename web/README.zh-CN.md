@@ -40,6 +40,7 @@ npm run dev
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Google Analytics 4；**仅在用户在 Cookie 横幅中点击「全部接受」后**才会加载 |
 | `NEXT_PUBLIC_ADSENSE_CLIENT_ID` | AdSense 发布商 ID（`ca-pub-…`） |
 | `NEXT_PUBLIC_ADSENSE_SLOT_FOOTER` | 页脚预留广告位对应的展示广告单元 slot id |
+| `MARKDOWN_EXPORT_BASE_FONT_PX` | 可选，**仅服务端**（勿加 `NEXT_PUBLIC_`）：Markdown 导出 HTML/PDF 正文字号（12–22 px），默认 14 |
 
 ## 上线清单（初版）
 

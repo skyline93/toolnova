@@ -92,6 +92,14 @@
 
 确保 PDF 服务允许来自 Vercel 出口 IP 的访问（若你做了 IP 白名单，需放行或改为 Token 校验）。
 
+#### Markdown 导出字号（可选，仅服务端）
+
+| 变量名 | 必填 | 说明 |
+|--------|------|------|
+| `MARKDOWN_EXPORT_BASE_FONT_PX` | 否 | 导出 **HTML** 与 **PDF** 的正文基础字号（像素整数，**12–22**，未设置默认 **14**）。**只需**配置这一项（勿用 `NEXT_PUBLIC_`）：仅在 API Route 运行时读取，与浏览器 bundle 无关；修改后**重新部署**即可生效。 |
+
+实现见 `web/lib/markdown-export-font.ts`；PDF 路径下 Next 会将生成的片段放入请求体字段 `font_override_css`（见 `services/markdown-pdf`）。
+
 ### 4.4 环境作用域
 
 对 `NEXT_PUBLIC_SITE_URL`：Production 填正式域名；Preview 可填 Vercel 预览域名（如 `https://xxx.vercel.app`），便于预览环境 sitemap/robots 正确。
@@ -170,8 +178,11 @@
 | `web/next.config.ts` | Next 配置、`next-intl` 插件 |
 | `web/proxy.ts` | 国际化路由（Next 16：`proxy.ts`，Node 边界；原 `middleware.ts`） |
 | `web/app/api/markdown-pdf/route.ts` | PDF 代理与环境变量 |
-| 根目录 `.env.example` | 全栈示例环境变量名 |
+| `web/app/api/markdown-html/route.ts` | Markdown 导出 HTML |
+| `web/lib/markdown-export-font.ts` | 导出字号：`MARKDOWN_EXPORT_BASE_FONT_PX` |
+| 根目录 `.env.example` | Compose / 全栈示例环境变量名 |
+| `web/.env.example` | 本地 `web/` 开发用环境变量说明 |
 
 ---
 
-按上述步骤配置 **Root Directory、`NEXT_PUBLIC_SITE_URL`**，并在需要时配置 **PDF 与公开分析变量**，即可在 Vercel 上完整运行 Toolnova 前端。
+按上述步骤配置 **Root Directory、`NEXT_PUBLIC_SITE_URL`**，并在需要时配置 **PDF、Markdown 导出字号（`MARKDOWN_EXPORT_BASE_FONT_PX`）与公开分析变量**，即可在 Vercel 上完整运行 Toolnova 前端。

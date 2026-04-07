@@ -277,9 +277,9 @@
   },
   "markdownPreview": {
     "metaTitle": "Markdown Preview Online Free",
-    "metaDescription": "Write Markdown with GitHub-style tables and task lists, with live preview; export a PDF that matches the preview when the PDF service is configured.",
+    "metaDescription": "Write Markdown with GitHub-style tables and task lists, with live preview; export PDF, a self-contained HTML file, or the raw Markdown.",
     "title": "Markdown Preview",
-    "intro": "Draft notes, readme snippets, or documentation with instant feedback. Rendering uses GitHub Flavored Markdown features such as tables and strikethrough. PDF export sends your Markdown through this site’s server to a dedicated converter; content is not kept by the tool after the file is generated.",
+    "intro": "Draft notes, readme snippets, or documentation with instant feedback. Rendering uses GitHub Flavored Markdown features such as tables and strikethrough. PDF export sends your Markdown through this site’s server to a dedicated converter; HTML export returns a full page with inlined styles; Markdown export saves the editor text in your browser. Content is not kept by the tool after the file is generated.",
     "source": "Markdown source",
     "preview": "Preview",
     "viewSource": "Source",
@@ -287,12 +287,15 @@
     "viewSplit": "Split",
     "fullscreen": "Fullscreen",
     "exitFullscreen": "Exit fullscreen",
-    "pdfExport": "Export PDF",
-    "pdfExporting": "Generating…",
-    "pdfErrorGeneric": "Export failed. Try again later or check server configuration.",
-    "pdfHint": "Download a PDF that matches the preview (requires the PDF worker and PDF_SERVICE_URL).",
+    "exportMenu": "Export",
+    "exportMenuAriaLabel": "Export as PDF, HTML, or Markdown",
+    "exportFormatPdf": "PDF",
+    "exportFormatHtml": "HTML",
+    "exportFormatMarkdown": "Markdown",
+    "exportBusy": "Exporting…",
+    "exportErrorGeneric": "Export failed. Try again later or check server configuration.",
     "howTitle": "How to use",
-    "howBody": "Use Source, Preview, or Split to focus on editing, reading the render, or seeing both. Split uses two columns on large screens and stacks on small ones. Fullscreen keeps the same layout options in a full-screen workspace (press Esc or Exit to close). PDF export uses the same rendering rules as the preview; if the converter is not configured, use your browser’s print-to-PDF instead."
+    "howBody": "Use Source, Preview, or Split to focus on editing, reading the render, or seeing both. Split uses two columns on large screens and stacks on small ones. Fullscreen keeps the same layout options in a full-screen workspace (press Esc or Exit to close). The Export menu offers PDF, HTML, or Markdown: PDF matches the preview and needs the PDF worker and PDF_SERVICE_URL; HTML is a standalone styled file for offline viewing; Markdown is the raw source from the editor."
   },
   "loanCalculator": {
     "metaTitle": "Loan Payment Calculator Online Free",

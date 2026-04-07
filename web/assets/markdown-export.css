@@ -1,7 +1,7 @@
 /*
- * PDF / print styles for .markdown-preview-root — keep in sync with web/app/globals.css
- * and web/assets/markdown-export.css (standalone HTML export).
- * (Radix CSS variables replaced with literals; Geist → system / Noto stack for headless Chromium.)
+ * Standalone HTML / PDF export styles for .markdown-preview-root.
+ * Keep in sync with: services/markdown-pdf/assets/markdown-export.css
+ * and web/app/globals.css (Radix literals; system / CJK-friendly sans stack).
  */
 html[data-color-mode="light"] {
   --md-text: #11181c;

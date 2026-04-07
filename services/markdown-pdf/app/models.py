@@ -16,3 +16,8 @@ class PdfExportRequest(BaseModel):
     )
     paper: Literal["A4", "Letter"] = "A4"
     print_background: bool = True
+    font_override_css: str = Field(
+        default="",
+        max_length=16_384,
+        description="Optional CSS after base export styles (e.g. font sizes from Next.js env)",
+    )

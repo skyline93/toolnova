@@ -40,6 +40,7 @@ See [`.env.example`](./.env.example). **`NEXT_PUBLIC_SITE_URL`** should be your 
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | GA4; **only loads after “Accept all”** on the cookie banner |
 | `NEXT_PUBLIC_ADSENSE_CLIENT_ID` | AdSense client id (`ca-pub-…`) |
 | `NEXT_PUBLIC_ADSENSE_SLOT_FOOTER` | Display ad unit slot id for the reserved footer placement |
+| `MARKDOWN_EXPORT_BASE_FONT_PX` | Optional **server-only** (no `NEXT_PUBLIC_`): Markdown HTML/PDF export base font size (12–22 px); default 14 |
 
 ## Launch checklist
 

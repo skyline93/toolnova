@@ -72,7 +72,11 @@ async def export_pdf(
     if not safe_inner.strip():
         raise HTTPException(status_code=422, detail="HTML body is empty after sanitization")
 
-    full_html = build_pdf_html(body_inner_html=safe_inner, color_mode=body.color_mode)
+    full_html = build_pdf_html(
+        body_inner_html=safe_inner,
+        color_mode=body.color_mode,
+        font_override_css=body.font_override_css,
+    )
     browser = app.state.browser
     semaphore: asyncio.Semaphore = app.state.pdf_semaphore
 

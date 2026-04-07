@@ -80,7 +80,7 @@
     },
     "markdownPreview": {
       "title": "Markdown Preview",
-      "description": "Write Markdown on the left and see the rendered preview on the right in your browser."
+      "description": "Write and preview Markdown with export to PDF, self-contained HTML, or raw Markdown."
     },
     "timeZone": {
       "title": "Time Zone Converter",

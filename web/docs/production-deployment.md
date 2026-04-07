@@ -61,6 +61,7 @@ See root **`.env.example`**. Highlights:
 | `WEB_PORT` | Host port (default `3000`) |
 | `PDF_SERVICE_URL` | Default `http://markdown-pdf:8000` inside Compose |
 | `PDF_SERVICE_SECRET` / `PDF_INTERNAL_API_TOKEN` | Optional shared secret |
+| `MARKDOWN_EXPORT_BASE_FONT_PX` | Optional. Base body font size (12–22 px) for Markdown HTML/PDF export; default 14. See `web/.env.example`. Passed through to the `web` container by Compose. |
 
 ### Start production (images already local)
 

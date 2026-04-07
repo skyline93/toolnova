@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Markdown 导出（HTML/PDF）正文字号仅通过服务端环境变量 **`MARKDOWN_EXPORT_BASE_FONT_PX`** 配置（不再读取 `NEXT_PUBLIC_MARKDOWN_EXPORT_BASE_FONT_PX`）；未设置时默认 **14** px；根目录 `docker-compose.yml` 向 `web` 容器透传该变量；`web/.env.example`、Vercel 与 Docker 部署文档已同步说明。
 - Theme implementation avoids `next-themes` and any `<script>` / `next/script` bootstrapping in layouts, preventing React 19 console errors around script ordering and client-rendered `<script>` nodes.
 - Markdown preview and CodeMirror themes follow the same resolved light/dark mode as the rest of the UI.
 - Documentation: default README is English (`README.md`); Chinese copy in `README.zh-CN.md`, with cross-links.

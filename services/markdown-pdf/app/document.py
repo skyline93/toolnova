@@ -10,8 +10,17 @@ def load_export_css() -> str:
     return _CSS_PATH.read_text(encoding="utf-8")
 
 
-def build_pdf_html(*, body_inner_html: str, color_mode: str) -> str:
+def build_pdf_html(
+    *,
+    body_inner_html: str,
+    color_mode: str,
+    font_override_css: str = "",
+) -> str:
     css = load_export_css()
+    extra_block = ""
+    stripped = font_override_css.strip()
+    if stripped:
+        extra_block = f"  <style>\n{stripped}\n  </style>\n"
     return f"""<!DOCTYPE html>
 <html lang="en" data-color-mode="{color_mode}">
 <head>
@@ -20,7 +29,7 @@ def build_pdf_html(*, body_inner_html: str, color_mode: str) -> str:
   <style>
 {css}
   </style>
-</head>
+{extra_block}</head>
 <body>
 {body_inner_html}
 </body>

@@ -277,9 +277,9 @@
   },
   "markdownPreview": {
     "metaTitle": "免费在线 Markdown 预览",
-    "metaDescription": "支持 GitHub 风格表格与任务列表的 Markdown 实时预览；可导出与预览一致的 PDF（需配置服务端转换）。",
+    "metaDescription": "支持 GitHub 风格表格与任务列表的 Markdown 实时预览；可导出 PDF、完整 HTML 或原始 Markdown。",
     "title": "Markdown 预览",
-    "intro": "撰写笔记、README 片段或文档并即时查看渲染效果。支持 GFM 常用扩展（如表格、删除线）。导出 PDF 时，内容会经本站服务端发送至独立转换服务生成文件，不会在工具内长期存储。",
+    "intro": "撰写笔记、README 片段或文档并即时查看渲染效果。支持 GFM 常用扩展（如表格、删除线）。导出 PDF 时内容会经本站服务端发送至独立转换服务；导出 HTML 由服务端生成带内联样式的完整页面；导出 Markdown 仅在浏览器本机保存。内容不会在工具内长期存储。",
     "source": "Markdown 源码",
     "preview": "预览",
     "viewSource": "源码",
@@ -287,12 +287,15 @@
     "viewSplit": "分栏",
     "fullscreen": "全屏",
     "exitFullscreen": "退出全屏",
-    "pdfExport": "导出 PDF",
-    "pdfExporting": "正在生成…",
-    "pdfErrorGeneric": "导出失败，请稍后重试或检查服务配置。",
-    "pdfHint": "生成与预览版式一致的 PDF（需部署 PDF 转换服务并配置 PDF_SERVICE_URL）。",
+    "exportMenu": "导出",
+    "exportMenuAriaLabel": "导出为 PDF、HTML 或 Markdown",
+    "exportFormatPdf": "PDF",
+    "exportFormatHtml": "HTML",
+    "exportFormatMarkdown": "Markdown",
+    "exportBusy": "正在导出…",
+    "exportErrorGeneric": "导出失败，请稍后重试或检查服务配置。",
     "howTitle": "使用说明",
-    "howBody": "可用「源码」专注编辑、「预览」专注渲染，或「分栏」同时查看；宽屏为左右排列，窄屏自动上下堆叠。「全屏」进入浏览器全屏后仍可切换上述三种布局（Esc 或退出全屏关闭）。导出 PDF 使用与预览相同的渲染规则；若未配置转换服务，请使用浏览器打印另存为 PDF。"
+    "howBody": "可用「源码」专注编辑、「预览」专注渲染，或「分栏」同时查看；宽屏为左右排列，窄屏自动上下堆叠。「全屏」进入浏览器全屏后仍可切换上述三种布局（Esc 或退出全屏关闭）。「导出」菜单可选 PDF、HTML 或 Markdown：PDF 与预览渲染一致，需部署 PDF 转换服务并配置 PDF_SERVICE_URL；HTML 为带样式的独立文件，便于离线打开；Markdown 为当前编辑器中的原文。"
   },
   "loanCalculator": {
     "metaTitle": "免费贷款月供估算",

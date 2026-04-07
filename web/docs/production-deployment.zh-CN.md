@@ -68,6 +68,7 @@ make build-web \
 | `WEB_PORT` | 宿主机映射，默认 `3000` |
 | `PDF_SERVICE_URL` | Next 访问 PDF 的 URL，Compose 内默认 `http://markdown-pdf:8000` |
 | `PDF_SERVICE_SECRET` / `PDF_INTERNAL_API_TOKEN` | 若设置，两者应一致，用于内部鉴权 |
+| `MARKDOWN_EXPORT_BASE_FONT_PX` | 可选。Markdown 导出 HTML/PDF 的正文基础字号（12–22 px），默认 14；见 `web/.env.example`。Compose 已透传至 `web` 容器。 |
 
 ### 生产启动（已有镜像）
 

@@ -6,6 +6,8 @@ import {
   Box,
   Button,
   Card,
+  ChevronDownIcon,
+  DropdownMenu,
   Flex,
   Heading,
   SegmentedControl,
@@ -36,7 +38,7 @@ Write **bold**, *italic*, and ~~strikethrough~~.
 ## Task list
 
 - [x] Live preview
-- [x] Built-in PDF export
+- [x] Export PDF, HTML, or Markdown
 
 ## Code
 
@@ -50,6 +52,16 @@ console.log(greeting);
 
 type ViewMode = "source" | "preview" | "split";
 
+function downloadBlob(blob: Blob, filename: string) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.rel = "noopener";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 export default function MarkdownPreviewPage() {
   const t = useTranslations("markdownPreview");
   const [source, setSource] = useState(DEFAULT_MARKDOWN);
@@ -57,8 +69,8 @@ export default function MarkdownPreviewPage() {
   const fsRef = useRef<HTMLDivElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const colorMode = useMarkdownPreviewColorMode();
-  const [pdfBusy, setPdfBusy] = useState(false);
-  const [pdfError, setPdfError] = useState<string | null>(null);
+  const [exportBusy, setExportBusy] = useState(false);
+  const [exportError, setExportError] = useState<string | null>(null);
 
   useEffect(() => {
     const sync = () => {
@@ -88,9 +100,51 @@ export default function MarkdownPreviewPage() {
     }
   }, []);
 
+  const exportMarkdown = useCallback(() => {
+    setExportError(null);
+    const blob = new Blob([source], { type: "text/markdown;charset=utf-8" });
+    downloadBlob(blob, `${Date.now()}.md`);
+  }, [source]);
+
+  const exportHtml = useCallback(async () => {
+    setExportError(null);
+    setExportBusy(true);
+    const htmlFilename = `${Date.now()}.html`;
+    try {
+      const res = await fetch("/api/markdown-html", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          markdown: source,
+          color_mode: colorMode,
+          filename: htmlFilename,
+        }),
+      });
+      if (!res.ok) {
+        let message = t("exportErrorGeneric");
+        try {
+          const data = (await res.json()) as { error?: string };
+          if (typeof data.error === "string" && data.error) {
+            message = data.error;
+          }
+        } catch {
+          /* ignore */
+        }
+        setExportError(message);
+        return;
+      }
+      const blob = await res.blob();
+      downloadBlob(blob, htmlFilename);
+    } catch {
+      setExportError(t("exportErrorGeneric"));
+    } finally {
+      setExportBusy(false);
+    }
+  }, [colorMode, source, t]);
+
   const exportPdf = useCallback(async () => {
-    setPdfError(null);
-    setPdfBusy(true);
+    setExportError(null);
+    setExportBusy(true);
     const pdfFilename = `${Date.now()}.pdf`;
     try {
       const res = await fetch("/api/markdown-pdf", {
@@ -103,7 +157,7 @@ export default function MarkdownPreviewPage() {
         }),
       });
       if (!res.ok) {
-        let message = t("pdfErrorGeneric");
+        let message = t("exportErrorGeneric");
         try {
           const data = (await res.json()) as { error?: string };
           if (typeof data.error === "string" && data.error) {
@@ -112,23 +166,19 @@ export default function MarkdownPreviewPage() {
         } catch {
           /* ignore */
         }
-        setPdfError(message);
+        setExportError(message);
         return;
       }
       const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = pdfFilename;
-      a.rel = "noopener";
-      a.click();
-      URL.revokeObjectURL(url);
+      downloadBlob(blob, pdfFilename);
     } catch {
-      setPdfError(t("pdfErrorGeneric"));
+      setExportError(t("exportErrorGeneric"));
     } finally {
-      setPdfBusy(false);
+      setExportBusy(false);
     }
   }, [colorMode, source, t]);
+
+  const exportDisabled = exportBusy || source.trim().length === 0;
 
   return (
     <Flex direction="column" gap="6">
@@ -173,22 +223,26 @@ export default function MarkdownPreviewPage() {
                 {t("fullscreen")}
               </Button>
             )}
-            <Button
-              type="button"
-              size="2"
-              variant="outline"
-              color="gray"
-              disabled={pdfBusy || source.trim().length === 0}
-              title={t("pdfHint")}
-              onClick={exportPdf}
-            >
-              {pdfBusy ? t("pdfExporting") : t("pdfExport")}
-            </Button>
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger disabled={exportDisabled}>
+                <Button type="button" size="2" variant="outline" color="gray" aria-label={t("exportMenuAriaLabel")}>
+                  <Flex align="center" gap="1">
+                    {exportBusy ? t("exportBusy") : t("exportMenu")}
+                    <ChevronDownIcon />
+                  </Flex>
+                </Button>
+              </DropdownMenu.Trigger>
+              <DropdownMenu.Content size="2" variant="soft" align="end">
+                <DropdownMenu.Item onSelect={() => void exportPdf()}>{t("exportFormatPdf")}</DropdownMenu.Item>
+                <DropdownMenu.Item onSelect={() => void exportHtml()}>{t("exportFormatHtml")}</DropdownMenu.Item>
+                <DropdownMenu.Item onSelect={() => exportMarkdown()}>{t("exportFormatMarkdown")}</DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu.Root>
           </Flex>
         </Flex>
-        {pdfError ? (
+        {exportError ? (
           <Text size="2" color="red" role="alert">
-            {pdfError}
+            {exportError}
           </Text>
         ) : null}
 
