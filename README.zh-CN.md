@@ -13,7 +13,7 @@
 
 ## 🧰 功能概览
 
-当前内置工具包括但不限于：Markdown 预览、JSON / SQL 格式化、UUID 生成、Base64、时间戳、JWT 解析、正则测试、文本对比、JSON 转 CSV、Cron 表达式、时区与日期/年龄/贷款/ROI 等计算器、图片压缩、PDF 合并等。路由与文案键名见 `web/lib/tool-routes.ts` 与各语言 `web/messages/`。
+当前内置工具包括但不限于：Markdown 预览、JSON / SQL 格式化、UUID 生成、Base64、时间戳、JWT 解析、正则测试、文本对比、JSON 转 CSV、Cron 表达式、时区与日期/年龄/贷款/ROI 等计算器、图片压缩、PDF 合并、**色相环与配色参考**等。路由与文案键名见 `web/lib/tool-routes.ts` 与各语言 `web/messages/`。
 
 ## 📋 环境要求
 

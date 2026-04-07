@@ -13,7 +13,7 @@ Application code lives in the `web/` directory.
 
 ## 🧰 Features
 
-Tools include (non-exhaustive): Markdown preview, JSON/SQL formatters, UUID generator, Base64, timestamps, JWT decode, regex tester, diff checker, JSON to CSV, cron expression helper, time zone and date/age/loan/ROI calculators, image compression, PDF merge, and more. Routes and copy keys are defined in `web/lib/tool-routes.ts` and `web/messages/` per locale.
+Tools include (non-exhaustive): Markdown preview, JSON/SQL formatters, UUID generator, Base64, timestamps, JWT decode, regex tester, diff checker, JSON to CSV, cron expression helper, time zone and date/age/loan/ROI calculators, image compression, PDF merge, color wheel & harmony palettes, and more. Routes and copy keys are defined in `web/lib/tool-routes.ts` and `web/messages/` per locale.
 
 ## 📋 Requirements
 

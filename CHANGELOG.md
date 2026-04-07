@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **色相环与配色参考**（`/color-wheel`）：Canvas 色相环、H/S/L 滑块与数值、HEX 应用、互补/分裂互补/三角/类似色/单色和谐方案、单块与整组复制 HEX、相对黑白 WCAG 对比度与预览条；URL `?hex=` 同步（`replaceState` 防抖）；中英文文案；新分类「日常与设计」。
 - Light / dark appearance for the site with a header toggle; preference is stored in `localStorage` and mirrored to a `toolnova-theme` cookie so the server can emit the correct `dark` class on `<html>` without inline boot scripts.
 - Navigation strings for the theme toggle (`themeUseLight` / `themeUseDark`) in `web/messages/*/common.json`.
 

@@ -27,4 +27,5 @@ export const toolRoutes: ToolRoute[] = [
   { path: "/roi-calculator", messageKey: "roiCalculator", category: "calculators" },
   { path: "/image-compressor", messageKey: "imageCompressor", category: "file" },
   { path: "/pdf-merge", messageKey: "pdfMerge", category: "file" },
+  { path: "/color-wheel", messageKey: "colorWheel", category: "daily" },
 ];

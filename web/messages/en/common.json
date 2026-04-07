@@ -27,14 +27,15 @@
   },
   "toolsIndex": {
     "title": "All tools",
-    "description": "Browse free online utilities: JSON, Base64, UUID, JWT, timestamps, time zones, calculators, PDF merge, and image compression.",
+    "description": "Browse free online utilities: JSON, Base64, UUID, JWT, timestamps, time zones, calculators, PDF merge, image compression, and color wheel.",
     "lead": "Browse by category or open the tool you need. Each tool has its own page so it stays fast and easy to focus on one task."
   },
   "categories": {
     "developer": "Developer tools",
     "file": "File tools",
     "time": "Time & date",
-    "calculators": "Calculators"
+    "calculators": "Calculators",
+    "daily": "Everyday & design"
   },
   "toolDefs": {
     "jsonFormatter": {
@@ -108,6 +109,10 @@
     "pdfMerge": {
       "title": "PDF Merge",
       "description": "Combine multiple PDF files into one download."
+    },
+    "colorWheel": {
+      "title": "Color wheel & harmony",
+      "description": "Interactive hue wheel, harmony palettes, and contrast checks—pick and copy colors locally in your browser."
     }
   },
   "common": {
@@ -142,7 +147,7 @@
     "backHome": "Back to home",
     "intro": "{siteName} (\"we\") provides free online tools. This page explains what data may be collected and how uploads are handled.",
     "hLocal": "Local processing",
-    "pLocal": "Many utilities (JSON, Base64, UUID, timestamps, JWT decode, time zones, date math, image compression) run entirely in your browser. That processing does not leave your device unless you explicitly download a file.",
+    "pLocal": "Many utilities (JSON, Base64, UUID, timestamps, JWT decode, time zones, date math, image compression, color wheel) run entirely in your browser. That processing does not leave your device unless you explicitly download a file.",
     "hPdf": "PDF merge",
     "pPdf": "When you merge PDFs, files are sent to our server only for the duration of the request. We do not use your documents for training or marketing. Temporary data should be discarded immediately after the response is sent—avoid uploading sensitive documents if your threat model requires zero server transit.",
     "hAnalytics": "Analytics",

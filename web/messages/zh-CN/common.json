@@ -27,14 +27,15 @@
   },
   "toolsIndex": {
     "title": "全部工具",
-    "description": "浏览免费在线工具：JSON、Base64、UUID、JWT、时间戳、时区、计算器、PDF 合并与图片压缩等。",
+    "description": "浏览免费在线工具：JSON、Base64、UUID、JWT、时间戳、时区、计算器、PDF 合并、图片压缩与色相环配色等。",
     "lead": "可按分类浏览，或直接打开需要的工具。每个工具单独成页，加载快、界面更专注。"
   },
   "categories": {
     "developer": "开发者工具",
     "file": "文件工具",
     "time": "时间与日期",
-    "calculators": "计算器"
+    "calculators": "计算器",
+    "daily": "日常与设计"
   },
   "toolDefs": {
     "jsonFormatter": {
@@ -108,6 +109,10 @@
     "pdfMerge": {
       "title": "PDF 合并",
       "description": "将多个 PDF 合并为一个文件并下载。"
+    },
+    "colorWheel": {
+      "title": "色相环与配色",
+      "description": "可交互色相环、和谐色方案与对比度参考，在浏览器本地选色与复制色值。"
     }
   },
   "common": {
@@ -142,7 +147,7 @@
     "backHome": "返回首页",
     "intro": "{siteName}（「我们」）提供免费在线工具。本页说明可能收集的数据以及上传文件的处理方式。",
     "hLocal": "本地处理",
-    "pLocal": "许多工具（JSON、Base64、UUID、时间戳、JWT 解码、时区、日期计算、图片压缩）完全在您的浏览器中运行。除非您主动下载文件，否则处理过程不会离开本机。",
+    "pLocal": "许多工具（JSON、Base64、UUID、时间戳、JWT 解码、时区、日期计算、图片压缩、色相环与配色）完全在您的浏览器中运行。除非您主动下载文件，否则处理过程不会离开本机。",
     "hPdf": "PDF 合并",
     "pPdf": "合并 PDF 时，文件仅在请求处理期间传至服务器。我们不会将您的文档用于模型训练或营销。响应返回后应尽快丢弃临时数据——若您的安全模型要求「零经过服务器」，请勿上传敏感文档。",
     "hAnalytics": "统计分析",

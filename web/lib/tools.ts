@@ -1,4 +1,4 @@
-export type ToolCategory = "developer" | "file" | "time" | "calculators";
+export type ToolCategory = "developer" | "file" | "time" | "calculators" | "daily";
 
 /** Category order on /tools index */
 export const categoryOrder: ToolCategory[] = [
@@ -6,4 +6,5 @@ export const categoryOrder: ToolCategory[] = [
   "time",
   "calculators",
   "file",
+  "daily",
 ];
