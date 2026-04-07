@@ -25,6 +25,7 @@ export const toolRoutes: ToolRoute[] = [
   { path: "/age-calculator", messageKey: "ageCalculator", category: "calculators" },
   { path: "/loan-calculator", messageKey: "loanCalculator", category: "calculators" },
   { path: "/roi-calculator", messageKey: "roiCalculator", category: "calculators" },
+  { path: "/nd-calculator", messageKey: "ndCalculator", category: "calculators" },
   { path: "/image-compressor", messageKey: "imageCompressor", category: "file" },
   { path: "/pdf-merge", messageKey: "pdfMerge", category: "file" },
   { path: "/color-wheel", messageKey: "colorWheel", category: "daily" },

@@ -102,6 +102,10 @@
       "title": "投资回报率（ROI）",
       "description": "根据期初与期末金额计算收益率百分比。"
     },
+    "ndCalculator": {
+      "title": "ND 减光镜计算器",
+      "description": "按 ND 倍数或挡位计算加镜后的等效快门，支持多片叠加。"
+    },
     "imageCompressor": {
       "title": "图片压缩",
       "description": "在浏览器本地压缩 JPG、PNG、WebP，减轻上传体积。"

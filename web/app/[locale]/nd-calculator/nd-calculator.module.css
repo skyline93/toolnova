@@ -1,0 +1,159 @@
+/* ND calculator — optical / long-exposure panel; works with Radix light & dark */
+
+.shell {
+  position: relative;
+}
+
+.shell::before {
+  content: "";
+  position: absolute;
+  inset: -1.5rem -1rem auto -1rem;
+  height: 12rem;
+  pointer-events: none;
+  border-radius: 1.25rem;
+  background: radial-gradient(ellipse 70% 90% at 15% 0%, var(--accent-a4), transparent 55%),
+    radial-gradient(ellipse 50% 70% at 85% 30%, var(--amber-a3, rgba(245, 158, 11, 0.12)), transparent 50%);
+  opacity: 0.85;
+  z-index: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .shell::before {
+    animation: ndGlow 14s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes ndGlow {
+  from {
+    opacity: 0.65;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0.95;
+    transform: translateY(4px);
+  }
+}
+
+.grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: 2rem;
+  }
+}
+
+.controlCard {
+  border-radius: var(--radius-5);
+  border: 1px solid var(--gray-a6);
+  background: linear-gradient(165deg, var(--gray-1), var(--gray-2));
+  box-shadow: 0 1px 2px color-mix(in oklab, var(--gray-a7) 40%, transparent);
+}
+
+html.dark .controlCard {
+  background: linear-gradient(165deg, var(--gray-2), var(--gray-3));
+  border-color: var(--gray-a6);
+}
+
+.resultHero {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-5);
+  padding: clamp(1.25rem, 4vw, 2rem);
+  border: 1px solid var(--accent-a6);
+  background:
+    radial-gradient(ellipse 100% 80% at 100% 0%, var(--accent-a4), transparent 52%),
+    radial-gradient(circle at 20% 120%, var(--gray-a4), transparent 45%),
+    linear-gradient(155deg, var(--gray-2), var(--gray-3));
+  box-shadow:
+    0 1px 2px color-mix(in oklab, var(--gray-a8) 35%, transparent),
+    0 12px 40px color-mix(in oklab, var(--accent-a5) 18%, transparent);
+}
+
+html.dark .resultHero {
+  background:
+    radial-gradient(ellipse 100% 80% at 100% 0%, var(--accent-a5), transparent 50%),
+    radial-gradient(circle at 15% 110%, var(--amber-a4, rgba(251, 191, 11, 0.08)), transparent 42%),
+    linear-gradient(155deg, var(--gray-2), var(--gray-1));
+  border-color: var(--accent-a7);
+}
+
+/* Decorative “lens” ring */
+.resultHero::after {
+  content: "";
+  position: absolute;
+  right: -18%;
+  top: 50%;
+  width: min(52vw, 280px);
+  height: min(52vw, 280px);
+  transform: translateY(-50%);
+  border-radius: 50%;
+  border: 2px solid var(--accent-a5);
+  opacity: 0.35;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px var(--gray-a5);
+}
+
+.resultValue {
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  color: var(--gray-12);
+}
+
+.resultSub {
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--gray-11);
+}
+
+.presetChip {
+  font-variant-numeric: tabular-nums;
+}
+
+.stackRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+  align-items: end;
+}
+
+@media (min-width: 480px) {
+  .stackRow {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+  }
+}
+
+.viewfinderCorner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--gray-a7);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.vfTl {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 2px;
+}
+
+.vfBr {
+  bottom: 10px;
+  right: 10px;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 2px;
+}

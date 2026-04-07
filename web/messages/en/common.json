@@ -102,6 +102,10 @@
       "title": "ROI Calculator",
       "description": "Compute return on investment as a percentage from starting and ending amounts."
     },
+    "ndCalculator": {
+      "title": "ND Filter Calculator",
+      "description": "Equivalent shutter from ND multiplier or stops, including stacked filters."
+    },
     "imageCompressor": {
       "title": "Image Compressor",
       "description": "Shrink JPG, PNG, and WebP images locally in your browser."
