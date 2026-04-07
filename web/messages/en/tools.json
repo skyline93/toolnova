@@ -13,6 +13,28 @@
     "howTitle": "How to use",
     "howBody": "Paste raw JSON and press Format for readable indentation or Minify to remove whitespace. Invalid documents surface a parser error so you can fix typos quickly."
   },
+  "sqlFormatter": {
+    "metaTitle": "SQL Formatter Online Free",
+    "metaDescription": "Format and beautify SQL in your browser with dialect-aware rules and syntax highlighting. Nothing is sent to a server by default.",
+    "title": "SQL Formatter",
+    "intro": "Paste SQL, pick a dialect that matches your database, and format for readable indentation and upper-case keywords. Editing and highlighting run locally in your browser.",
+    "format": "Format",
+    "dialect": "Dialect",
+    "dialectStandard": "Standard SQL",
+    "dialectPostgresql": "PostgreSQL",
+    "dialectMysql": "MySQL",
+    "dialectMariadb": "MariaDB",
+    "dialectSqlite": "SQLite",
+    "dialectMssql": "SQL Server (T-SQL)",
+    "dialectPlsql": "Oracle PL/SQL",
+    "input": "Input",
+    "output": "Output",
+    "inputPlaceholder": "SELECT id, name FROM users WHERE active = 1;",
+    "outputPlaceholder": "Formatted SQL appears here",
+    "formatError": "Could not format this SQL. Check syntax or try another dialect.",
+    "howTitle": "How to use",
+    "howBody": "Choose the dialect that matches your engine so formatting and highlighting follow the right keywords and rules. Press Format to rewrite whitespace and capitalize keywords; copy the result when you are done."
+  },
   "uuidGenerator": {
     "metaTitle": "UUID Generator Online Free",
     "metaDescription": "Generate random UUID v4 identifiers in bulk—secure random values for IDs and everyday use.",

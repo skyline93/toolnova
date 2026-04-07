@@ -1,35 +1,39 @@
 "use client";
 
 import CodeMirror from "@uiw/react-codemirror";
-import { json } from "@codemirror/lang-json";
+import { sql } from "@codemirror/lang-sql";
 import { EditorView } from "@codemirror/view";
 import { codemirrorEditorChrome } from "@/lib/codemirror-editor-chrome";
 import { useGithubCodemirrorTheme } from "@/lib/use-github-codemirror-theme";
+import type { SqlToolDialectId } from "@/lib/sql-tool-dialects";
+import { getSqlDialectCm } from "@/lib/sql-tool-dialects";
 import { useMemo } from "react";
 
-type JsonCodeEditorProps = {
+type SqlCodeEditorProps = {
   value: string;
   onChange?: (value: string) => void;
   placeholder?: string;
   readOnly?: boolean;
+  dialectId: SqlToolDialectId;
   "aria-label"?: string;
 };
 
-export function JsonCodeEditor({
+export function SqlCodeEditor({
   value,
   onChange,
   placeholder,
   readOnly = false,
+  dialectId,
   "aria-label": ariaLabel,
-}: JsonCodeEditorProps) {
+}: SqlCodeEditorProps) {
   const githubTheme = useGithubCodemirrorTheme();
-  const extensions = useMemo(
-    () => [json(), githubTheme, codemirrorEditorChrome, EditorView.lineWrapping],
-    [githubTheme],
-  );
+  const extensions = useMemo(() => {
+    const dialect = getSqlDialectCm(dialectId);
+    return [sql({ dialect }), githubTheme, codemirrorEditorChrome, EditorView.lineWrapping];
+  }, [dialectId, githubTheme]);
 
   return (
-    <div className="json-code-editor w-full" aria-label={ariaLabel}>
+    <div className="sql-code-editor w-full" aria-label={ariaLabel}>
       <div className="json-code-editor-shell">
         <CodeMirror
           value={value}
@@ -47,7 +51,7 @@ export function JsonCodeEditor({
             highlightActiveLine: !readOnly,
             highlightActiveLineGutter: !readOnly,
             autocompletion: false,
-            /* Theme ships `syntaxHighlighting`; disable basic-setup default to avoid double styles */
+            /* Theme ships `syntaxHighlighting`; disable basic-setup default */
             syntaxHighlighting: false,
             drawSelection: false,
           }}

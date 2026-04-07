@@ -11,6 +11,7 @@ export type ToolRoute = {
 export const toolRoutes: ToolRoute[] = [
   { path: "/markdown-preview", messageKey: "markdownPreview", category: "developer" },
   { path: "/json-formatter", messageKey: "jsonFormatter", category: "developer" },
+  { path: "/sql-formatter", messageKey: "sqlFormatter", category: "developer" },
   { path: "/uuid-generator", messageKey: "uuidGenerator", category: "developer" },
   { path: "/base64-encode-decode", messageKey: "base64", category: "developer" },
   { path: "/timestamp-converter", messageKey: "timestamp", category: "developer" },

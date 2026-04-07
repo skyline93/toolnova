@@ -13,6 +13,28 @@
     "howTitle": "使用说明",
     "howBody": "粘贴原始 JSON 后点击「格式化」获得缩进，或点击「压缩」去除空白。若 JSON 无效，会显示解析错误便于修正。"
   },
+  "sqlFormatter": {
+    "metaTitle": "免费在线 SQL 格式化",
+    "metaDescription": "在浏览器中按数据库方言美化 SQL，并带语法高亮；默认不向服务器上传内容。",
+    "title": "SQL 格式化",
+    "intro": "粘贴 SQL，选择与实际数据库相近的方言，即可整理缩进并将关键字转为大写。编辑与高亮均在本地浏览器完成。",
+    "format": "格式化",
+    "dialect": "方言",
+    "dialectStandard": "标准 SQL",
+    "dialectPostgresql": "PostgreSQL",
+    "dialectMysql": "MySQL",
+    "dialectMariadb": "MariaDB",
+    "dialectSqlite": "SQLite",
+    "dialectMssql": "SQL Server（T-SQL）",
+    "dialectPlsql": "Oracle PL/SQL",
+    "input": "输入",
+    "output": "输出",
+    "inputPlaceholder": "SELECT id, name FROM users WHERE active = 1;",
+    "outputPlaceholder": "格式化后的 SQL 将显示在这里",
+    "formatError": "无法格式化该 SQL。请检查语法或尝试其他方言。",
+    "howTitle": "使用说明",
+    "howBody": "先选择与目标数据库一致的方言，以便格式化规则与高亮更符合该引擎的关键字习惯。点击「格式化」整理空白并将关键字大写，完成后可复制输出。"
+  },
   "uuidGenerator": {
     "metaTitle": "免费在线 UUID 生成器",
     "metaDescription": "批量生成随机 UUID v4，适用于唯一编号、邀请码或测试数据。",

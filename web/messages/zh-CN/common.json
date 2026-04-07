@@ -39,6 +39,10 @@
       "title": "JSON 格式化",
       "description": "在浏览器中格式化、校验与压缩 JSON。"
     },
+    "sqlFormatter": {
+      "title": "SQL 格式化",
+      "description": "在浏览器中按方言规则格式化 SQL，并支持语法高亮。"
+    },
     "uuidGenerator": {
       "title": "UUID 生成器",
       "description": "即时生成 UUID v4 标识符。"

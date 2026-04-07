@@ -73,38 +73,7 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
 }
 
-/* CodeMirror JSON — Google-blue family for keys/bools/caret (light/dark) */
-.radix-themes.light {
-  --cm-json-key: #1967d2;
-  --cm-json-string: #a16207;
-  --cm-json-number: #a21caf;
-  --cm-json-bool: #1a73e8;
-  --cm-json-null: #64748b;
-  --cm-json-punct: #5f6368;
-  --cm-json-bracket: #44403c;
-  --cm-json-placeholder: #80868b;
-  --cm-json-caret: #1a73e8;
-  --cm-json-focus-ring: rgba(26, 115, 232, 0.5);
-  --cm-json-selection: rgba(66, 133, 244, 0.22);
-  --cm-json-active-line-gutter: rgba(26, 115, 232, 0.12);
-  --cm-json-active-line: rgba(66, 133, 244, 0.08);
-}
-
-.radix-themes.dark {
-  --cm-json-key: #8ab4f8;
-  --cm-json-string: #fbbf24;
-  --cm-json-number: #e879f9;
-  --cm-json-bool: #8ab4f8;
-  --cm-json-null: #94a3b8;
-  --cm-json-punct: #a8a29e;
-  --cm-json-bracket: #d6d3d1;
-  --cm-json-placeholder: #9ca3af;
-  --cm-json-caret: #8ab4f8;
-  --cm-json-focus-ring: rgba(138, 180, 248, 0.55);
-  --cm-json-selection: rgba(138, 180, 248, 0.22);
-  --cm-json-active-line-gutter: rgba(138, 180, 248, 0.14);
-  --cm-json-active-line: rgba(138, 180, 248, 0.1);
-}
+/* CodeMirror JSON/SQL: `@uiw/codemirror-theme-github` + Radix chrome in `codemirror-editor-chrome.ts`. */
 
 .radix-themes {
   --json-editor-default-height: 420px;

@@ -39,6 +39,10 @@
       "title": "JSON Formatter",
       "description": "Format, validate, and minify JSON in your browser."
     },
+    "sqlFormatter": {
+      "title": "SQL Formatter",
+      "description": "Format SQL with dialect-aware rules and syntax highlighting in your browser."
+    },
     "uuidGenerator": {
       "title": "UUID Generator",
       "description": "Generate random UUID v4 identifiers instantly."
