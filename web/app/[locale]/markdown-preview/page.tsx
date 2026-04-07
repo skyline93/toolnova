@@ -134,36 +134,33 @@ export default function MarkdownPreviewPage() {
     <Flex direction="column" gap="6">
       <Box
         ref={fsRef}
-        p={{ initial: "4", sm: "5" }}
         style={{
           display: "flex",
           flexDirection: "column",
           gap: "var(--space-4)",
-          borderRadius: isFullscreen ? 0 : "var(--radius-4)",
-          border: isFullscreen ? "none" : "1px solid var(--gray-a6)",
-          backgroundColor: "var(--color-background)",
-          boxShadow: isFullscreen
-            ? undefined
-            : "0 1px 3px rgba(15, 23, 42, 0.06), 0 6px 20px rgba(15, 23, 42, 0.05)",
-          minHeight: isFullscreen ? "100dvh" : undefined,
+          ...(isFullscreen
+            ? {
+                boxSizing: "border-box",
+                width: "100%",
+                minHeight: "100dvh",
+                height: "100%",
+                backgroundColor: "var(--color-background)",
+                padding: "var(--space-4)",
+              }
+            : {}),
         }}
       >
         <Flex align="center" gap="3" wrap="wrap" justify="between">
-          <Flex align="center" gap="3" wrap="wrap">
-            <Text size="1" weight="bold" color="gray" style={{ letterSpacing: "0.06em", textTransform: "uppercase" }}>
-              {t("viewModeLabel")}
-            </Text>
-            <SegmentedControl.Root
-              value={viewMode}
-              onValueChange={(v) => setViewMode(v as ViewMode)}
-              size="2"
-              aria-label={t("viewModeLabel")}
-            >
-              <SegmentedControl.Item value="source">{t("viewSource")}</SegmentedControl.Item>
-              <SegmentedControl.Item value="preview">{t("viewPreview")}</SegmentedControl.Item>
-              <SegmentedControl.Item value="split">{t("viewSplit")}</SegmentedControl.Item>
-            </SegmentedControl.Root>
-          </Flex>
+          <SegmentedControl.Root
+            value={viewMode}
+            onValueChange={(v) => setViewMode(v as ViewMode)}
+            size="2"
+            aria-label={`${t("viewSource")} / ${t("viewPreview")} / ${t("viewSplit")}`}
+          >
+            <SegmentedControl.Item value="source">{t("viewSource")}</SegmentedControl.Item>
+            <SegmentedControl.Item value="preview">{t("viewPreview")}</SegmentedControl.Item>
+            <SegmentedControl.Item value="split">{t("viewSplit")}</SegmentedControl.Item>
+          </SegmentedControl.Root>
           <Flex gap="2" wrap="wrap">
             {isFullscreen ? (
               <Button type="button" size="2" variant="outline" color="gray" onClick={exitFullscreen}>
