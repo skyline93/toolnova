@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Light / dark appearance for the site with a header toggle; preference is stored in `localStorage` and mirrored to a `toolnova-theme` cookie so the server can emit the correct `dark` class on `<html>` without inline boot scripts.
 - Navigation strings for the theme toggle (`themeUseLight` / `themeUseDark`) in `web/messages/*/common.json`.
 
+### Fixed
+
+- **Markdown 预览**（分栏模式）：`web/app/globals.css` 中为分栏 Grid 使用 `minmax(0, 1fr)`，并为源码/预览列及编辑区 Flex 链路设置 `min-width: 0`，避免长代码块或宽表格通过 min-content 挤占对侧宽度；预览列增加 `overflow-x: auto` 以在列内横向滚动溢出内容。
+
 ### Changed
 
 - Theme implementation avoids `next-themes` and any `<script>` / `next/script` bootstrapping in layouts, preventing React 19 console errors around script ordering and client-rendered `<script>` nodes.

@@ -343,24 +343,28 @@ html.dark body {
 }
 
 /* Split: side-by-side flows with document; row height = max(editor, preview) */
+/* minmax(0,1fr) + min-width:0 so long <pre>/tables cannot steal width from the other column */
 .markdown-preview-md-editor-shell .w-md-editor-show-live .w-md-editor-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: stretch;
 }
 
 .markdown-preview-md-editor-shell .w-md-editor-show-live .w-md-editor-input {
+  min-width: 0;
   width: 100% !important;
   height: auto !important;
   overflow: visible !important;
 }
 
 .markdown-preview-md-editor-shell .w-md-editor-show-live .w-md-editor-preview {
+  min-width: 0;
   position: static !important;
   inset: auto !important;
   width: 100% !important;
   height: auto !important;
-  overflow: visible !important;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
 }
 
 .markdown-preview-md-editor-shell .w-md-editor-show-edit .w-md-editor-input {
@@ -395,6 +399,7 @@ html.dark body {
 .markdown-preview-md-editor-shell .w-md-editor-show-live .w-md-editor-area {
   display: flex;
   flex-direction: column;
+  min-width: 0;
   min-height: 100%;
 }
 
@@ -402,19 +407,21 @@ html.dark body {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
+  min-width: 0;
   min-height: min(240px, 40vh);
 }
 
 .markdown-preview-md-editor-shell .w-md-editor-show-live .w-md-editor-text-input {
   flex: 1 1 auto;
   width: 100%;
+  min-width: 0;
   min-height: min(240px, 40vh);
   box-sizing: border-box;
 }
 
 @media (max-width: 767px) {
   .markdown-preview-md-editor-shell .w-md-editor-show-live .w-md-editor-content {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
