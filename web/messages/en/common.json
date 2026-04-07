@@ -9,7 +9,9 @@
     "terms": "Terms",
     "language": "Language",
     "english": "English",
-    "chineseSimplified": "简体中文"
+    "chineseSimplified": "简体中文",
+    "themeUseLight": "Switch to light mode",
+    "themeUseDark": "Switch to dark mode"
   },
   "footer": {
     "tagline": "Free online utilities.",

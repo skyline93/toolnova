@@ -8,9 +8,11 @@ import { routing } from "@/i18n/routing";
 import { geistMono, geistSans } from "@/app/fonts";
 import { getSiteUrl, siteName } from "@/lib/site";
 import type { Metadata } from "next";
-import { Theme } from "@radix-ui/themes";
+import { SiteThemeProvider } from "@/components/site-theme-provider";
+import { SITE_THEME_STORAGE_KEY, serverHtmlIsDark } from "@/lib/site-theme";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 
 const siteUrl = getSiteUrl();
@@ -70,10 +72,14 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
 
+  const cookieStore = await cookies();
+  const themeCookie = cookieStore.get(SITE_THEME_STORAGE_KEY)?.value;
+  const htmlDark = serverHtmlIsDark(themeCookie);
+
   return (
     <html
       lang={locale === "zh-CN" ? "zh-CN" : "en"}
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased${htmlDark ? " dark" : ""}`}
       suppressHydrationWarning
     >
       <head>
@@ -87,14 +93,9 @@ export default async function LocaleLayout({
       <body className="min-h-full">
         <NextIntlClientProvider messages={messages}>
           <ConsentProvider>
-            <Theme
-              accentColor="blue"
-              grayColor="slate"
-              panelBackground="solid"
-              radius="large"
-              scaling="100%"
-              hasBackground
-              className={`flex min-h-dvh flex-1 flex-col ${locale === "zh-CN" ? "locale-zh-cn" : "locale-en"}`}
+            <SiteThemeProvider
+              localeClass={locale === "zh-CN" ? "locale-zh-cn" : "locale-en"}
+              serverThemeCookie={themeCookie}
             >
               <Header />
               <div className="min-h-0 flex-1">{children}</div>
@@ -102,7 +103,7 @@ export default async function LocaleLayout({
               <Footer />
               <CookieBanner />
               <ConditionalAnalytics />
-            </Theme>
+            </SiteThemeProvider>
           </ConsentProvider>
         </NextIntlClientProvider>
       </body>

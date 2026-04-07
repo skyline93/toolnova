@@ -142,8 +142,10 @@ export default function MarkdownPreviewPage() {
             ? {
                 boxSizing: "border-box",
                 width: "100%",
-                minHeight: "100dvh",
                 height: "100%",
+                maxHeight: "100%",
+                overflowY: "auto",
+                WebkitOverflowScrolling: "touch",
                 backgroundColor: "var(--color-background)",
                 padding: "var(--space-4)",
               }
@@ -190,15 +192,7 @@ export default function MarkdownPreviewPage() {
           </Text>
         ) : null}
 
-        <Flex
-          direction="column"
-          gap="4"
-          className="min-h-0 min-w-0"
-          style={{
-            minHeight: isFullscreen ? 0 : "min(68vh, 820px)",
-            flex: isFullscreen ? 1 : undefined,
-          }}
-        >
+        <Flex direction="column" gap="4" className="min-w-0">
           <MarkdownPreviewEditor value={source} onChange={setSource} viewMode={viewMode} />
         </Flex>
       </Box>

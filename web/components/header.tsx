@@ -1,4 +1,5 @@
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { SiteChromeFrame } from "@/components/site-chrome-frame";
 import { Link } from "@/i18n/navigation";
 import { siteName } from "@/lib/site";
@@ -32,6 +33,7 @@ export async function Header() {
                 </Link>
               </Text>
               <Separator orientation="vertical" size="2" />
+              <ThemeToggle />
               <LanguageSwitcher />
             </Flex>
           </Flex>

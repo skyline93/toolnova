@@ -11,15 +11,13 @@
     sans-serif;
 }
 
-/* Clean white page (light); Theme hasBackground paints Radix canvas */
+/* Page canvas: follows `class="dark"` on <html> (boot script + theme toggle). */
 body {
   background-color: #ffffff;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #111113;
-  }
+html.dark body {
+  background-color: #111113;
 }
 
 /* Light UI: crisp white canvas + Google-style blue (Radix accent blue) */
@@ -314,21 +312,21 @@ body {
   border-radius: var(--radius-3);
 }
 
-/* @uiw/react-md-editor — fill flex parent, align with Radix surface */
+/* @uiw/react-md-editor — auto height, page scrolls (no locked viewport / inner preview scroll) */
 .markdown-preview-md-editor-shell {
   display: flex;
   flex-direction: column;
   min-height: min(240px, 40vh);
   border-radius: var(--radius-3);
-  overflow: hidden;
+  overflow: visible;
   border: 1px solid var(--gray-a6);
   background-color: var(--color-background);
 }
 
 .markdown-preview-md-editor-shell .w-md-editor {
-  flex: 1 !important;
-  min-height: 0 !important;
-  height: 100% !important;
+  flex: 0 0 auto !important;
+  min-height: min(240px, 40vh) !important;
+  height: auto !important;
   box-shadow: none !important;
   border: none !important;
   border-radius: 0 !important;
@@ -338,8 +336,86 @@ body {
 }
 
 .markdown-preview-md-editor-shell .w-md-editor-content {
-  flex: 1 !important;
-  min-height: 0 !important;
+  flex: 0 0 auto !important;
+  height: auto !important;
+  min-height: min(240px, 40vh) !important;
+  overflow: visible !important;
+}
+
+/* Split: side-by-side flows with document; row height = max(editor, preview) */
+.markdown-preview-md-editor-shell .w-md-editor-show-live .w-md-editor-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+}
+
+.markdown-preview-md-editor-shell .w-md-editor-show-live .w-md-editor-input {
+  width: 100% !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.markdown-preview-md-editor-shell .w-md-editor-show-live .w-md-editor-preview {
+  position: static !important;
+  inset: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.markdown-preview-md-editor-shell .w-md-editor-show-edit .w-md-editor-input {
+  width: 100% !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.markdown-preview-md-editor-shell .w-md-editor-show-edit .w-md-editor-text-input {
+  min-height: min(42vh, 520px);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.markdown-preview-md-editor-shell .w-md-editor-show-preview .w-md-editor-preview {
+  position: static !important;
+  inset: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.markdown-preview-md-editor-shell .w-md-editor-area {
+  overflow: visible !important;
+}
+
+.markdown-preview-md-editor-shell .w-md-editor-text {
+  overflow: visible !important;
+}
+
+/* Live split: stretch source column to match preview row height */
+.markdown-preview-md-editor-shell .w-md-editor-show-live .w-md-editor-area {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.markdown-preview-md-editor-shell .w-md-editor-show-live .w-md-editor-text {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: min(240px, 40vh);
+}
+
+.markdown-preview-md-editor-shell .w-md-editor-show-live .w-md-editor-text-input {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: min(240px, 40vh);
+  box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+  .markdown-preview-md-editor-shell .w-md-editor-show-live .w-md-editor-content {
+    grid-template-columns: 1fr;
+  }
 }
 
 .markdown-preview-md-editor-shell .w-md-editor-text,

@@ -31,7 +31,6 @@ export function MarkdownPreviewEditor({
 }) {
   const colorMode = useMarkdownPreviewColorMode();
   const preview = previewFromViewMode(viewMode);
-  const enableScroll = preview === "live";
 
   const previewOptions = useMemo(
     () => ({
@@ -51,7 +50,8 @@ export function MarkdownPreviewEditor({
         value={value}
         onChange={(v) => onChange(v ?? "")}
         preview={preview}
-        enableScroll={enableScroll}
+        height="auto"
+        enableScroll={false}
         highlightEnable
         hideToolbar
         visibleDragbar={false}

@@ -7,8 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Light / dark appearance for the site with a header toggle; preference is stored in `localStorage` and mirrored to a `toolnova-theme` cookie so the server can emit the correct `dark` class on `<html>` without inline boot scripts.
+- Navigation strings for the theme toggle (`themeUseLight` / `themeUseDark`) in `web/messages/*/common.json`.
+
 ### Changed
 
+- Theme implementation avoids `next-themes` and any `<script>` / `next/script` bootstrapping in layouts, preventing React 19 console errors around script ordering and client-rendered `<script>` nodes.
+- Markdown preview and CodeMirror themes follow the same resolved light/dark mode as the rest of the UI.
 - Documentation: default README is English (`README.md`); Chinese copy in `README.zh-CN.md`, with cross-links.
 - Documentation: README badges (stack) and light emoji / labels in section headings and the versioning table.
 
