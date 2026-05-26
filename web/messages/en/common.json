@@ -70,6 +70,10 @@
       "title": "Text Diff",
       "description": "Compare two texts line by line and highlight additions and removals."
     },
+    "textDesensitize": {
+      "title": "Text Desensitizer",
+      "description": "Mask phones, IDs, emails, database URIs, and more—with a Git-style split diff of before and after."
+    },
     "jsonToCsv": {
       "title": "JSON to CSV",
       "description": "Turn a JSON array of objects into a comma-separated table you can paste into a spreadsheet."

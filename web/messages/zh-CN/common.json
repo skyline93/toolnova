@@ -70,6 +70,10 @@
       "title": "文本对比",
       "description": "逐行对比两段文本，高亮新增与删除。"
     },
+    "textDesensitize": {
+      "title": "长文本脱敏",
+      "description": "自动识别并遮盖手机号、身份证、邮箱、数据库 URI 等敏感信息，Git 分栏对比前后差异。"
+    },
     "jsonToCsv": {
       "title": "JSON 转 CSV",
       "description": "将对象数组 JSON 转为逗号分隔表，便于粘贴到表格软件。"

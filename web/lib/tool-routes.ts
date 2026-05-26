@@ -18,6 +18,7 @@ export const toolRoutes: ToolRoute[] = [
   { path: "/jwt-decoder", messageKey: "jwt", category: "developer" },
   { path: "/regex-tester", messageKey: "regexTester", category: "developer" },
   { path: "/diff-checker", messageKey: "diffChecker", category: "developer" },
+  { path: "/text-desensitize", messageKey: "textDesensitize", category: "developer" },
   { path: "/json-to-csv", messageKey: "jsonToCsv", category: "developer" },
   { path: "/cron-expression-generator", messageKey: "cronGenerator", category: "developer" },
   { path: "/time-zone-converter", messageKey: "timeZone", category: "time" },
